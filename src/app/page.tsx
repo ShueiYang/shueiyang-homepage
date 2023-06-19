@@ -1,95 +1,72 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import Image from "next/image"
+import dynamic from "next/dynamic"
+import HomepageLayout from "@/components/resume/homepage"
+import { Section } from "@/components/layouts/Section"
+import Button from "@/components/customButton/Button"
+import Curriculum from "@/components/resume/Curriculum"
+import Langues from "@/components/resume/Langues"
+import WebPresence from "@/components/resume/WebPresence"
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
+
+const SkillsBar = dynamic(()=> import("@/components/skillsAnimeBar/SkillsBar"), {
+   ssr: false 
+})
+
+
+export default function Homepage() {  
+
+  return ( 
+    <HomepageLayout>
+      <Section delay={0.1}> 
+        <h2 className="section">
+          A propos
+        </h2>
+        <p className="text-justify indent-8"> Ex-vendeur en maroquinerie et en informatique actuellement en reconversion 
+          professionnelle dans le développement Web, j&apos;ai commencé en autodidacte et j&apos;ai décidé de poursuivre 
+          ce &quot;Carrer path&quot; ! 
+          <br />&nbsp; J&apos;ai récemment complété ma formation chez Le Reacteur afin de renforcer mes compétences, et je 
+          suis actuellement à la recherche d&apos;un stage ou alternance pour mettre en pratique mes compétences en Frontend 
+          et/ou Backend.  
         </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+      </Section>
+          
+      <Section delay={0.2}>
+        <h2 className="section"> 
+          Competence
+        </h2>
+        <SkillsBar />
+      </Section>
+               
+      <Section delay={0.3}> 
+        <Button path="/projects">
+          Mon portfolio
+        </Button>
+      </Section> 
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <Section delay={0.4}>
+        <h2 className="section"> 
+          Bio
+        </h2>
+        <Curriculum />
+      </Section>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+      <Section delay={0.5}>
+        <WebPresence />
+      </Section>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
+      <Section delay={0.6}>
+        <Langues />
+      </Section>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      <Section delay={0.7}>
+        <h2 className="section"> 
+          Hobbies
+        </h2>
+        <p>
+          Veille technologique, Jeux video de type MMORPG, RTS, Hack&apos;n Slash, et City-Builder,
+          Cyclisme, Manga et Manhwa, Film coréen en VOSTA.
+        </p>
+      </Section>
+    </HomepageLayout>
   )
-}
+};
