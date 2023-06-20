@@ -22,15 +22,15 @@ function PortfolioLayout({children, href, title, thumbnail}: LayoutProps) {
       >
         <Link href={href} scroll={false}>
           <Image 
-              src={thumbnail}
-              className="rounded-xl w-full aspect-[16/10]"
-              alt={title}
-              loading="lazy"
-              placeholder="blur"
-              blurDataURL={thumbnail}
-              width={550}
-              height={310}
-          />
+            src={thumbnail}
+            className="rounded-xl w-full aspect-[16/10]"
+            alt={title}
+            loading="lazy"
+            placeholder="blur"
+            blurDataURL={thumbnail}
+            width={550}
+            height={310}
+        />
           <motion.div 
             initial={{opacity: 0}}
             whileHover={{opacity: 1}}

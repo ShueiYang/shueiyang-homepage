@@ -29,7 +29,7 @@ module.exports = {
         'blackhover': 'rgba(0,0,0,0.6)'
       },
       boxShadow : {
-        custom: '4px 6px 6px rgba(0,0,0,0.5)'
+        custom: '3px 6px 6px 1px rgba(0,0,0,0.5)',
       }
     }
   },

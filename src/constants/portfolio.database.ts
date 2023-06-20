@@ -13,6 +13,36 @@ export interface PortfolioProps {
 
 export const projectsData: PortfolioProps[] = [
     {
+        id: "marvel",
+        title: "Marvel",
+        images: ["marvel.jpg"],
+        desc: `Un site exploitant le API de Marvel et affiche les personnages, les comics, et les
+        relations des comics avec les personnages.`,
+        url: "https://shueiyang-marvel.netlify.app",
+        stack: ["MongoDB", "Express.js", "Reactjs", "Node.js"],
+        source: "https://github.com/ShueiYang/marvel-project",
+        content: `Marvel est un site réalisé lors du test technique pendant 5 jours afin d'afficher les
+        personnages, les comics de marvel, et aussi mettre en place le système de sauvegarde des favoris dans la
+        base des données quand est connecté sur un compte, j'avais mis en place l'authentification avec
+        le compte de google utilisant OAuth20, cependant j'ai des issues après déploiement pour la 
+        connexion que je dois tout revoir cette partie.`
+    },
+    {
+        id: "vinted-clone",
+        title: "Vinted clone",
+        images: ["vinted.jpg"],
+        desc: `Un site réplique de Vinted en simplifié, où on peut acheter, vendre, ou échanger
+        les vêtements et accessoires!`,
+        url: "https://shueiyang-vinted.netlify.app",
+        stack: ["MongoDB", "Express.js", "Reactjs", "Node.js"],
+        source: "https://github.com/ShueiYang/vinted-project",
+        content: `Vinted est un projet réalisé pendant la formation chez Le Reacteur, une fois inscrit on peut
+        publier les annonces, et passer au mode de paiement avec Stripe, et j'ai notamment amélioré le API en
+        Backend et ajouter d'autres fonctionnalités comme par ex afficher le détail du profile quand on est 
+        connecté, de pouvoir modifier le profile et changer le mot de passe, et aussi la possibilité de 
+        réinitialiser le mot de passe.`
+    },
+    {
         id: "coffee-connaisseur",
         title: "Discovery Coffee Shop",
         images: ["coffeeshop.jpg"],
