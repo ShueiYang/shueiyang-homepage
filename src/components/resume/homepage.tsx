@@ -5,7 +5,8 @@ import PageLayout from "@/components/layouts/PageLayout"
 import HeroTitle from "@/components/resume/HeroTitle"
 import { HeroSection, Section } from "@/components/layouts/Section"
 import Button from "@/components/customButton/Button"
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { ThemeContext } from "../themeContext/ThemeProvider";
 
 
 export default function HomepageLayout({
@@ -14,13 +15,24 @@ export default function HomepageLayout({
     children: React.ReactNode
   }) {
   const [motionDirection, setMotionDirection] = useState<string | undefined>();
+  const [isMounted, setIsMounted] = useState(false);
+  const { theme } = useContext(ThemeContext);
     
+  // Display the Herotitle only when IsMounted is set to true in order to
+  // correctly display the dark theme gradient color on first load.
+  useEffect(() => {
+    setIsMounted(true)
+  }, []);
+
   // client side wrapper for the homePage 
   return (
     <PageLayout direction={motionDirection}>
       <article className="container xl:max-w-5xl">
         <div className="flex flex-col md:flex-row sm:max-w-[95%] md:max-w-[80%] lg:max-w-2xl items-center justify-center gap-[5%] mb-3 mx-auto">
-          <div className="grow rounded-lg text-center md:text-left bg-sand-l dark:bg-sea-d p-5 mt-5 md:px-7">  
+        {isMounted ?
+          <div className={`${theme === "light" ? "bg-gradient-to-r from-sand-l to-[#ece6b3]" : "dark:bg-gradient-to-r from-[#30375e] to-sea-d"}
+            grow rounded-lg text-center md:text-left p-5 mt-5 md:px-7`}
+          >  
             <h1 className="font-ibm font-semibold text-2xl sm:text-3xl lg:text-4xl tracking-wide">
               <HeroTitle />
                 <HeroSection delay={1.5}>
@@ -34,6 +46,8 @@ export default function HomepageLayout({
               </p>
             </h1>
           </div>
+         : <div />
+        }
           <div className="shrink-0 mt-4 sm:mt-0 ">
             <Image src="/images/kim.png"
               className="border-neutral-300 mt-6 md:mt-4 border-2 border-solid rounded-full inline-block"

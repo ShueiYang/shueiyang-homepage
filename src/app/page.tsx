@@ -21,12 +21,12 @@ export default function Homepage() {
         <h2 className="section">
           A propos
         </h2>
-        <p className="text-justify indent-8"> Ex-vendeur en maroquinerie et en informatique actuellement en reconversion 
+        <p className="text-justify indent-4"> Ex-vendeur en maroquinerie et en informatique actuellement en reconversion 
           professionnelle dans le développement Web, j&apos;ai commencé en autodidacte et j&apos;ai décidé de poursuivre 
           ce &quot;Carrer path&quot; ! 
           <br />&nbsp; J&apos;ai récemment complété ma formation chez Le Reacteur afin de renforcer mes compétences, et je 
-          suis actuellement à la recherche d&apos;un stage ou alternance pour mettre en pratique mes compétences en Frontend 
-          et/ou Backend.  
+          suis actuellement à la recherche d&apos;un stage ou alternance pour mettre en pratique mes compétences en Backend 
+          et/ou Frontend.  
         </p>
       </Section>
           

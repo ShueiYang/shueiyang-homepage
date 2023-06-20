@@ -20,7 +20,7 @@ export const menuLists: MenuProps[] = [
     },
     {
         name: "Source",
-        url: "https://github.com/ShueiYang",
+        url: "https://github.com/ShueiYang/shueiyang-homepage",
         ioIcon: IoLogoGithub
     },
     {

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { verifyAuth } from "./lib/auth";
  
-// This function can be marked `async` if using `await` inside
+// Middleware function to protect backoffice route and auth API route.
 export async function middleware(req: NextRequest) {
 
   const jwtCookie = req.cookies.get("shueiJWT") 

@@ -1,6 +1,7 @@
 "use server"
 import { cookies } from "next/headers"
 
+// testing server action
 
 export async function logOut() {
   
