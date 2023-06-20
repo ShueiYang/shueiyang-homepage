@@ -3,20 +3,21 @@
 import dynamic from "next/dynamic"
 import { useRef, useState } from "react";
 import { motion } from "framer-motion"
-import { sendEmail } from '@/lib/sendEmail';
-
+import { sendEmail } from "@/lib/sendEmail";
 import { slideIn } from "@/utils/motion";
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from "react-hook-form";
+import { RiMailSendFill } from "react-icons/ri";
 
-import PreviousLink from '@/components/PreviousLink';
+import PreviousLink from "@/components/PreviousLink";
 import SuccessForm from "@/components/SuccessForm";
 import InputForm from "@/components/formToSubmit/InputForm";
-import { RiMailSendFill } from "react-icons/ri";
 import TextareaForm from "@/components/formToSubmit/TextareaForm";
 
 const MapLocation = dynamic(()=> import("@/components/map/MapLocation"), {
   ssr: false 
 })
+
+// const pageTitle = "Contact - Kim Nguyen"
 
 function Contact () {
   
@@ -28,7 +29,6 @@ function Contact () {
   const methods = useForm<InputsProps>();
   const { handleSubmit } = methods;
 
-  const pageTitle = "Contact - Kim Nguyen"
   
   function resetForm() {
     formRef.current?.reset();

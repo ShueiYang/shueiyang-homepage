@@ -5,11 +5,11 @@ import { projectsData } from "@/constants/portfolio.database";
 import PreviousLink from '@/components/PreviousLink';
 import { prisma } from "@/lib/prisma";
 
-// export const metadata: Metadata = {
-//   title: "Kim Nguyen - Projects",
-//   description: `Kim"s website`,
-//   authors: [{ name: "Kim Nguyen" }, { name: "Shueiyang", url: "https://nextjs.org" }],
-// }
+export const metadata: Metadata = {
+  title: "Kim Nguyen - Projects",
+  description: `Kim"s website`,
+  // authors: [{ name: "Kim Nguyen" }, { name: "Shueiyang", url: "https://nextjs.org" }],
+}
 
 export async function getProjects() {
   return Promise.resolve(projectsData);
