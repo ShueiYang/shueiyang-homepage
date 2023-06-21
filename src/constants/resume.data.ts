@@ -10,11 +10,11 @@ export const resumeData = [
     },
     {
         year: "2004 - 2008",
-        cv: "Vente et Assistance commercial à ISIS Maroquinerie (Osny 95)",
+        cv: "Vente et Assistant commercial à ISIS Maroquinerie (Osny 95)",
     },
     {
         year: "2009",
-        cv: "Bac +2 Spécialisation en maintenance informatique et réseaux (ITIC Paris)",
+        cv: "BTS en maintenance informatique et réseaux (ITIC Paris)",
     },
     {
         year: "2010 - 2022",
@@ -24,11 +24,11 @@ export const resumeData = [
     },
     {
         year: "Avril - Juin 2023",
-        cv: `En formation chez Le Reacteur.`
+        cv: `En formation chez Le Reacteur à Paris.`
     },
     {
-        year: "2023 à présent",
-        cv: `Autodidacte en Développment Web et application (Udemy, freeCodeCamp, internet)`
+        year: "2022 à présent",
+        cv: `Autoformation en Développment Web et application (Zero to Mastery, Udemy, internet)`
     },
 ];
 

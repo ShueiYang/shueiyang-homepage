@@ -1,6 +1,6 @@
 import "./globals.css"
 import type { Metadata } from "next"
-import { Inter, IBM_Plex_Sans } from "next/font/google"
+import { Roboto, IBM_Plex_Sans } from "next/font/google"
 // import Head from "next/head"
 // import Script from "next/script"
 import ThemeProvider from "@/components/themeContext/ThemeProvider"
@@ -25,8 +25,10 @@ export const metadata: Metadata = {
   // }
 }
 
-const inter = Inter({
+const roboto = Roboto({
+  weight: ["400", "500", "700"],
   subsets: ["latin"],
+  variable: "--font-robo"
 })
 const ibmPlex = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -47,7 +49,7 @@ export default function RootLayout({
       </Head> */}
       <body className="bg-orange-50 dark:bg-black-russ text-zinc-900 dark:text-slate-200 break-words leading-6 transition-colors duration-500">
         <ThemeProvider>
-          <main className={`${inter.className} ${ibmPlex.variable}`}>
+          <main className={`${roboto.className} ${ibmPlex.variable} ${roboto.variable}`}>
             <Navbar />
               <section className="container grow pt-14 px-8"> 
                 <ChineseCandleStick />

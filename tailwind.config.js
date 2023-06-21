@@ -19,6 +19,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'ibm': ['var(--font-ibm)'],
+        'robo': ['var(--font-robo)']
       },
       colors: {
         'sand-l': 'rgb(237, 143, 3, 0.4)', 

@@ -40,7 +40,7 @@ export default function HomepageLayout({
                     KIM
                   </span>
                 </HeroSection>
-              <p className="font-medium text-lg sm:text-xl lg:text-[1.3rem] md: mt-2">
+              <p className="font-robo font-medium text-lg sm:text-xl lg:text-[1.3rem] md: mt-2">
                 Un développeur passionné par l&apos;apprentissage et 
                 la création dans le domaine du web.
               </p>

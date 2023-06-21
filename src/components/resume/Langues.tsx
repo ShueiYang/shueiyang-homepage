@@ -13,7 +13,7 @@ const Langues = () => {
         </div>
         <div className="flex gap-4">  
           <div>Anglais :</div>
-          lu et technique
+          Courant
         </div>
       </div>
     </>

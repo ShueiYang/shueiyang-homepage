@@ -1,4 +1,4 @@
-import Image from "next/image"
+
 import dynamic from "next/dynamic"
 import HomepageLayout from "@/components/resume/homepage"
 import { Section } from "@/components/layouts/Section"
@@ -21,9 +21,9 @@ export default function Homepage() {
         <h2 className="section">
           A propos
         </h2>
-        <p className="text-justify indent-4"> Ex-vendeur en maroquinerie et en informatique actuellement en reconversion 
-          professionnelle dans le développement Web, j&apos;ai commencé en autodidacte et j&apos;ai décidé de poursuivre 
-          ce &quot;Carrer path&quot; ! 
+        <p className="text-justify indent-4">Ancien vendeur et assistant commercial en maroquinerie et en informatique actuellement
+          en reconversion professionnelle dans le développement Web, j&apos;ai commencé en autodidacte en 2022 et afin d'officialiser 
+          cette reconversion j&apos;ai décidé de démissionner de mon poste pour poursuivre ce &quot;Carrer path&quot; ! 
           <br />&nbsp; J&apos;ai récemment complété ma formation chez Le Reacteur afin de renforcer mes compétences, et je 
           suis actuellement à la recherche d&apos;un stage ou alternance pour mettre en pratique mes compétences en Backend 
           et/ou Frontend.  
