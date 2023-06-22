@@ -25,6 +25,7 @@ const InputForm = ({ label, text, errorText }: FormProps) => {
       <label className="customField relative w-full mt-5" htmlFor={label}>
         <input
           className="inputField"
+          id={label}
           {...register(label, {required: true}) }
           type={getInputType(label)}
           required

@@ -14,6 +14,7 @@ const TextareaForm = ({ label, text, errorText }: FormProps) => {
         <span className="font-medium tracking-tight pl-2">{text}</span>
         <textarea
             className="inputField mt-2 resize-none"
+            id={label}
             rows={9}
             {...register(label, {required: true}) }
             placeholder="Redigez votre message ici ..."
