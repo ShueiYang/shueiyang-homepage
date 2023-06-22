@@ -27,10 +27,6 @@ export const Section = ({ children, delay = 0 }: SectionProps) => {
 
 export const HeroSection = ({ children, delay = 0 }: SectionProps) => {
 
-  // const [showAnimation, setShowAnimation] = useState(true); 
-  // const introAnimate = useIntro();
-  // console.log("hook Animate", introAnimate)
-   
   return (
     <motion.div
       className="inline-flex"
@@ -42,7 +38,8 @@ export const HeroSection = ({ children, delay = 0 }: SectionProps) => {
         duration: 0.5,
         delay,
         type: "spring",
-        stiffness: 50
+        stiffness: 50,
+        damping: 13
       }}
     >
       {children}

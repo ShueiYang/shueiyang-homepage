@@ -44,7 +44,7 @@ function ChineseCandleStick () {
                 10,
                 20 * Math.cos(0.2 * Math.PI)
             )
-            
+            // CAMERA
             const scale = scH * 0.015 + 8.8
             const camera = new THREE.OrthographicCamera(
                 -scale,
