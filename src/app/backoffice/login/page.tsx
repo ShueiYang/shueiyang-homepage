@@ -49,7 +49,7 @@ const AdminLoginPage = () => {
     <div className="container xl:max-w-5xl my-6 flex flex-col items-center justify-center lg:flex-row">
       <fieldset className="max-w-lg w-full text-center">
         <PageLayout>
-          <legend>
+          <legend className="mx-auto">
             <span className="font-ibm text-3xl lg:text-3xl font-semibold block mt-3 tracking-wide">
               Connexion au BackOffice
             </span>

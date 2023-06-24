@@ -23,7 +23,7 @@ const ClientProtectPage = () => {
     <div className="container xl:max-w-5xl my-6 flex flex-col items-center justify-center lg:flex-row">
       <fieldset className="max-w-lg w-full">
         <PageLayout>
-          <legend className="flex items-center justify-between">
+          <legend className="flex items-center justify-between w-full">
             <span className="font-ibm text-xl lg:text-2xl font-semibold block mt-3 tracking-wide">
                 Project insertion
             </span>
