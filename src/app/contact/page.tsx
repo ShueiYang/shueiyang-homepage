@@ -54,7 +54,7 @@ function Contact () {
     } 
   }
 
-  if(isSubmitSuccessful) {
+  if(isSubmitSuccessful && !error) {
     return <SuccessForm />
   }
   return (
