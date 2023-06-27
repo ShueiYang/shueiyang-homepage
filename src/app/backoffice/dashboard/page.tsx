@@ -3,6 +3,7 @@
 import { FormProvider, useForm } from "react-hook-form";
 import InputForm from "@/components/formToSubmit/InputForm";
 import TextareaForm from "@/components/formToSubmit/TextareaForm";
+import ImgUploadForm from "@/components/formToSubmit/ImgUploadForm";
 import PageLayout from "@/components/layouts/PageLayout";
 import { useRouter } from "next/navigation";
 import { logOut } from "@/app/action";
@@ -11,7 +12,7 @@ import { logOut } from "@/app/action";
 
 const ClientProtectPage = () => {
 
-  const methods = useForm<InputsProps>();
+  const methods = useForm<ProjectForm>();
   const { handleSubmit } = methods;
   const route = useRouter();
 
@@ -41,24 +42,29 @@ const ClientProtectPage = () => {
           <FormProvider {...methods}>
             <form
                 //   ref={formRef}
-                className="flex flex-col mt-2 "
+                className="flex flex-col mt-4"
                 //   onSubmit={handleSubmit(data => submitEmail(data))}
                 //   noValidate
             >
+                <ImgUploadForm 
+                  label="imageFile"
+                  errorText="Au moins une image est requise" 
+                />
+
                 <InputForm
-                    label="title"
-                    text="Title du projet"
-                    errorText="Un titre est requis"         
+                  label="title"
+                  text="Title du projet"
+                  errorText="Un titre est requis"         
                 />
                 <InputForm 
-                    label="description"
-                    text="Votre description"
-                    errorText="Une description est requise"         
+                  label="description"
+                  text="Votre description"
+                  errorText="Une description est requise"         
                 />   
                 <TextareaForm 
-                    label="content"
-                    text="Votre contenu"
-                    errorText="Le contenu est requis" 
+                  label="content"
+                  text="Votre contenu"
+                  errorText="Le contenu est requis" 
                 />     
             </form>
           </FormProvider>
