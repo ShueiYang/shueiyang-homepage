@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic"
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion"
 import { sendEmail } from "@/lib/sendEmail";
 import { slideIn } from "@/utils/motion";
@@ -21,32 +21,40 @@ const MapLocation = dynamic(()=> import("@/components/map/MapLocation"), {
 
 function Contact () {
   
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<{ message: string } | null>(null);
-  const [isSend, setIsSend ] = useState(false);
+  const initialForm = {
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  }
 
-  const methods = useForm<EmailForm>();
-  const { handleSubmit, reset } = methods;
+  const methods = useForm<EmailForm>({mode: "onChange", defaultValues: initialForm});
+  const { 
+    handleSubmit, 
+    reset, 
+    formState: { 
+      isValid,
+      isSubmitting, 
+      isSubmitSuccessful 
+    } 
+  } = methods;
 
-
+  
   async function submitEmail(form: EmailForm) {
-    setLoading(true);
     try {
+      setError(null);
       const response = await sendEmail(form); // send Email using emailjs library
       if(response.status === 200) {
-        reset();
-        setIsSend(true)
-        setError(null);
+        reset();    
       }
     } catch (err) {
       console.error("ErrorLog", err);
       setError({message: "Une erreur est survenue lors de l'envoi d'un email à ce contact"})
-    } finally {
-      setLoading(false);
-    }
+    } 
   }
 
-  if(isSend) {
+  if(isSubmitSuccessful) {
     return <SuccessForm />
   }
   return (
@@ -93,9 +101,11 @@ function Contact () {
               text="Votre message"
               errorText="Veuillez écrire un message avant l'envoi"
             />   
-            <button className="btn-primary flex items-center mx-auto">
+            <button className={`${isValid ? "" : "inactive"}
+              btn-primary flex items-center mx-auto`}
+            >
               <RiMailSendFill className="mr-3 text-xl"/>
-              {loading? "Envoi en cours..." : "Envoyer"}
+              { isSubmitting ? "Envoi en cours..." : "Envoyer"}
             </button>
           </form>
         </FormProvider>

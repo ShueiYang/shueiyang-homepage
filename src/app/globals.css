@@ -55,6 +55,10 @@
     @apply border-t-teal-500 border-b-teal-500 border-l-transparent border-r-transparent dark:border-t-teal-400 dark:border-b-teal-400;
     animation: spin 0.5s linear infinite
   }
+  .inactive {
+    pointer-events: none;
+    opacity: 0.5;
+  }
   .bouncer div {
     width: 20px;
     height: 20px;

@@ -10,15 +10,20 @@ import PageLayout from "@/components/layouts/PageLayout";
 const AdminLoginPage = () => {
 
   const router = useRouter();
-  const [ loading, setLoading ] = useState(false);
-  const [ error, setError ] = useState("");
+  const [ loginError, setLoginError ] = useState("");
+  const [ authenticate, setAuthenticate ] = useState(false);
 
   const methods = useForm<AdminForm>();
-  const { handleSubmit } = methods;
+  const { 
+    handleSubmit, 
+    formState: { 
+      errors,
+      isSubmitting, 
+    } 
+  } = methods;
 
   async function handleLogin(userCredential: AdminForm) {   
-    setError("")
-    setLoading(true)
+    setLoginError("")
     try {
       const response = await fetch("/api/auth/login", {
         method: "POST",
@@ -27,16 +32,15 @@ const AdminLoginPage = () => {
       });
       const data = await response.json();
       if(response.ok) {
+        setAuthenticate(true);
         router.refresh();
       } else if (response.status === 401) {
-        setError(data.message)  
+        setLoginError(data.message)  
       }
     } catch (err) {
       console.error(err)
-      setError((err as Error).message)   
-    } finally {
-      setLoading(false)
-    }
+      setLoginError((err as Error).message)   
+    } 
   }
 
 
@@ -54,28 +58,36 @@ const AdminLoginPage = () => {
             <form
               className="flex flex-col max-w-xs mt-6 mx-auto"
               onSubmit={handleSubmit(data => handleLogin(data))}
-                //   noValidate
+              noValidate
             >
               <InputForm
                 label="username"
                 text="Admin username"
-                errorText="username est requis"     
+                errorText=""     
               />
               <InputForm 
                 label="password"
                 text="Password"
-                errorText="password est requis"       
+                errorText=""       
               /> 
               <button 
                 className="btn-primary flex items-center mx-auto mt-6"
               >
-                {loading? "Checking..." : "Connecter"}
+                { isSubmitting ? "Checking..." 
+                  : authenticate ? "Authenticate!" 
+                  : "Connecter"
+                }
               </button>
             </form>
           </FormProvider>
-          { error &&
+          { loginError &&
             <p className="text-sm text-red-500 dark:text-red-400 text-center mt-3">
-              {error}
+              {loginError}
+            </p>
+          }
+          { (errors.username || errors.password) &&
+            <p className="text-sm text-red-500 dark:text-red-400 text-center mt-3">
+              All field are required
             </p>
           }
         </PageLayout>

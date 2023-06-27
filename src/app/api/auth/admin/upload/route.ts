@@ -16,9 +16,8 @@ export async function POST(req: Request) {
 
         console.log("check stat", title, description);
         
-        let imageArray = [];
-
-        imageArray.push("http://imagecloudtest/api");
+        // let imageArray = [];
+        // imageArray.push(image);
             
         await prisma.project.create({
             data: {
