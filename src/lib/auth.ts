@@ -1,6 +1,6 @@
 import { JWTPayload, SignJWT, jwtVerify } from "jose"
 
-
+// check and get the credential 
 export function getJwtSecret () {
     const secret = process.env.JWT_SECRET
     if(!secret) {
@@ -9,6 +9,7 @@ export function getJwtSecret () {
     return secret;
 }
 
+// function to to sign the JWT
 export async function signJWT (
     payload: {username: string},
     options: {expiresIn: string}
@@ -29,6 +30,7 @@ export async function signJWT (
     }
 }
 
+// function to verify and validate the JWT
 export async function verifyAuth(token: string) {
     try {
         const secret = new TextEncoder().encode(getJwtSecret())
