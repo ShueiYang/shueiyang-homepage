@@ -92,7 +92,7 @@ function ChineseCandleStick () {
             })
             renderer.setPixelRatio(window.devicePixelRatio)
             renderer.setSize(scW, scH)
-            renderer.outputEncoding = THREE.sRGBEncoding
+            renderer.outputColorSpace = THREE.SRGBColorSpace
             renderer.toneMapping = THREE.ACESFilmicToneMapping
             renderer.toneMappingExposure = 0.5
             renderer.shadowMap.enabled = true;
