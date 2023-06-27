@@ -10,7 +10,7 @@ export async function middleware(req: NextRequest) {
   if(!jwtCookie && url.includes("/backoffice/dashboard")) {
     return NextResponse.redirect(new URL("/backoffice/login", url)) 
   }
-  if(!jwtCookie && req.nextUrl.pathname.startsWith("/api/auth/publish")) {
+  if(!jwtCookie && req.nextUrl.pathname.startsWith("/api/auth/admin")) {
     return NextResponse.json(
       { message: "Authentification required"},
       { status: 401 }     
@@ -32,7 +32,7 @@ export async function middleware(req: NextRequest) {
     if(url.includes("/backoffice/dashboard")) {
       return NextResponse.redirect(new URL("/backoffice/login", url)) 
     } 
-    if(req.nextUrl.pathname.startsWith("/api/auth/publish")) {
+    if(req.nextUrl.pathname.startsWith("/api/auth/admin")) {
       return NextResponse.json(
         { message: "Jwt is expired or is not valid"},
         { status: 403 }     
@@ -42,5 +42,5 @@ export async function middleware(req: NextRequest) {
 }
  
 export const config = {
-  matcher: ["/backoffice/:path*", "/api/auth/publish/:path*"]
+  matcher: ["/backoffice/:path*", "/api/auth/admin/:path*"]
 }
