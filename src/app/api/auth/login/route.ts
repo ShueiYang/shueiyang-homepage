@@ -1,37 +1,25 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers"
 import { signJWT } from "@/lib/auth";
+import { getCredential } from "@/app/action";
 
-
-function getCredential() {
-    const adminUser = process.env.ADMIN_USER;
-    const adminPassword = process.env.ADMIN_PASSWORD    
-    if(!adminUser || !adminPassword) {
-        throw new Error("Credentials are not set")
-    }
-    return {
-        adminUser,
-        adminPassword,
-    }
-}
 
 export async function POST(req: Request) {
     try {
         const body = await req.json() as unknown as AdminForm
         const { username, password } = body 
-        const { adminUser, adminPassword } = getCredential();
+        const { adminUser, adminPassword } = await getCredential();
         
         if( username !== adminUser || password !== adminPassword) {
             return NextResponse.json(
                 { message: "Access denied" },
                 { status: 401 }     
             );
-        }
-        
+        }        
         // sign up the jwt
         const token = await signJWT(
             { username, },
-            { expiresIn: "1d"}
+            getJwtSecret()
         );
 
         cookies().set({
@@ -64,3 +52,13 @@ export async function POST(req: Request) {
         }
     }    
 };
+
+
+// get the jwt secret
+ function getJwtSecret() {
+    const secret = process.env.JWT_SECRET
+    if(!secret) {
+        throw new Error("JWT_SECRET is not set")
+    }
+    return secret;
+  }

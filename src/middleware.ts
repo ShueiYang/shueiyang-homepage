@@ -5,6 +5,7 @@ import { verifyAuth } from "./lib/auth";
 export async function middleware(req: NextRequest) {
 
   const jwtCookie = req.cookies.get("shueiJWT") 
+  const jwtSecret = process.env.JWT_SECRET
   const url = req.url;
   
   if(!jwtCookie && url.includes("/backoffice/dashboard")) {
@@ -17,10 +18,10 @@ export async function middleware(req: NextRequest) {
     );
   }
   try {
-    if(jwtCookie) {
+    if(jwtCookie && jwtSecret) {
       const tokenValue = jwtCookie.value;
       // verify if the jwt is valid
-      await verifyAuth(tokenValue);  
+      await verifyAuth(tokenValue, jwtSecret);  
 
       if(url.includes("/backoffice/login")) {
         return NextResponse.rewrite(new URL("/backoffice/dashboard", url))
