@@ -6,11 +6,6 @@ import { useRouter } from "next/navigation"
 import { useState } from "react";
 import PageLayout from "@/components/layouts/PageLayout";
 
-interface User {
-  username: string,
-  password: string,
-}
-
 
 const AdminLoginPage = () => {
 
@@ -18,10 +13,10 @@ const AdminLoginPage = () => {
   const [ loading, setLoading ] = useState(false);
   const [ error, setError ] = useState("");
 
-  const methods = useForm<InputsProps>();
+  const methods = useForm<AdminForm>();
   const { handleSubmit } = methods;
 
-  async function handleLogin(userCredential: User) {   
+  async function handleLogin(userCredential: AdminForm) {   
     setError("")
     setLoading(true)
     try {

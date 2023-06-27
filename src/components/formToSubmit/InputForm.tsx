@@ -1,22 +1,24 @@
 "use client";
 
-import { useFormContext } from 'react-hook-form';
+import { useFormContext } from "react-hook-form";
+
+type FormKeys = keyof EmailForm | keyof AdminForm | keyof ProjectForm
 
 export interface FormProps {
-    label: keyof InputsProps,
+    label: FormKeys,
     text: string,
     errorText: string,
 }
 
 const InputForm = ({ label, text, errorText }: FormProps) => {
 
-  const { register, formState: { errors }} = useFormContext<InputsProps>();
+  const { register, formState: { errors }} = useFormContext();
 
-  function getInputType (label: string ) {
+  function getInputType (label: FormKeys ) {
     if(label === "password") {
       return "password"
     } else {
-      return undefined;
+      return undefined
     }
   }
 

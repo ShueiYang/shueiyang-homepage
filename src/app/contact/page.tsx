@@ -21,25 +21,20 @@ const MapLocation = dynamic(()=> import("@/components/map/MapLocation"), {
 
 function Contact () {
   
-  const formRef = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<{ message: string } | null>(null);
   const [isSend, setIsSend ] = useState(false);
 
-  const methods = useForm<InputsProps>();
-  const { handleSubmit } = methods;
+  const methods = useForm<EmailForm>();
+  const { handleSubmit, reset } = methods;
 
-  
-  function resetForm() {
-    formRef.current?.reset();
-  }
 
-  async function submitEmail(form: InputsProps) {
+  async function submitEmail(form: EmailForm) {
     setLoading(true);
     try {
       const response = await sendEmail(form); // send Email using emailjs library
       if(response.status === 200) {
-        resetForm()
+        reset();
         setIsSend(true)
         setError(null);
       }
@@ -56,7 +51,6 @@ function Contact () {
   }
   return (
     <div className="container xl:max-w-5xl my-6 flex flex-col items-center justify-between lg:flex-row">
- 
       <motion.fieldset
         initial="hidden"
         animate="enter"
@@ -75,7 +69,6 @@ function Contact () {
         
         <FormProvider {...methods}>
           <form
-            ref={formRef}
             className="flex flex-col mt-2 "
             onSubmit={handleSubmit(data => submitEmail(data))}
             noValidate

@@ -2,10 +2,6 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers"
 import { signJWT } from "@/lib/auth";
 
-interface AdminUser {
-    username: string,
-    password: string,
-}
 
 function getCredential() {
     const adminUser = process.env.ADMIN_USER;
@@ -21,7 +17,7 @@ function getCredential() {
 
 export async function POST(req: Request) {
     try {
-        const body = await req.json() as unknown as AdminUser
+        const body = await req.json() as unknown as AdminForm
         const { username, password } = body 
         const { adminUser, adminPassword } = getCredential();
         

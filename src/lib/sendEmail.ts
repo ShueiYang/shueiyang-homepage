@@ -1,7 +1,7 @@
 import emailjs from "@emailjs/browser";
 
 
-export function sendEmail(form: InputsProps) {
+export function sendEmail(form: EmailForm) {
   if(
     process.env.NEXT_PUBLIC_SERVICE_ID
     && process.env.NEXT_PUBLIC_TEMPLATE_ID

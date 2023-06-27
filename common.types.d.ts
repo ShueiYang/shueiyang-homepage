@@ -10,14 +10,25 @@ interface Portfolio {
     content?: string;
 };
 
-interface InputsProps {
+interface EmailForm {
     name: string,
     email: string,
     subject: string,
     message: string,
-    title: string,
-    description: string,
-    content: string,
+};
+
+interface AdminForm {
     username: string,
     password: string,
+}
+
+interface ProjectForm {
+    title: string,
+    imageFile: string,
+    description: string,
+    siteUrl: string,
+    githubUrl: string,
+    content: string,
 };
+
+// type FormType = EmailForm | AdminForm | ProjectForm;
