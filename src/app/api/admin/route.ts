@@ -1,21 +1,32 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers"
 import { signJWT } from "@/lib/auth";
-import { getCredential } from "@/app/action";
+import { prisma } from "@/lib/prisma";
+import bcrypt from "bcrypt";
 
 
 export async function POST(req: Request) {
     try {
         const body = await req.json() as unknown as AdminForm
         const { username, password } = body 
-        const { adminUser, adminPassword } = await getCredential();
-        
-        if( username !== adminUser || password !== adminPassword) {
+    
+        const adminUser = await prisma.adminUser.findUnique({
+            where: {username}
+        })
+        if(adminUser === null) {
             return NextResponse.json(
-                { message: "Access denied" },
+                { message: "Access Denied"},
                 { status: 401 }     
             );
-        }        
+        }
+        // compare the password with hash...
+        const match = await bcrypt.compare(password, adminUser.userhash);
+        if(!match) {
+            return NextResponse.json(
+                { message: "Access Denied"},
+                { status: 401 }     
+            );  
+        } 
         // sign up the jwt
         const token = await signJWT(
             { username, },

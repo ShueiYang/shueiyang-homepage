@@ -10,12 +10,16 @@ export async function DELETE(request: Request, {params}: ParamsRoute) {
     try {
         const id = params.id;
 
-        const resultFound = await prisma.project.findUnique({ where: {id}})  
-        if(resultFound) {
-            const folderName = resultFound.title.replace(/\s/g, "");      
-            await deleteImage(folderName); 
+        const resultFound = await prisma.project.findUnique({ where: {id}}) 
+        if(!resultFound) {
+            return NextResponse.json(
+                { message: "project not found!" }, { status: 404 }      
+            )
         }
-        
+        // delete image from cloudinary
+        const folderName = resultFound.title.replace(/\s/g, "");      
+        await deleteImage(folderName); 
+        // delete project
         await prisma.project.delete({where: {id}})
    
         return NextResponse.json(
