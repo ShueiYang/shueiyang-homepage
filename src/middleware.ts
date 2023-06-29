@@ -9,9 +9,9 @@ export async function middleware(req: NextRequest) {
   const url = req.url;
   
   if(!jwtCookie && url.includes("/backoffice/dashboard")) {
-    return NextResponse.redirect(new URL("/backoffice/login", url)) 
+    return NextResponse.redirect(new URL("/backoffice/admin", url)) 
   }
-  if(!jwtCookie && req.nextUrl.pathname.startsWith("/api/auth/admin")) {
+  if(!jwtCookie && req.nextUrl.pathname.startsWith("/api/auth")) {
     return NextResponse.json(
       { message: "Authentification required"},
       { status: 401 }     
@@ -23,7 +23,7 @@ export async function middleware(req: NextRequest) {
       // verify if the jwt is valid
       await verifyAuth(tokenValue, jwtSecret);  
 
-      if(url.includes("/backoffice/login")) {
+      if(url.includes("/backoffice/admin")) {
         return NextResponse.rewrite(new URL("/backoffice/dashboard", url))
       }
       return NextResponse.next();
@@ -31,9 +31,9 @@ export async function middleware(req: NextRequest) {
   } catch (err) {
     console.error(err);
     if(url.includes("/backoffice/dashboard")) {
-      return NextResponse.redirect(new URL("/backoffice/login", url)) 
+      return NextResponse.redirect(new URL("/backoffice/admin", url)) 
     } 
-    if(req.nextUrl.pathname.startsWith("/api/auth/admin")) {
+    if(req.nextUrl.pathname.startsWith("/api/auth")) {
       return NextResponse.json(
         { message: "Jwt is expired or is not valid"},
         { status: 403 }     
@@ -43,5 +43,5 @@ export async function middleware(req: NextRequest) {
 }
  
 export const config = {
-  matcher: ["/backoffice/:path*", "/api/auth/admin/:path*"]
+  matcher: ["/backoffice/:path*", "/api/auth/:path*"]
 }

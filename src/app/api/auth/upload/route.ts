@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
     try {
-
+        // desctructure the key from formData
         const formData = await request.formData();
         const {
             title,
@@ -17,14 +17,13 @@ export async function POST(request: Request) {
 
         const imageFile = formData.get("imageFile") as string
         const stack = formData.get("stack") as string
+        // transform into array
         const stackArray = stack.split(",");
-
-        console.log("CHECK ", stackArray);
-       
+        // upload to cloudinary
         const folderName = title.replace(/\s/g, "");
         const cloudImage = await uploadImage(imageFile, folderName);
 
-            
+        // than create the document to DB    
         await prisma.project.create({
             data: {
                 title,

@@ -52,7 +52,7 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
             }  
           })
         );    
-        const response = await fetch("/api/auth/admin/upload", {
+        const response = await fetch("/api/auth/upload", {
           method: "POST",
           body: formData
         })

@@ -25,3 +25,20 @@ export async function uploadImage(image: string, projectName: string) {
         throw err;
     }
 }   
+
+
+
+export async function deleteImage(projectName: string) {
+    try {
+        // delete image in the specific foler
+        await cloudinary.api.delete_resources_by_prefix(
+            `api/portfolio/${projectName}`
+        );
+        // than delete the empty folder...
+        await cloudinary.api.delete_folder(
+            `api/portfolio/${projectName}`
+        )   
+    } catch (err) {
+        throw err;
+    }
+} 
