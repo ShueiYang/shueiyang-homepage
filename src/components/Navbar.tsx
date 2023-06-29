@@ -47,7 +47,7 @@ const Navbar = () => {
 
     return isMounted ? (
         <nav
-            className={`fixed w-full z-10 backdrop-blur flex items-center
+            className={`fixed w-full z-50 backdrop-blur flex items-center
                 ${theme === "light" ? "bg-gradient-to-r from-sand-l to-grn-l" : "bg-gradient-to-r from-purp-d to-sea-d"}`
             }
         >

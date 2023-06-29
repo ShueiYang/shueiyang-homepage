@@ -54,6 +54,7 @@ export default function HomepageLayout({
               width={100} 
               height={100} 
               alt="profile Image"
+              priority
             />
           </div>
         </div>
