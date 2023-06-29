@@ -10,7 +10,7 @@ generator client {
 
 model AdminUser {
     id String @id @default(auto()) @map("_id") @db.ObjectId
-    username String
+    username String @unique
     userhash String
     projects Project[]
 }
@@ -34,7 +34,7 @@ model Image {
     id String @id @default(auto()) @map("_id") @db.ObjectId
     public_id String
     secure_url String
-    project Project @relation(fields: [projectId], references: [id])
+    project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
     projectId String @db.ObjectId
 
     @@map("Images")
