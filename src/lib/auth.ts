@@ -10,7 +10,7 @@ export async function signJWT (
         const jwtSecret = new TextEncoder().encode(secret);
         const alg = "HS256"
         const iat = Math.floor(Date.now() / 1000);
-        const exp = iat + 60 * 60 * 2 // 2 hours
+        const exp = iat + 60 * 60 * 12 // 12 hours
 
         return new SignJWT(payload)
             .setProtectedHeader({ alg })

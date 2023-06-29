@@ -1,33 +1,46 @@
+import { uploadImage } from "@/app/api/cloudinary.actions";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
     try {
+
+        const formData = await request.formData();
         const {
             title,
             description,
-            image,
-            url,
-            stack,
-            source,
+            siteUrl,
+            githubUrl,
             content
-        }: Portfolio = await req.json() as unknown as Portfolio
+        } = Object.fromEntries(formData) as unknown as Portfolio;
 
-        console.log("check stat", title, description);
-        
-        // let imageArray = [];
-        // imageArray.push(image);
+        const imageFile = formData.get("imageFile") as string
+        const stack = formData.get("stack") as string
+        const stackArray = stack.split(",");
+
+        console.log("CHECK ", stackArray);
+       
+        const folderName = title.replace(/\s/g, "");
+        const cloudImage = await uploadImage(imageFile, folderName);
+
             
         await prisma.project.create({
             data: {
                 title,
                 description,
-                image,
-                url: url || "",
-                stack,
-                source,
-                content: content || ""
+                images: {
+                    create: [cloudImage]
+                },
+                siteUrl: siteUrl || "",
+                stack: stackArray,
+                githubUrl,
+                content: content || "",
+                owner: {
+                    connect: {
+                        id: "649c7484735a162a66509481"
+                    }
+                }
             }
         })
     
@@ -36,6 +49,10 @@ export async function POST(req: Request) {
         )
         
     } catch (err) {
-       console.error(err);        
+        console.error(err);
+        return NextResponse.json(
+            { message: "Internal Error please try again later." },
+            { status: 500 }
+        );      
     }    
 };

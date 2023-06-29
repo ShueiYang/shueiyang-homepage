@@ -3,10 +3,10 @@ interface Portfolio {
     id: string;
     title: string;
     description: string;
-    image: string[];
-    url?: string;
+    imageFile: ImageProps;
+    siteUrl?: string;
     stack: string[];
-    source: string,
+    githubUrl: string,
     content?: string;
 };
 
@@ -28,7 +28,13 @@ interface ProjectForm {
     description: string,
     siteUrl: string,
     githubUrl: string,
+    stack: string,
     content: string,
 };
+
+interface ImageProps {
+    public_id: string;
+    secure_url: string;
+}
 
 // type FormType = EmailForm | AdminForm | ProjectForm;

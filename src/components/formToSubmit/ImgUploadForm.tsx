@@ -1,81 +1,61 @@
 "use client";
 
-import { useFormContext, useWatch } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { FormProps } from "./InputForm";
 import Image from "next/image";
 
+interface ImgUploadProps extends Pick<FormProps, "label"> {
+  type: string
+  defaultImg: string 
+}
 
 
-const ImgUploadForm = ({ label, errorText }: Pick<FormProps, "label" | "errorText">) => {
+const ImgUploadForm = ({ label, type, defaultImg }: ImgUploadProps) => {
 
-    const { register, setValue, watch, formState: { errors }} = useFormContext();
+    const { register, watch } = useFormContext();
     
-    const file: FileList | null = watch(label, null)
-    const imageFile = file?.[0]
+    const imgFile: FileList | string = watch(label, defaultImg)
+  
+    const actionMode = type === "create";
     
-    console.log("IMGcheck", imageFile);
-
-    // function handleChangeImage (event: React.ChangeEvent<HTMLInputElement>) {
-    //     event.preventDefault();
-    //     const file = event.target.files?.[0];
-    //     console.log("file check", file);
-
-    //     if(file && file.length !== 0) {
-    //         const reader = new FileReader();
-    //         reader.readAsDataURL(file);
-    //         reader.onload = () => {
-    //             const result = reader.result as string;
-    //             setValue(label, result);
-    //         }
-    //     } else {
-    //         setValue(label, null);
-    //     }
-    // };
-
-    function convertToBase64 (file: File): Promise<string> {
-      return new Promise((resolve, reject) => {
-          const reader = new FileReader(); 
-          reader.readAsDataURL(file);
-
-          reader.onload = () => {
-          resolve(reader.result as string)
-          }
-          reader.onerror = (error) => {
-          reject(error)
-          }
-      })
-    }
-        
 
 
   return (
     <div className="relative inputField h-[175px] lg:h-[250px] mb-3 bg-[#ffffff]">
       <label className="flex justify-center items-center w-full h-full z-10 p-20" htmlFor={label}>
-        {(!file || !file.length) && "Image for project presentation"}
+      {(!imgFile || (imgFile instanceof FileList && !imgFile.length && !defaultImg)) && 
+        <div className="flex">
+          <Image 
+            className="invert dark:invert-0 mx-4"
+            src="/icons/upload.svg"
+            width={25}
+            height={25}
+            alt="upload"
+          />
+          <span>Image for project presentation</span>
+        </div>  
+      }   
       </label>    
       <input
-          className="absolute z-30 inset-0 opacity-0 cursor-pointer"
-          id={label}
-          {...register(label, {
-            // onChange: handleChangeImage, 
-            required: true 
-          })}       
-          type="file"
-          accept="image/*"
+        className="absolute z-30 inset-0 opacity-0 cursor-pointer"
+        id={label}
+        {...register(label, { required: actionMode })}   
+        type="file"
+        accept="image/*"
       />
-      { imageFile &&
+      { ((imgFile && imgFile.length) || defaultImg) &&
         <Image 
-          src={URL.createObjectURL(imageFile)}
+          src={ imgFile instanceof FileList && imgFile[0] ?
+            URL.createObjectURL(imgFile[0])
+          : defaultImg
+          }
           className="object-contain z-20 sm:p-10"
           alt="Project poster"
-          fill   
+          fill
+          sizes="(max-width: 512px) 100vw"   
         />
-      }
-     
-     <span className="text-sm text-red-500 dark:text-red-400 mb-2">
-      {errors[label] && errorText}
-     </span>
-   </div>
+      }   
+    </div>
   )
 }
 
