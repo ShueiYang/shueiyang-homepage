@@ -7,9 +7,7 @@ import ImgUploadForm from "@/components/formToSubmit/ImgUploadForm";
 import PageLayout from "@/components/layouts/PageLayout";
 import { useRouter } from "next/navigation";
 import { logOut } from "@/app/action";
-import { convertToBase64 } from "@/utils/utility";
-import { useState } from "react";
-
+import usePortFolio from "@/hooks/usePortFolio";
 
 interface FormProps {
     type: string,
@@ -19,8 +17,9 @@ interface FormProps {
 
 
 const ProjectForm = ({type, legend, project }: FormProps) => {
-
-    const [ submitError, setSubmitError ] = useState("");
+    // custom hook
+    const { submitError, uploadProject } = usePortFolio();
+    
     const route = useRouter();
     const initialForm = {
         title: project?.title || "",
@@ -34,42 +33,7 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
     const methods = useForm<ProjectForm>({mode: "onChange", defaultValues: initialForm});
     const { handleSubmit, formState: { errors, isSubmitting } } = methods;
 
-    async function submitProject (data: ProjectForm) {
-      setSubmitError("")
-      const formData = new FormData();
-      const formField = Object.entries(data);
-      try {
-        await Promise.all(
-          formField.map(async([key, value]) => {
-            //check if the value is a FileList instance and if there is a file in FileList.
-            if(key === "imageFile") {
-              if(value instanceof FileList && value.length) {
-                const result = await convertToBase64(value[0]);
-                formData.append(key, result);
-              }
-            } else {
-              formData.append(key, value);
-            }  
-          })
-        );    
-        const response = await fetch("/api/auth/upload", {
-          method: "POST",
-          body: formData
-        })
-        if(response.status === 201) {
-          route.push("/projects")
-        } else {
-          throw new Error(
-            `Failed to ${type === "create" ? "create" : "edit"} a project. Try again!`
-          )
-        }        
-      } catch (err: any) {
-          console.error(err)
-          setSubmitError(err.message)
-      }
-    }
-
-
+   
 
 
 
@@ -95,8 +59,8 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
         <FormProvider {...methods}>
           <form
             className="flex flex-col mt-4"
-            onSubmit={handleSubmit(data => submitProject(data))}
-            //   noValidate
+            onSubmit={handleSubmit(data => uploadProject(data, type))}
+            // noValidate
           >
             <ImgUploadForm 
               label="imageFile"
