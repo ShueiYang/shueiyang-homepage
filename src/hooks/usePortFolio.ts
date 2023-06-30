@@ -1,15 +1,19 @@
+import { FieldNamesMarkedBoolean } from "react-hook-form";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { convertToBase64 } from "@/utils/utility";
 
+type FieldsProps = Partial<Readonly<FieldNamesMarkedBoolean<ProjectForm>>>
+
 
 // custom hook
-function usePortFolio() {
+function usePortFolio(dirtyFields: FieldsProps) {
 
   const route = useRouter();
   const [submitError, setSubmitError] = useState("");
 
     console.log("HOOK FUNCTION RECREATE");
+    console.log("fields check", dirtyFields);
     
 
   async function uploadProject(data: ProjectForm, type: string) {
@@ -29,6 +33,7 @@ function usePortFolio() {
           } else {
             formData.append(key, value);
           }
+          return null;
         })
       );
       const response = await fetch("/api/auth/upload", {

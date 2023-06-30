@@ -33,7 +33,7 @@ export async function POST(request: Request) {
                 },
                 siteUrl: siteUrl || "",
                 stack: stackArray,
-                githubUrl,
+                githubUrl: githubUrl || "",
                 content: content || "",
                 owner: {
                     connect: {

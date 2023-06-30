@@ -13,8 +13,9 @@ export async function uploadImage(image: string, projectName: string) {
         const result = await cloudinary.uploader.upload(image , {
 
             folder: `api/portfolio/${projectName}`,
-            use_filename: true,
-            unique_filename: false,
+            public_id: "preview",
+            // use_filename: true,
+            // unique_filename: false,
         });
         const { public_id, secure_url } = result;
         return {

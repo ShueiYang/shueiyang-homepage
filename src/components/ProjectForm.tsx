@@ -17,25 +17,31 @@ interface FormProps {
 
 
 const ProjectForm = ({type, legend, project }: FormProps) => {
-    // custom hook
-    const { submitError, uploadProject } = usePortFolio();
-    
-    const route = useRouter();
-    const initialForm = {
-        title: project?.title || "",
-        imageFile: project?.imageFile || "",
-        description: project?.description || "",
-        siteUrl: project?.siteUrl || "",
-        githubUrl: project?.githubUrl || "",
-        content: project?.content || "",
-    }
+  
+  const route = useRouter();
+  const initialForm = {
+    title: project?.title || "",
+    imageFile: project?.imageFile || "",
+    description: project?.description || "",
+    siteUrl: project?.siteUrl || "",
+    githubUrl: project?.githubUrl || "",
+    content: project?.content || "",
+  }
+  
+  const methods = useForm<ProjectForm>({mode: "onChange", defaultValues: initialForm});
+  const { 
+    handleSubmit, 
+    formState: { 
+      errors, 
+      isSubmitting,
+      dirtyFields
+    } 
+  } = methods;
 
-    const methods = useForm<ProjectForm>({mode: "onChange", defaultValues: initialForm});
-    const { handleSubmit, formState: { errors, isSubmitting } } = methods;
-
-   
-
-
+  // custom hook
+  const { submitError, uploadProject } = usePortFolio(dirtyFields);
+  
+  
 
   return (
     <div className="container xl:max-w-5xl my-6 flex flex-col items-center justify-center lg:flex-row">
