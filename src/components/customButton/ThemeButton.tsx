@@ -24,8 +24,7 @@ function ThemeToggleButton() {
         setTheme(themeColor)
     }
 
-  return (
-    
+  return (    
     <Switch
         checked={theme === 'dark'}
         onChange={toggleTheme}
@@ -43,8 +42,7 @@ function ThemeToggleButton() {
             <IoSunny />
             <IoMoon />   
         </div>
-    </Switch>
-  
+    </Switch>  
   )
 }
 
