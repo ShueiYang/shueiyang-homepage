@@ -6,7 +6,7 @@ interface Portfolio {
     imageFile: ImageProps;
     siteUrl?: string;
     stack: string[];
-    githubUrl: string,
+    githubUrl?: string,
     content?: string;
 };
 
@@ -36,5 +36,3 @@ interface ImageProps {
     public_id: string;
     secure_url: string;
 }
-
-// type FormType = EmailForm | AdminForm | ProjectForm;
