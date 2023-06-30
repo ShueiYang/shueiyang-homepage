@@ -33,6 +33,7 @@ model Project {
 model Image {
     id String @id @default(auto()) @map("_id") @db.ObjectId
     public_id String
+    folder String
     secure_url String
     project Project @relation(fields: [projectId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     projectId String @db.ObjectId
