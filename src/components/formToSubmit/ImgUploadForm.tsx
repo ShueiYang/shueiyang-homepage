@@ -3,6 +3,7 @@
 import { useFormContext } from "react-hook-form";
 import { FormProps } from "./InputForm";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 interface ImgUploadProps extends Pick<FormProps, "label"> {
   type: string
@@ -13,14 +14,18 @@ interface ImgUploadProps extends Pick<FormProps, "label"> {
 const ImgUploadForm = ({ label, type, defaultImg }: ImgUploadProps) => {
 
     const { register, watch } = useFormContext();
-    
+    const [isMounted, setIsMounted] = useState(false);
+
     const imgFile: FileList | string = watch(label, defaultImg)
   
     const actionMode = type === "create";
-    
+
+    useEffect(() => {
+      setIsMounted(true)
+    }, []);  
 
 
-  return (
+  return isMounted ? (
     <div className="relative inputField h-[175px] lg:h-[250px] mb-3 bg-[#ffffff]">
       <label className="flex justify-center items-center w-full h-full z-10 p-20" htmlFor={label}>
       {(!imgFile || (imgFile instanceof FileList && !imgFile.length && !defaultImg)) && 
@@ -56,7 +61,7 @@ const ImgUploadForm = ({ label, type, defaultImg }: ImgUploadProps) => {
         />
       }   
     </div>
-  )
+  ) : <div />
 }
 
 export default ImgUploadForm;
