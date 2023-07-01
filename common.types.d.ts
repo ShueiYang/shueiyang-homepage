@@ -34,5 +34,10 @@ interface ProjectForm {
 
 interface ImageProps {
     public_id: string;
+    folder: string,
     secure_url: string;
+}
+
+type DataKeys = ProjectForm & {
+    id: string,
 }

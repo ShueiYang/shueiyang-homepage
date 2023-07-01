@@ -14,15 +14,16 @@ export async function POST(request: Request) {
             githubUrl,
             content
         } = Object.fromEntries(formData) as unknown as Portfolio;
-
+        
         const imageFile = formData.get("imageFile") as string
         const stack = formData.get("stack") as string
         // transform into array
-        const stackArray = stack.split(",");
+        const stackArray = stack.split(", ");
         // upload to cloudinary
         const folderName = title.replace(/\s/g, "");
-        const cloudImage = await uploadImage(imageFile, folderName);
-
+        const folderPath = `api/portfolio/${folderName}`
+        const cloudImage = await uploadImage(imageFile, folderPath);
+        
         // than create the document to DB    
         await prisma.project.create({
             data: {

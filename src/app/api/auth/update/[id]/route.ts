@@ -6,9 +6,11 @@ interface ParamsRoute {
     params: { id: string }
 }
 interface UpdateProps {
+    oldAssetId: string,
     cloudImage: ImageProps,
     stackArray: string[]
 }
+
 
 export async function PUT(request: Request, {params}: ParamsRoute) {
     try {
@@ -25,7 +27,7 @@ export async function PUT(request: Request, {params}: ParamsRoute) {
 
         const imageFile = formData.get("imageFile") as string | null
         const stack = formData.get("stack") as string | null
-        const updateData = {} as UpdateProps;
+        const updateData = {} as UpdateProps
 
         const resultFound = await prisma.project.findUnique({
             where: {id},
@@ -37,14 +39,15 @@ export async function PUT(request: Request, {params}: ParamsRoute) {
             return NextResponse.json(
                 { message: "project not found!" }, { status: 404 }      
             )
-        }
-        
+        }  
         if(imageFile) {
-            const folderName = resultFound.title.replace(/\s/g, ""); 
-            updateData.cloudImage = await uploadImage(imageFile, folderName);
+            updateData.oldAssetId = resultFound.images[0].id
+            const publicId = resultFound.images[0].public_id
+            const folderPath = resultFound.images[0].folder
+            updateData.cloudImage = await uploadImage(imageFile, folderPath, publicId);
         }
         if(stack) {
-            updateData.stackArray = stack.split(",");
+            updateData.stackArray = stack.split(", ");
         }
         
         await prisma.project.update({
@@ -52,16 +55,21 @@ export async function PUT(request: Request, {params}: ParamsRoute) {
             data: {
                 title: title || undefined,
                 description: description || undefined,
-                images: imageFile ? {create: [updateData.cloudImage]} : undefined,
+                images: imageFile ? {
+                    update: {
+                        where: {id: updateData.oldAssetId},
+                        data: updateData.cloudImage
+                    }
+                }     
+                : undefined,
                 siteUrl,
                 stack: stack ? updateData.stackArray : undefined,
                 githubUrl,
-                content
-            }
+                content,
+            },
         })
-     
         return NextResponse.json(
-            { message: "project successfully updated!" }, { status: 200 }      
+            { message: "Project successfully updated!" }, { status: 200 }      
         )
         
     } catch (err) {
@@ -79,22 +87,27 @@ export async function DELETE(request: Request, {params}: ParamsRoute) {
     try {
         const id = params.id;
 
-        const resultFound = await prisma.project.findUnique({ where: {id}}) 
+        const resultFound = await prisma.project.findUnique({
+             where: {id},
+             include: {
+                images: true, // Include the associated images
+            } 
+        }) 
         if(!resultFound) {
             return NextResponse.json(
                 { message: "project not found!" }, { status: 404 }      
             )
         }
         // delete image from cloudinary
-        const folderName = resultFound.title.replace(/\s/g, "");      
-        await deleteImage(folderName); 
+        const folderPath = resultFound.images[0].folder;   
+        await deleteImage(folderPath); 
         // delete project
         await prisma.project.delete({where: {id}})
    
         return NextResponse.json(
             { message: "project successfully deleted!" }, { status: 200 }      
-        )
-        
+        )  
+              
     } catch (err) {
         console.error(err);
         return NextResponse.json(

@@ -12,19 +12,22 @@ import usePortFolio from "@/hooks/usePortFolio";
 interface FormProps {
     type: string,
     legend: string,
-    project?: ProjectForm
+    project?: DataKeys
 }
 
 
 const ProjectForm = ({type, legend, project }: FormProps) => {
   
   const route = useRouter();
+  const projectId = project?.id
+
   const initialForm = {
     title: project?.title || "",
     imageFile: project?.imageFile || "",
     description: project?.description || "",
     siteUrl: project?.siteUrl || "",
     githubUrl: project?.githubUrl || "",
+    stack: project?.stack || "",
     content: project?.content || "",
   }
   
@@ -65,7 +68,7 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
         <FormProvider {...methods}>
           <form
             className="flex flex-col mt-4"
-            onSubmit={handleSubmit(data => uploadProject(data, type))}
+            onSubmit={handleSubmit(data => uploadProject(data, type, projectId))}
             // noValidate
           >
             <ImgUploadForm 
@@ -107,7 +110,7 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
               className="btn-primary flex items-center mx-auto mt-6"
              >
               { isSubmitting ? "Uploading..." 
-                : "Upload"
+                : type === "create" ? "Upload" : "Update"
               }
              </button>     
            </form>
