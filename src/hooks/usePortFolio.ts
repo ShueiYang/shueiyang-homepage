@@ -1,7 +1,7 @@
 import { FieldNamesMarkedBoolean } from "react-hook-form";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { convertToBase64 } from "@/utils/utility";
+import { processImage } from "@/utils/imageTool";
 
 type FieldsProps = Partial<Readonly<FieldNamesMarkedBoolean<ProjectForm>>>
 
@@ -11,8 +11,7 @@ function usePortFolio(dirtyFields: FieldsProps) {
 
   const route = useRouter();
   const [submitError, setSubmitError] = useState("");
-
-    console.log("fields check", dirtyFields);
+  
 
   async function uploadProject(
     data: ProjectForm, 
@@ -31,7 +30,7 @@ function usePortFolio(dirtyFields: FieldsProps) {
           //check if the value is a FileList instance and if there is a file in FileList.
           if (key === "imageFile") {
             if (value instanceof FileList && value.length) {
-              const result = await convertToBase64(value[0]);
+              const result = await processImage(value[0]);
               formData.append(key, result);
             }
           } else {

@@ -99,11 +99,14 @@ export async function DELETE(request: Request, {params}: ParamsRoute) {
             )
         }
         // delete image from cloudinary
-        const folderPath = resultFound.images[0].folder;   
-        await deleteImage(folderPath); 
+        if(resultFound.images.length) {
+            console.log("ITRIGGER HERE");  
+            const folderPath = resultFound.images[0].folder;   
+            await deleteImage(folderPath); 
+        }
         // delete project
         await prisma.project.delete({where: {id}})
-   
+    
         return NextResponse.json(
             { message: "project successfully deleted!" }, { status: 200 }      
         )  
