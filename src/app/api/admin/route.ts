@@ -45,9 +45,8 @@ export async function POST(req: Request) {
         const resp = {
             message: "Authenticate!"
         }
-        return new Response(JSON.stringify(resp), {
-            status: 200,
-        })
+        return new Response(JSON.stringify(resp), {status: 200});
+        
     } catch (err) {
         console.error(err);
         if((err as Error).message === "Credentials are not set") {

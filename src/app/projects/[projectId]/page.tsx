@@ -4,34 +4,40 @@ import Image from "next/image";
 import PageLayout from "@/components/layouts/PageLayout";
 import PreviousLink from "@/components/PreviousLink";
 import { getProjects } from "../page";
-// import Loader from "@/components/Loader";
-
 
 interface ParamsProps {
-  params: { projectName: string }
+  params: { projectId: string }
 }
 
-
-async function getProjectDetail(projectName: string) {
-  const projectsData = await getProjects()
-  const project = projectsData.find(project => project.id === projectName)
-  return project;       
+// function for Datadetail fetching
+async function getProjectInfo(projectId: string) {
+  try {
+    const response = await fetch(
+      `${process.env.BASE_URL}/api/review/${projectId}`
+    )
+    if(!response.ok) {
+      return null
+    }
+    return response.json();
+  } catch (err) {
+    console.error(err)
+  }  
 }
-
 
 export async function generateStaticParams() {
-  const projectsData = await getProjects();
+  const projectsData: ProjectData[] = await getProjects();
   const paths = projectsData.map(project => {
-      return { projectName: project.id }
+      return { projectId: project.id }
   })
   return paths;
 }
 
 
-
 const Work = async ({params}: ParamsProps) => {
-   
-  const project = await getProjectDetail(params.projectName)
+  const projectId = params.projectId
+  // console.log("check", params);
+  
+  const project: ProjectData = await getProjectInfo(projectId);
 
   if(!project) {
     notFound();
@@ -71,12 +77,12 @@ const Work = async ({params}: ParamsProps) => {
             WEBSITE
           </h3>
           <a 
-            href={project.url}
+            href={project.siteUrl}
             className="text-blue-600 dark:text-teal-300 hover:underline underline-offset-4"              
             rel="noopener noreferrer" 
             target="_blank"
           >              
-            <span>{project.url}</span>
+            <span>{project.siteUrl}</span>
           </a>
         </div>
 
@@ -85,12 +91,12 @@ const Work = async ({params}: ParamsProps) => {
             SOURCE CODE
           </h3>
           <a 
-            href={project.source}
+            href={project.githubUrl}
             className="text-blue-600 dark:text-teal-300 hover:underline underline-offset-4"              
             rel="noopener noreferrer" 
             target="_blank"
           > 
-            <span>{project.source}</span>
+            <span>{project.githubUrl}</span>
           </a>
         </div>
 
@@ -100,12 +106,12 @@ const Work = async ({params}: ParamsProps) => {
             return (
               <div key={index} className="mt-8">
                 <Image 
-                  src={`/images/assets/${image}`}
+                  src={image.secure_url}
                   className="rounded-xl w-full aspect-[16/10]"
-                  alt={image}
+                  alt="project preview"
                   loading="lazy"
                   placeholder="blur"
-                  blurDataURL={`/images/assets/${image}`}
+                  blurDataURL={`/images/assets/vercel.jpeg`}
                   width={550}
                   height={300}
                 />

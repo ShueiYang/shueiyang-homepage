@@ -1,10 +1,8 @@
+import { ParamsRoute } from "@/app/api/review/[id]/route";
 import { deleteImage, uploadImage } from "@/app/api/cloudinary.actions";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-interface ParamsRoute {
-    params: { id: string }
-}
 interface UpdateProps {
     oldAssetId: string,
     cloudImage: ImageProps,
@@ -100,7 +98,6 @@ export async function DELETE(request: Request, {params}: ParamsRoute) {
         }
         // delete image from cloudinary
         if(resultFound.images.length) {
-            console.log("ITRIGGER HERE");  
             const folderPath = resultFound.images[0].folder;   
             await deleteImage(folderPath); 
         }

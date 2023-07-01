@@ -1,27 +1,33 @@
 import type { Metadata } from "next"
 import PageLayout from "@/components/layouts/PageLayout";
 import PortfolioLayout from "@/components/layouts/PortfolioLayout";
-import { projectsData } from "@/constants/portfolio.database";
 import PreviousLink from '@/components/PreviousLink';
-import { prisma } from "@/lib/prisma";
+
 
 export const metadata: Metadata = {
   title: "Kim Nguyen - Projects",
   description: `Kim"s website`,
-  // authors: [{ name: "Kim Nguyen" }, { name: "Shueiyang", url: "https://nextjs.org" }],
 }
 
+// function for Data fetching
 export async function getProjects() {
-  return Promise.resolve(projectsData);
+  try {
+    const response = await fetch(`${process.env.BASE_URL}/api`)
+    if(!response.ok) {
+      throw new Error("Failed to Fetch Data")
+    }
+    return response.json();
+  } catch (err) {
+    console.error(err)
+  }
 }
+
 
 const Projects = async () => {
 
-  const projectsData = await getProjects();
+  // Data fetching on server side
+  const projectsData: ProjectData[] = await getProjects();
 
-  // const results = await prisma.project.findMany();
-  // console.log("API fetch Results", results);
-    
   return (
     <PageLayout>
       <article className="container mb-6">
@@ -39,9 +45,9 @@ const Projects = async () => {
                   <PortfolioLayout
                     href={`/projects/${project.id}`}
                     title={project.title}
-                    thumbnail={`/images/assets/${project.images[0]}`}
+                    thumbnail={project.images[0].secure_url}
                   >
-                    {project.desc}
+                    {project.description}
                   </PortfolioLayout>
                 </div>
               )

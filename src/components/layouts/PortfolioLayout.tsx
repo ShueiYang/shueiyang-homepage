@@ -12,6 +12,7 @@ interface LayoutProps {
 }
 
 function PortfolioLayout({children, href, title, thumbnail}: LayoutProps) {
+  const titleName = title.replace(/\s/g, "-");
 
   return (
     <div className="w-full text-center"> 
@@ -20,7 +21,11 @@ function PortfolioLayout({children, href, title, thumbnail}: LayoutProps) {
         transition={{ duration: 0.1, type: 'linear'}}
         className="relative rounded-xl shadow-custom hover:shadow-none duration-100"
       >
-        <Link href={href} scroll={false}>
+        <Link 
+          href={href} 
+          // as={`/projects/${titleName}`}
+          scroll={false}
+        >
           <Image 
             src={thumbnail}
             className="rounded-xl w-full aspect-[16/10]"
