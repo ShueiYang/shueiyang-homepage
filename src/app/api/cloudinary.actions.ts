@@ -8,18 +8,23 @@ cloudinary.config({
 });
 
 
-export async function uploadImage(image: string, projectName: string) {
+export async function uploadImage(
+    image: string, 
+    folderPath: string,
+    publicId?: string 
+) {
     try {
+        if(publicId) {
+            await cloudinary.uploader.destroy(publicId);
+        }
         const result = await cloudinary.uploader.upload(image , {
-
-            folder: `api/portfolio/${projectName}`,
+            folder: folderPath,
             public_id: "preview",
-            // use_filename: true,
-            // unique_filename: false,
         });
-        const { public_id, secure_url } = result;
+        const { public_id, folder, secure_url } = result;
         return {
             public_id,
+            folder,
             secure_url
         };
     } catch (err) {
@@ -29,16 +34,12 @@ export async function uploadImage(image: string, projectName: string) {
 
 
 
-export async function deleteImage(projectName: string) {
+export async function deleteImage(folderPath: string) {
     try {
         // delete image in the specific foler
-        await cloudinary.api.delete_resources_by_prefix(
-            `api/portfolio/${projectName}`
-        );
+        await cloudinary.api.delete_resources_by_prefix(folderPath);
         // than delete the empty folder...
-        await cloudinary.api.delete_folder(
-            `api/portfolio/${projectName}`
-        )   
+        await cloudinary.api.delete_folder(folderPath);   
     } catch (err) {
         throw err;
     }
