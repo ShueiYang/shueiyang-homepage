@@ -24,6 +24,8 @@ model Project {
     stack String[]
     githubUrl String
     content String?
+    createAt DateTime @default(now())
+    updateAt DateTime @updatedAt
     owner AdminUser @relation(fields: [ownerId], references: [id])
     ownerId String @db.ObjectId
 
