@@ -41,3 +41,14 @@ interface ImageProps {
 type DataKeys = ProjectForm & {
     id: string,
 }
+
+interface ProjectData {
+    id: string;
+    title: string;
+    description: string;
+    images: ImageProps[]
+    siteUrl: string;
+    stack: string[];
+    githubUrl: string,
+    content: string;
+};
