@@ -4,23 +4,25 @@ import Image from "next/image";
 import PageLayout from "@/components/layouts/PageLayout";
 import PreviousLink from "@/components/PreviousLink";
 import { getProjects } from "../page";
+import { prisma } from "@/lib/prisma";
 
 interface ParamsProps {
   params: { projectId: string }
 }
 
-// function for Datadetail fetching
+// function to query project detail from DB
 async function getProjectInfo(projectId: string) {
   try {
-    const response = await fetch(
-      `${process.env.BASE_URL}/api/review/${projectId}`
-    )
-    if(!response.ok) {
-      return null
-    }
-    return response.json();
-  } catch (err) {
-    console.error(err)
+    const project = await prisma.project.findUnique({
+        where: {id: projectId},
+        include:{
+          images: true  // Include the associated images
+        },   
+    })      
+    return project as unknown as ProjectData | null
+  } catch (error) {
+    console.error(error)
+    throw error
   }  
 }
 
@@ -37,7 +39,7 @@ const Work = async ({params}: ParamsProps) => {
   const projectId = params.projectId
   // console.log("check", params);
   
-  const project: ProjectData = await getProjectInfo(projectId);
+  const project: ProjectData | null = await getProjectInfo(projectId);
 
   if(!project) {
     notFound();

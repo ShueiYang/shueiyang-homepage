@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import PageLayout from "@/components/layouts/PageLayout";
 import PortfolioLayout from "@/components/layouts/PortfolioLayout";
 import PreviousLink from '@/components/PreviousLink';
+import { prisma } from "@/lib/prisma";
 
 
 export const metadata: Metadata = {
@@ -9,21 +10,26 @@ export const metadata: Metadata = {
   description: `Kim"s website`,
 }
 
-// function for Data fetching
-export async function getProjects() {
+// function to query database in server component
+export async function getProjects()  {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/api`)
-    if(!response.ok) {
-      throw new Error("Failed to Fetch Data")
-    }
-    return response.json();
-  } catch (err) {
-    console.error(err)
+    const results = await prisma.project.findMany({
+      include:{
+        images: true
+      },
+      orderBy: {
+        createAt: "desc" // Sort by most recent date
+      }
+    })
+    return results as unknown as ProjectData[]
+  } catch (error) {
+    console.error(error)
+    throw error
   }
 }
 
 
-const Projects = async () => {
+export default async function Projects() {
 
   // Data fetching on server side
   const projectsData: ProjectData[] = await getProjects();
@@ -57,6 +63,4 @@ const Projects = async () => {
       </article>
     </PageLayout>
   )
-}
-
-export default Projects;        
+};  
