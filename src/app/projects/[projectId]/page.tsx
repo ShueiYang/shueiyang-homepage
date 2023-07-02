@@ -5,27 +5,12 @@ import { notFound } from "next/navigation"
 import PageLayout from "@/components/layouts/PageLayout";
 import PreviousLink from "@/components/PreviousLink";
 import { getProjects } from "../page";
-import { prisma } from "@/lib/prisma";
+import { getProjectInfo } from "@/app/action";
 
 interface ParamsProps {
   params: { projectId: string }
 }
 
-// function to query project detail from DB in server component
-async function getProjectInfo(projectId: string) {
-  try {
-    const project = await prisma.project.findUnique({
-      where: {id: projectId},
-      include:{
-        images: true  // Include the associated images
-      },   
-    })      
-    return project as unknown as ProjectData | null
-  } catch (error) {
-    console.error(error)
-    throw error
-  }  
-}
 
 export async function generateStaticParams() {
   const projectsData: ProjectData[] = await getProjects();
@@ -55,6 +40,7 @@ const Work = async ({params}: ParamsProps) => {
           </PreviousLink>
           <Link
             href={`/backoffice/dashboard/${projectId}`}
+            prefetch={false}
             className="flex items-start h-full"
           >
             <span className="text-lg text-blue-600 dark:text-teal-300 hover:underline underline-offset-4">

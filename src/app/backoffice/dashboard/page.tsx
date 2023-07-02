@@ -5,11 +5,7 @@ export const metadata: Metadata = {
   title: "Admin - Kim Nguyen"
 }
 
-
-
 const CreateProject = () => {
-
-
 
   return (
     <ProjectForm 

@@ -1,10 +1,8 @@
 import { deleteImage, uploadImage } from "@/app/api/cloudinary.actions";
+import { ParamsRoute } from "@/app/backoffice/dashboard/[id]/page";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-interface ParamsRoute {
-    params: {id: string}
-}
 interface UpdateProps {
     oldAssetId: string,
     cloudImage: ImageProps,
