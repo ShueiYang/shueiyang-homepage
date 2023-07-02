@@ -1,15 +1,21 @@
+import CircularProgressBar from '../CircularLoader';
 import SceneContainer from './SceneContainer'
 
 
-const CandleStickLoader = () => {
+const CandleStickLoader = ({progress}: {progress?: number}) => {
   
     return (
         <SceneContainer>
-            <div className="spinner top-[40%] mx-auto flex justify-center items-center"></div>
-            <div className="absolute left-0 right-0 w-[4.6rem] h-[4.6rem] top-[40%] mx-auto flex justify-center items-center text-xs">
-                Loading
+            <div className="absolute inset-x-0 top-[40%] flex flex-col justify-center items-center gap-2">
+                <CircularProgressBar 
+                  strokeWidth={7}
+                  sqSize={100}
+                  percentage={progress ? progress : 0}
+                />
+                <span className="text-sm md:text-base">Loading...</span>
             </div>
+            
         </SceneContainer>
   )
 }
-export default CandleStickLoader;        
+export default CandleStickLoader;

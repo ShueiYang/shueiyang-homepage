@@ -17,6 +17,7 @@ function ChineseCandleStick () {
     const glbFilePath = "/candleStick.glb"
 
     const [loading, setLoading] = useState(true);
+    const [progress, setProgress] = useState(0);
 
     const handleWindowResize = useCallback(() => {
         const container = refContainer.current;
@@ -27,6 +28,10 @@ function ChineseCandleStick () {
             renderer.setSize(scW, scH)
         }
     }, [])
+
+    const updateProgress = (currentProgree: number) => {
+        setProgress(currentProgree)
+    }
 
     /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
@@ -113,7 +118,7 @@ function ChineseCandleStick () {
             controls.target = target
       
             // Load 3D Model from custom lib
-            loadGLTFModel(scene, glbFilePath, {
+            loadGLTFModel(scene, glbFilePath, updateProgress, {
                 receiveShadow: true,
                 castShadow: true
             }).then((candleStick) => {
@@ -178,7 +183,7 @@ function ChineseCandleStick () {
 
     return (
         <SceneContainer ref={refContainer}>
-            { loading && <CandleStickLoader /> }
+            { loading && <CandleStickLoader progress={progress} /> }
         </SceneContainer>
     )
 }

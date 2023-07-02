@@ -44,17 +44,6 @@
   .logoBox:hover > img {
     transform: rotate(-35deg);
   }
-  .spinner {
-    position: absolute;
-    left: 0;
-    right: 0;
-    width: 75px;
-    height: 75px;
-    border: 6px solid;
-    border-radius: 50%;
-    @apply border-t-teal-500 border-b-teal-500 border-l-transparent border-r-transparent dark:border-t-teal-400 dark:border-b-teal-400;
-    animation: spin 0.5s linear infinite
-  }
   .inactive {
     pointer-events: none;
     opacity: 0.5;
@@ -74,11 +63,25 @@
     animation-delay: 0.2s;
     opacity: 0.6;
   }
-  @keyframes spin {
-    to {transform: rotate(360deg);}
-  }
   @keyframes bouncer {
     from { transform: translateY(0);}
     to { transform: translateY(-30px);}
+  }
+  .circle-background,
+  .circle-progress {
+    fill: none;
+  }
+  .circle-background {
+    stroke: #ddd;
+  }
+  .circle-progress {
+    stroke: #14b8a6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .circle-text {
+    font-size: 2em;
+    font-weight: bold;
+    fill: #14b8a6;
   }
 }

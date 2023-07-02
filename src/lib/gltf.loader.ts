@@ -5,14 +5,24 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 export function loadGLTFModel (
   scene: THREE.Scene,
   glbPath: string,
+  loadProgress: (progress: number) => void,
   options = { receiveShadow: true, castShadow: true }
 ): Promise<THREE.Object3D> {
   
 const { receiveShadow, castShadow } = options
 
   return new Promise((resolve, reject) => {
-    const loader = new GLTFLoader();
-    loader.load(
+    // use loadingManager to show the progress bar
+    const loadingManager = new THREE.LoadingManager();
+    const gltfLoader = new GLTFLoader(loadingManager);
+   
+    // Set up the loadProgress callback
+    loadingManager.onProgress = (url, itemsLoaded, itemsTotal) => {
+      const currentProgress = (itemsLoaded / itemsTotal) * 100;
+      loadProgress(currentProgress);
+    }
+
+    gltfLoader.load(
       glbPath,
       gltf => {
         const obj = gltf.scene
@@ -24,7 +34,7 @@ const { receiveShadow, castShadow } = options
         const center = new THREE.Vector3();
         box.getCenter(center);
         obj.position.sub(center); //center the model
-        scene.add(obj)
+        scene.add(obj) // add the model to the scene
         
         obj.traverse(node => {
           if ((node as THREE.Mesh).isMesh) {
