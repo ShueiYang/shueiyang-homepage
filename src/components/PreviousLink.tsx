@@ -21,11 +21,11 @@ const PreviousLink = ({children, path, style }: PrevLinkProps) => {
           />
         </div>
         <Link 
-            href={path}
-            scroll={false} 
-            className="z-20 text-blue-600 dark:text-teal-300 hover:underline underline-offset-4"
+          href={path}
+          scroll={false} 
+          className="z-20 text-blue-600 dark:text-teal-300 hover:underline underline-offset-4"
         >
-            {children}
+          {children}
         </Link>
     </div>
   )

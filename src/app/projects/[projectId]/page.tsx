@@ -1,6 +1,7 @@
 // import { ParsedUrlQuery } from "querystring";
-import { notFound } from "next/navigation"
 import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation"
 import PageLayout from "@/components/layouts/PageLayout";
 import PreviousLink from "@/components/PreviousLink";
 import { getProjects } from "../page";
@@ -10,14 +11,14 @@ interface ParamsProps {
   params: { projectId: string }
 }
 
-// function to query project detail from DB
+// function to query project detail from DB in server component
 async function getProjectInfo(projectId: string) {
   try {
     const project = await prisma.project.findUnique({
-        where: {id: projectId},
-        include:{
-          images: true  // Include the associated images
-        },   
+      where: {id: projectId},
+      include:{
+        images: true  // Include the associated images
+      },   
     })      
     return project as unknown as ProjectData | null
   } catch (error) {
@@ -48,11 +49,27 @@ const Work = async ({params}: ParamsProps) => {
   return (
     <PageLayout>
       <article className="container xl:max-w-5xl my-6">
-        <PreviousLink path="/projects" style="mx-auto">
-          Projects
-        </PreviousLink>
- 
-        <h1 className="subSection text-3xl font-ibm font-semibold text-center mb-6">
+        <div className="flex justify-between md:max-w-[44rem] mx-auto">
+          <PreviousLink path="/projects" style="">
+            Projects
+          </PreviousLink>
+          <Link
+            href={`/backoffice/dashboard/${projectId}`}
+            className="flex items-start h-full"
+          >
+            <span className="text-lg text-blue-600 dark:text-teal-300 hover:underline underline-offset-4">
+              Edit
+            </span>
+            <Image
+              src="/icons/pencile.svg"
+              className="dark:invert mx-1"
+              width={23}
+              height={23}
+              alt="Edit pencil"
+            />
+          </Link>
+        </div>
+        <h1 className="subSection text-3xl font-ibm font-semibold text-center my-6">
           {project.title}
         </h1>
         
@@ -70,8 +87,7 @@ const Work = async ({params}: ParamsProps) => {
                   {`${item},`}
                 </span>
               )
-            })
-          }            
+          })}             
         </div>      
 
         <div className="subSection mt-2 sm:mt-0 font-ibm">
@@ -103,24 +119,22 @@ const Work = async ({params}: ParamsProps) => {
         </div>
 
         <div className="subSection">
-         {
-          project.images.map((image, index) => {
-            return (
-              <div key={index} className="mt-8">
-                <Image 
-                  src={image.secure_url}
-                  className="rounded-xl w-full aspect-[16/10]"
-                  alt="project preview"
-                  loading="lazy"
-                  placeholder="blur"
-                  blurDataURL={`/images/assets/vercel.jpeg`}
-                  width={550}
-                  height={300}
-                />
-              </div>
-            )
-          })
-         } 
+        {project.images.map((image, index) => {
+          return (
+            <div key={index} className="mt-8">
+              <Image 
+                src={image.secure_url}
+                className="rounded-xl w-full aspect-[16/10]"
+                alt="project preview"
+                loading="lazy"
+                placeholder="blur"
+                blurDataURL={`/images/assets/vercel.jpeg`}
+                width={550}
+                height={300}
+              />
+            </div>
+          )
+        })}      
         </div>  
       </article>
     </PageLayout>
