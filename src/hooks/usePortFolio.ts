@@ -34,6 +34,7 @@ function usePortFolio(dirtyFields: FieldsProps) {
               formData.append(key, result);
             }
           } else {
+          // only append data if is modified in the input value
             if(dirtyFields[key as keyof ProjectForm]) {
               formData.append(key, value);
             }
@@ -59,10 +60,27 @@ function usePortFolio(dirtyFields: FieldsProps) {
       setSubmitError(err.message);
     }
   }
+
+
+  async function deleteProject (projectId: string) {
+    try {
+      const response = await fetch(`/api/auth/update/${projectId}`, {
+        method: "DELETE"
+      })
+      if(response.ok) {
+        route.push("/projects")
+      } else {
+        throw new Error("Failed to delete project. Try again!")
+      }  
+    } catch (err) {
+      console.error(err)
+    }
+  }
   
   return {
     submitError,
     uploadProject,
+    deleteProject,
   }  
 };
 

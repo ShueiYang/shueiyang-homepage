@@ -11,16 +11,16 @@ const WebPresence = () => {
       </h2>
       <div className="sm:grid grid-cols-2 lg:grid-cols-4">
         <SocialButton iconName={IoLogoGithub} path="https://github.com/ShueiYang">
-            @ShueiYang
+          @ShueiYang
         </SocialButton>
         <SocialButton iconName={IoLogoLinkedin} path="https://www.linkedin.com/in/shueiyang">
-            @Shueiyang
+          @Shueiyang
         </SocialButton>
         <SocialButton iconName={FaSteam} path="https://steamcommunity.com/id/shueiyang">
-            @Yangxuzhu
+          @Yangxuzhu
         </SocialButton>
         <SocialButton iconName={IoLogoDiscord} path="https://discord.com/users/282279109273583616">
-            @Yang
+          @Yang
         </SocialButton>
       </div>
    </>

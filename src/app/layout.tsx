@@ -10,7 +10,6 @@ import dynamic from "next/dynamic";
 import CandleStickLoader from "@/components/model3D/CandleStick.Loader";
 import AnimatePresenceLayout from "./AnimateLayout"
 
-
 const ChineseCandleStick = dynamic(()=> import("@/components/model3D/ChineseCandleStick"), {
   ssr: false,
   loading: () => <CandleStickLoader />  

@@ -8,6 +8,7 @@ import PageLayout from "@/components/layouts/PageLayout";
 import { useRouter } from "next/navigation";
 import { logOut } from "@/app/action";
 import usePortFolio from "@/hooks/usePortFolio";
+import ModalDialog from "./modal/ModalDialog";
 
 interface FormProps {
     type: string,
@@ -41,8 +42,8 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
     } 
   } = methods;
 
-  // custom hook
-  const { submitError, uploadProject } = usePortFolio(dirtyFields);
+  // use portfolio custom hooks
+  const { submitError, uploadProject, deleteProject } = usePortFolio(dirtyFields);
   
   
   return (
@@ -105,13 +106,24 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
               text="Votre contenu"
               errorText="Le contenu est requis" 
             />
-             <button 
-              className="btn-primary flex items-center mx-auto mt-6"
-             >
-              { isSubmitting ? "Uploading..." 
-                : type === "create" ? "Upload" : "Update"
+            <div className="flex justify-around">
+              <button 
+                className="btn-primary flex items-center mt-6"
+              >
+                { isSubmitting ? "Uploading..." 
+                  : type === "create" ? "Upload" : "Update"
+                }
+              </button> 
+
+              {type === "edit" && project &&
+                <ModalDialog 
+                  type={type} 
+                  title={project.title}
+                  projectId={project.id}
+                  deleteAction={deleteProject}
+                />
               }
-             </button>     
+             </div>  
            </form>
          </FormProvider>
           { submitError &&
