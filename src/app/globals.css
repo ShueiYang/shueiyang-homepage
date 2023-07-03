@@ -84,4 +84,15 @@
     font-weight: bold;
     fill: #14b8a6;
   }
+  @keyframes progressAnime {
+    0% {
+      stroke-dashoffset: calc(46.5px * 3.14 * 2);
+    }
+    100% {
+      stroke-dashoffset: calc(46.5px * 3.14 * 2 * (1 - 45 / 100));
+    }
+  }
+  .circle-animate {
+    animation: progressAnime 1.5s linear forwards;
+  }
 }
