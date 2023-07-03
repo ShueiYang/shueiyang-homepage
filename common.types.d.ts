@@ -52,3 +52,7 @@ interface ProjectData {
     githubUrl: string,
     content: string;
 };
+
+interface validateForm {
+    titleName: string
+}
