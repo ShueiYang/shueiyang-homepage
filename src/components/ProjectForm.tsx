@@ -5,10 +5,11 @@ import InputForm from "@/components/formToSubmit/InputForm";
 import TextareaForm from "@/components/formToSubmit/TextareaForm";
 import ImgUploadForm from "@/components/formToSubmit/ImgUploadForm";
 import PageLayout from "@/components/layouts/PageLayout";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { logOut } from "@/app/action";
 import usePortFolio from "@/hooks/usePortFolio";
 import ModalDialog from "./modal/ModalDialog";
+import { useTransition } from "react";
 
 interface FormProps {
     type: string,
@@ -20,9 +21,8 @@ interface FormProps {
 const ProjectForm = ({type, legend, project }: FormProps) => {
   
   const route = useRouter();
-  const pathName = usePathname();
-  console.log("PATH CHECK", pathName);
-  
+  let [isPending, startTransition] = useTransition();
+
   const projectId = project?.id
 
   const initialForm = {
@@ -59,19 +59,19 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
           </span>
           <button 
             className="btn-primary px-2 mt-3"
-            onClick={()=> {
-              logOut();
-              route.refresh();  // force page revalidation
-            }}
+            onClick={()=> startTransition(()=> {
+              logOut()
+              route.refresh(); // force page revalidation
+            })}
           >
-            Deconnexion
+            {isPending ? "logging out..." : "Deconnexion"}
           </button>
         </legend>
         
         <FormProvider {...methods}>
           <form
             className="flex flex-col mt-4"
-            onSubmit={handleSubmit(data => uploadProject(data, type, projectId))}
+            onSubmit={handleSubmit((data)=> uploadProject(data, type, projectId))}
             // noValidate
           >
             <ImgUploadForm 

@@ -5,6 +5,8 @@ import PreviousLink from '@/components/PreviousLink';
 import { prisma } from "@/lib/prisma";
 
 
+export const revalidate = 5
+
 export const metadata: Metadata = {
   title: "Kim Nguyen - Projects",
   description: `Kim"s website`,
