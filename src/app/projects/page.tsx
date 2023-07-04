@@ -30,7 +30,6 @@ export async function getProjects()  {
 
 
 export default async function Projects() {
-
   // Data fetching on server side
   const projectsData: ProjectData[] = await getProjects();
 

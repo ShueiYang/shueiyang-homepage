@@ -5,7 +5,7 @@ import InputForm from "@/components/formToSubmit/InputForm";
 import TextareaForm from "@/components/formToSubmit/TextareaForm";
 import ImgUploadForm from "@/components/formToSubmit/ImgUploadForm";
 import PageLayout from "@/components/layouts/PageLayout";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { logOut } from "@/app/action";
 import usePortFolio from "@/hooks/usePortFolio";
 import ModalDialog from "./modal/ModalDialog";
@@ -20,6 +20,9 @@ interface FormProps {
 const ProjectForm = ({type, legend, project }: FormProps) => {
   
   const route = useRouter();
+  const pathName = usePathname();
+  console.log("PATH CHECK", pathName);
+  
   const projectId = project?.id
 
   const initialForm = {
@@ -58,7 +61,7 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
             className="btn-primary px-2 mt-3"
             onClick={()=> {
               logOut();
-              route.refresh();
+              route.refresh();  // force page revalidation
             }}
           >
             Deconnexion

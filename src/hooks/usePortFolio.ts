@@ -1,5 +1,5 @@
 import { FieldNamesMarkedBoolean } from "react-hook-form";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { processImage } from "@/utils/imageTool";
 
@@ -9,9 +9,9 @@ type FieldsProps = Partial<Readonly<FieldNamesMarkedBoolean<ProjectForm>>>
 // custom hook
 function usePortFolio(dirtyFields: FieldsProps) {
 
-  const route = useRouter();
+  const router = useRouter();
   const [submitError, setSubmitError] = useState("");
-  
+
 
   async function uploadProject(
     data: ProjectForm, 
@@ -47,7 +47,9 @@ function usePortFolio(dirtyFields: FieldsProps) {
         body: formData,
       });
       if (response.status === 201 || response.status === 200) {
-        route.push("/projects");
+      // workaround to revalidate data but not work as expected
+        router.replace("/projects")
+        router.refresh()
       } else {
         throw new Error(
           `Failed to ${
@@ -68,7 +70,9 @@ function usePortFolio(dirtyFields: FieldsProps) {
         method: "DELETE"
       })
       if(response.ok) {
-        route.push("/projects")
+
+        router.replace("/projects")
+        router.refresh()
       } else {
         throw new Error("Failed to delete project. Try again!")
       }  

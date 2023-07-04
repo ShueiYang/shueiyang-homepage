@@ -1,7 +1,8 @@
 import { deleteImage, uploadImage } from "@/app/api/cloudinary.actions";
+import { NextResponse } from "next/server";
 import { ParamsRoute } from "@/app/backoffice/dashboard/[id]/page";
 import { prisma } from "@/lib/prisma";
-import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 interface UpdateProps {
     oldAssetId: string,
@@ -55,8 +56,8 @@ export async function PUT(request: Request, {params}: ParamsRoute) {
                 description: description || undefined,
                 images: imageFile ? {
                     update: {
-                        where: {id: updateData.oldAssetId},
-                        data: updateData.cloudImage
+                      where: {id: updateData.oldAssetId},
+                      data: updateData.cloudImage
                     }
                 }     
                 : undefined,
@@ -66,6 +67,9 @@ export async function PUT(request: Request, {params}: ParamsRoute) {
                 content,
             },
         })
+        // call the revalidate path but it's not working as expected...
+        revalidatePath("/projects");
+
         return NextResponse.json(
             { message: "Project successfully updated!" }, { status: 200 }      
         )
@@ -103,6 +107,9 @@ export async function DELETE(request: Request, {params}: ParamsRoute) {
         }
         // delete project
         await prisma.project.delete({where: {id}})
+
+        // call the revalidate path but it's not working as expected...
+        revalidatePath("/projects");
     
         return NextResponse.json(
             { message: "project successfully deleted!" }, { status: 200 }      
