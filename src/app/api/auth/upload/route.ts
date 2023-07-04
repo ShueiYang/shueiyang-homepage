@@ -1,5 +1,6 @@
 import { uploadImage } from "@/app/api/cloudinary.actions";
 import { prisma } from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 
@@ -24,7 +25,7 @@ export async function POST(request: Request) {
         const folderPath = `api/portfolio/${folderName}`
         const cloudImage = await uploadImage(imageFile, folderPath);
         
-        // than create the document to DB    
+        // than create and save the document to the DB    
         await prisma.project.create({
             data: {
                 title,
@@ -38,11 +39,14 @@ export async function POST(request: Request) {
                 content: content || "",
                 owner: {
                     connect: {
-                        id: "649c7484735a162a66509481"
+                        id: "649c7484735a162a66509481"  // connect in relation to adminUser
                     }
                 }
             }
         })
+        // call the revalidate path but it's not working as expected...
+        // const path = request.nextUrl.searchParams.get("path") || "/"
+        revalidatePath("/projects");
     
         return NextResponse.json(
             { message: "project successfully insert!" }, { status: 201 }      
