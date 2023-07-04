@@ -4,8 +4,7 @@ import PortfolioLayout from "@/components/layouts/PortfolioLayout";
 import PreviousLink from '@/components/PreviousLink';
 import { prisma } from "@/lib/prisma";
 
-
-export const revalidate = 5
+export const revalidate = 60 // revalidate every 60s...
 
 export const metadata: Metadata = {
   title: "Kim Nguyen - Projects",

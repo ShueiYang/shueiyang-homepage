@@ -70,7 +70,7 @@ function usePortFolio(dirtyFields: FieldsProps) {
         method: "DELETE"
       })
       if(response.ok) {
-
+      // workaround to revalidate data but not work as expected
         router.replace("/projects")
         router.refresh()
       } else {
