@@ -2,16 +2,21 @@
 
 import { createContext, useState } from "react";
 
-type ReactProps = {children: React.ReactNode}
 type ThemeColor = "light" | "dark";
 
 //create context for theme color to be used in other components
 export const ThemeContext = createContext(
-    {} as { theme: ThemeColor, setTheme: (theme: ThemeColor) => void }
+    {} as { 
+        theme: ThemeColor, 
+        setTheme: (theme: ThemeColor) => void 
+    }
 );
 
-function ThemeProvider({children}: ReactProps ) {
-
+function ThemeProvider({
+  children
+}: {
+  children: React.ReactNode
+}) {
     const [ theme, setTheme ] = useState(()=> {
 
         //check if Server Side Rendering
