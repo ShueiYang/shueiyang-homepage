@@ -1,4 +1,4 @@
-import { IoLogoGithub, IoLogoLinkedin, IoMailOutline, IoSchoolOutline } from "react-icons/io5";
+import { IoLogoGithub, IoLogoLinkedin, IoMailOutline, IoSchoolOutline, IoKey } from "react-icons/io5";
 import { IconType } from 'react-icons';
 
 export interface MenuProps {
@@ -27,5 +27,10 @@ export const menuLists: MenuProps[] = [
         name: "Linkdln",
         url: "https://www.linkedin.com/in/shueiyang",
         ioIcon: IoLogoLinkedin
+    },
+    {
+        name: "BackOffice",
+        url: "/backoffice/admin",
+        ioIcon: IoKey
     },
 ]

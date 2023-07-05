@@ -3,7 +3,9 @@ import NextLink from "next/link";
 // function to pick Link component or a Html tag depending the route name
 export function getLinkAndProps (route: string,) {
     const Link = (
-        route === "/projects" || route === "/contact"        
+        route === "/projects" || 
+        route === "/contact" || 
+        route === "/backoffice/admin"        
     ) ? NextLink : "a"
 
     const linkProps = Link === "a" ? {rel:"noopener noreferrer", target: "_blank"} : {scroll: false};

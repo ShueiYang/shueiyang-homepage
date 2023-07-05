@@ -62,16 +62,19 @@ const Navbar = () => {
              grow justify-around items-center text-base lg:text-lg"
           >
             { menuLists.map(menu => {    
-            //assign the name for the reactIcon component
+              // assign the name for the reactIcon component
               const Icon = menu.ioIcon
-              return (
-                <LinkItem href={menu.url} path={path} key={menu.name}>
-                { (menu.name === "Source" || menu.name === "Linkdln") &&
+              if(menu.name !== "BackOffice") {
+                return (
+                  <LinkItem href={menu.url} path={path} key={menu.name}>
+                  {(menu.name === "Source" || menu.name === "Linkdln") &&
                     <Icon className="mr-0.5" />
-                }
-                  {menu.name}
-                </LinkItem>
-              )
+                  }
+                    {menu.name}
+                  </LinkItem>
+                )
+              }
+              return null;
             })}      
           </div>
           <div className="flex flex-nowrap justify-end md:justify-center gap-4 grow items-center">
