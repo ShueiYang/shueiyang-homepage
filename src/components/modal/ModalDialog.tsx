@@ -1,6 +1,9 @@
+"use client"
+
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { FaFacebook, FaTwitter } from "react-icons/fa"
 
 interface ModalProps {
   type?: string
@@ -11,7 +14,7 @@ interface ModalProps {
 
 export default function ModalDialog({
   type, 
-  title, 
+  title,
   projectId, 
   deleteAction 
 }: ModalProps 
@@ -35,14 +38,25 @@ export default function ModalDialog({
     setIsOpen(true)
   }
 
+  const Icon = title === "@Yang" ?
+   FaTwitter : title === "#Yang" ?
+   FaFacebook : null
+
   return (
     <>  
       <button
         type="button"
         onClick={openModal}
-        className="btn-secondary flex items-center mt-6"
+        className={`${type === "edit" ? "btn-secondary flex items-center mt-6"
+          : `text-teal-700 dark:text-teal-400 py-2 px-5 hover:bg-[#fce6cc] dark:hover:bg-sea-d 
+          font-semibold rounded-lg hover:underline underline-offset-4 decoration-blue-600 
+          dark:decoration-orange-200 sm:ml-[10%]`}
+        `}
       >
-        Delete
+        <div className="flex items-center">
+          {Icon && <Icon className="mr-3 text-xl"/>}
+          {type === "edit" ? "Delete" : title}
+        </div>
       </button>
    
       <Transition appear show={isOpen} as={Fragment}>
@@ -99,7 +113,9 @@ export default function ModalDialog({
                     </>
                   : <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        {`Désolé pas de compte ${title}, c'etait juste pour faire style...`}
+                        { `Désolé pas de compte ${title === "@Yang" ? "Twitter" : title === "#Yang" ? 
+                          "Facebook" : null}, c'etait juste pour faire style...`  
+                        }
                       </p>
                     </div>            
                   }

@@ -2,8 +2,6 @@ import { IconType } from "react-icons";
 import { ButtonProps } from "./Button";
 
 interface SocialButtonProps extends ButtonProps {
-//   children: React.ReactNode;
-//   path: string;
   iconName: IconType;
 }
 

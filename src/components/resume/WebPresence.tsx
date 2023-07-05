@@ -1,6 +1,7 @@
 import SocialButton from "@/components/customButton/SocialButton";
-import { IoLogoGithub, IoLogoLinkedin, IoLogoDiscord } from "react-icons/io5"
-import { FaSteam } from "react-icons/fa"
+import { IoLogoGithub, IoLogoLinkedin, IoLogoDiscord, IoLogoStackoverflow } from "react-icons/io5"
+import { FaSteam,  FaBattleNet } from "react-icons/fa"
+import ModalDialog from "../modal/ModalDialog";
 
 const WebPresence = () => {
 
@@ -22,8 +23,20 @@ const WebPresence = () => {
         <SocialButton iconName={IoLogoDiscord} path="https://discord.com/users/282279109273583616">
           @Yang
         </SocialButton>
+        <SocialButton iconName={IoLogoStackoverflow} path="https://stackoverflow.com/users/19114911/shueiyang">
+          @ShueiYang
+        </SocialButton>
+        <div>
+          <ModalDialog title="#Yang" />
+        </div>
+        <div>
+          <ModalDialog title="@Yang" />
+        </div>      
+        <SocialButton iconName={FaBattleNet} path="https://account.battle.net">
+          #YangWenXue
+        </SocialButton>
       </div>
-   </>
+    </>
   )
 }
 
