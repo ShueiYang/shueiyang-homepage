@@ -64,7 +64,7 @@ function Contact () {
         animate="enter"
         exit="exit"
         variants={slideIn("left", "tween", 0.2)}
-        className="max-w-lg w-full lg:flex-[0.45] p-8"
+        className="max-w-lg w-full lg:flex-[0.45] p-2 lg:p-8"
       >
         <legend>
           <PreviousLink path="/">
@@ -102,7 +102,7 @@ function Contact () {
               errorText="Veuillez écrire un message avant l'envoi"
             />   
             <button className={`${isValid ? "" : "inactive"}
-              btn-primary flex items-center mx-auto`}
+              btn-primary flex items-center mx-auto mb-4`}
             >
               <RiMailSendFill className="mr-3 text-xl"/>
               { isSubmitting ? "Envoi en cours..." : "Envoyer"}
