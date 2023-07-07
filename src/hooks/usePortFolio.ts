@@ -1,4 +1,5 @@
 import { FieldNamesMarkedBoolean } from "react-hook-form";
+import { ProjectForm } from "../../common.types";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { processImage } from "@/utils/imageTool";

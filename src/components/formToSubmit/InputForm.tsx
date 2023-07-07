@@ -1,5 +1,6 @@
 "use client";
 
+import { EmailForm, AdminForm, ProjectForm } from "../../../common.types";
 import { useFormContext } from "react-hook-form";
 
 type FormKeys = keyof EmailForm | keyof AdminForm | keyof ProjectForm

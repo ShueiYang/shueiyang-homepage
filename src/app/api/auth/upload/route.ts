@@ -2,6 +2,7 @@ import { uploadImage } from "@/app/api/cloudinary.actions";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
+import { Portfolio } from "../../../../../common.types";
 
 
 export async function POST(request: Request) {

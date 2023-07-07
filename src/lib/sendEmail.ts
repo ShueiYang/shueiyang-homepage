@@ -1,4 +1,5 @@
 import emailjs from "@emailjs/browser";
+import { EmailForm } from "../../common.types";
 
 
 export function sendEmail(form: EmailForm) {

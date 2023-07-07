@@ -1,5 +1,6 @@
 "use client";
 
+import { DataKeys, ProjectForm } from "../../common.types";
 import { FormProvider, useForm } from "react-hook-form";
 import InputForm from "@/components/formToSubmit/InputForm";
 import TextareaForm from "@/components/formToSubmit/TextareaForm";
@@ -12,9 +13,9 @@ import ModalDialog from "./modal/ModalDialog";
 import { useTransition } from "react";
 
 interface FormProps {
-    type: string,
-    legend: string,
-    project?: DataKeys
+   type: string,
+   legend: string,
+   project?: DataKeys
 }
 
 

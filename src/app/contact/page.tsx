@@ -7,6 +7,7 @@ import { sendEmail } from "@/lib/sendEmail";
 import { slideIn } from "@/utils/motion";
 import { FormProvider, useForm } from "react-hook-form";
 import { RiMailSendFill } from "react-icons/ri";
+import { EmailForm } from "../../../common.types";
 
 import PreviousLink from "@/components/PreviousLink";
 import SuccessForm from "@/components/SuccessForm";
