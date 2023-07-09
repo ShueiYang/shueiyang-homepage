@@ -6,8 +6,9 @@ import { transit, letterAnimate } from "@/utils/motion";
 // import useIntro from "@/hook/introTimer";
 
 export interface SectionProps {
-  children: React.ReactNode;
-  delay?: number;
+  children: React.ReactNode
+  delay?: number
+  type?: string
 }
 
 export const Section = ({ children, delay = 0 }: SectionProps) => {
@@ -25,7 +26,7 @@ export const Section = ({ children, delay = 0 }: SectionProps) => {
 }
 
 
-export const HeroSection = ({ children, delay = 0 }: SectionProps) => {
+export const HeroSection = ({ children, type, delay = 0 }: SectionProps) => {
 
   return (
     <motion.div
@@ -33,7 +34,7 @@ export const HeroSection = ({ children, delay = 0 }: SectionProps) => {
       initial="hidden"
       whileInView="visible"
       viewport={{once: true}}
-      variants={letterAnimate()}
+      variants={type === "top" ? letterAnimate("top") : letterAnimate("left")}
       transition={{
         duration: 0.5,
         delay,

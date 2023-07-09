@@ -12,7 +12,7 @@ interface LayoutProps {
 }
 
 function PortfolioLayout({children, href, title, thumbnail}: LayoutProps) {
-  const titleName = title.replace(/\s/g, "-");
+  // const titleName = title.replace(/\s/g, "-");
 
   return (
     <div className="w-full text-center"> 

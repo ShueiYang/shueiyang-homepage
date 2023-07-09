@@ -3,10 +3,11 @@
 import Image from "next/image"
 import PageLayout from "@/components/layouts/PageLayout"
 import HeroTitle from "@/components/resume/HeroTitle"
-import { HeroSection, Section } from "@/components/layouts/Section"
+import { Section } from "@/components/layouts/Section"
 import Button from "@/components/customButton/Button"
 import { useContext, useEffect, useState } from "react"
 import { ThemeContext } from "../themeContext/ThemeProvider";
+import HeroName from "./HeroName";
 
 
 export default function HomepageLayout({
@@ -35,11 +36,7 @@ export default function HomepageLayout({
           >  
             <h1 className="font-ibm font-semibold text-2xl sm:text-3xl lg:text-4xl tracking-wide">
               <HeroTitle />
-                <HeroSection delay={1.5}>
-                  <span className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-teal-600 dark:text-teal-400 ml-1">
-                    KIM
-                  </span>
-                </HeroSection>
+              <HeroName />
               <p className="font-robo font-medium text-lg sm:text-xl lg:text-[1.3rem] md: mt-2">
                 Un développeur passionné par l&apos;apprentissage et 
                 la création dans le domaine du web.

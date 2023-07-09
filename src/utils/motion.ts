@@ -22,12 +22,12 @@ export function transit(direction?: string) {
 }
 
 
-export function letterAnimate() {
+export function letterAnimate(direction: string) {
     return {
         hidden: {
             opacity: 0,
-            x: 200, 
-            y: 0 
+            x: direction === "top" ? 0 : 168,
+            y: direction === "top" ? -81 : 0, 
         },
         visible: {
             opacity: 1,
