@@ -1,5 +1,9 @@
 import { Metadata } from "next";
-import ProjectForm from "@/components/ProjectForm";
+import dynamic from "next/dynamic";
+
+const ProjectForm = dynamic(()=> import("@/components/ProjectForm"), {
+  ssr: false
+})
 
 export const metadata: Metadata = {
   title: "Admin - Kim Nguyen"
