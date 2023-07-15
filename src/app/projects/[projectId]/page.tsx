@@ -8,10 +8,11 @@ import PreviousLink from "@/components/PreviousLink";
 import { getProjects } from "../page";
 import { getProjectInfo } from "@/app/action";
 
+export const revalidate = 60 // revalidate every 60s...
+
 interface ParamsProps {
   params: { projectId: string }
 }
-
 
 export async function generateStaticParams() {
   const projectsData: ProjectData[] = await getProjects();
