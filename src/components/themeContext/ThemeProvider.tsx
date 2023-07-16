@@ -10,10 +10,9 @@ interface ThemeContextValue {
 }
 
 //create context for theme color to be used in other components
-export const ThemeContext = createContext<ThemeContextValue>({
-  theme: "light",
-  setTheme: () => {}
-});
+export const ThemeContext = createContext<ThemeContextValue>(
+  {} as ThemeContextValue
+);
 
 
 function ThemeProvider({
