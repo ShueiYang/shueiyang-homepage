@@ -4,13 +4,16 @@ import { createContext, useState } from "react";
 
 type ThemeColor = "light" | "dark";
 
+interface ThemeContextValue {
+  theme: ThemeColor
+  setTheme: React.Dispatch<React.SetStateAction<ThemeColor>>
+}
+
 //create context for theme color to be used in other components
-export const ThemeContext = createContext(
-  {} as { 
-    theme: ThemeColor, 
-    setTheme: (theme: ThemeColor) => void 
-  }
-);
+export const ThemeContext = createContext<ThemeContextValue>({
+  theme: "light",
+  setTheme: () => {}
+});
 
 
 function ThemeProvider({
