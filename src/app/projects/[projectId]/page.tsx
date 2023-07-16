@@ -1,5 +1,5 @@
 // import { ParsedUrlQuery } from "querystring";
-import { ProjectData } from "../../../../common.types";
+import { ProjectData } from "@root/common.types";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation"

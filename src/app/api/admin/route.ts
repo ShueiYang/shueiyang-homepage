@@ -1,4 +1,4 @@
-import { AdminForm } from "../../../../common.types";
+import { AdminForm } from "@root/common.types";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers"
 import { signJWT } from "@/lib/auth";

@@ -4,7 +4,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaFacebook, FaTwitter } from "react-icons/fa"
-import { validateForm } from '../../../common.types'
+import { validateForm } from '@root/common.types'
 
 interface ModalProps {
   type?: string

@@ -1,6 +1,6 @@
 "use client";
 
-import { AdminForm } from "../../../../common.types";
+import { AdminForm } from "@root/common.types";
 import InputForm from "@/components/formToSubmit/InputForm";
 import { FormProvider, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation"

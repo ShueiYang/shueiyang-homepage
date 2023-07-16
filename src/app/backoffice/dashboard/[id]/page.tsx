@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import { Metadata } from "next";
-import { ProjectData } from "../../../../../common.types";
+import { ProjectData } from "@root/common.types";
 import { notFound } from "next/navigation";
 import { getProjectInfo } from "@/app/action";
 

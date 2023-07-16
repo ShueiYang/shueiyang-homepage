@@ -1,4 +1,4 @@
-import { Portfolio, ImageProps } from "../../../../../../common.types";
+import { Portfolio, ImageProps } from "@root/common.types";
 import { ParamsRoute } from "@/app/backoffice/dashboard/[id]/page";
 import { NextResponse } from "next/server";
 import { deleteImage, uploadImage } from "@/app/api/cloudinary.actions";

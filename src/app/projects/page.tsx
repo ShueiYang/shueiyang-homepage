@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { ProjectData } from "../../../common.types";
+import { ProjectData } from "@root/common.types";
 import PageLayout from "@/components/layouts/PageLayout";
 import PortfolioLayout from "@/components/layouts/PortfolioLayout";
 import PreviousLink from '@/components/PreviousLink';

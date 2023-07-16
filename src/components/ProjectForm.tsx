@@ -1,6 +1,6 @@
 "use client";
 
-import { DataKeys, ProjectForm } from "../../common.types";
+import { DataKeys, ProjectForm } from "@root/common.types";
 import { FormProvider, useForm } from "react-hook-form";
 import InputForm from "@/components/formToSubmit/InputForm";
 import TextareaForm from "@/components/formToSubmit/TextareaForm";
