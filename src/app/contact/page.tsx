@@ -102,8 +102,10 @@ function Contact () {
               text="Votre message"
               errorText="Veuillez écrire un message avant l'envoi"
             />   
-            <button className={`${isValid ? "" : "inactive"}
-              btn-primary flex items-center mx-auto mb-4`}
+            <button 
+              className={`${isValid ? "" : "inactive"} btn-primary flex items-center mx-auto mb-4`}
+              aria-label={isSubmitting ? "Envoi en cours..." : "Envoyer"}
+              aria-disabled={!isValid}
             >
               <RiMailSendFill className="mr-3 text-xl"/>
               { isSubmitting ? "Envoi en cours..." : "Envoyer"}

@@ -31,6 +31,7 @@ const InputForm = ({ label, text, errorText }: FormProps) => {
           id={label}
           {...register(label, {required: true}) }
           type={getInputType(label)}
+          aria-label={text}
           required
         />
         <span className="placeholder absolute">{text}</span>
