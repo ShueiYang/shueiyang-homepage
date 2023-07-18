@@ -37,21 +37,21 @@ const LinkItem = ({ children, href, path }: LinkItemProps) => {
 
 
 const Navbar = () => {
-    const [isMounted, setIsMounted] = useState(false);
-    const path = usePathname();
-    const { theme } = useContext(ThemeContext);
+  const path = usePathname();
+  const { theme } = useContext(ThemeContext);
+  const [isMounted, setIsMounted] = useState(false);
 
-    useEffect(() => {
-        setIsMounted(true)
-    }, []);
+  useEffect(() => {
+      setIsMounted(true)
+  }, []);
 
-    return isMounted ? (
-      <nav
-        className={`fixed w-screen z-50 backdrop-blur flex items-center
-          ${theme === "light" ? "bg-gradient-to-r from-sand-l to-grn-l"
-          : "bg-gradient-to-r from-purp-d to-sea-d"}`
-        }
-      >
+  return isMounted ? (
+    <nav
+      className={`fixed w-screen z-50 backdrop-blur flex items-center
+        ${theme === "light" ? "bg-gradient-to-r from-sand-l to-grn-l"
+        : "bg-gradient-to-r from-purp-d to-sea-d"}`
+      }
+    >
       <div className="container flex flex-wrap p-2 xl:max-w-5xl">
         <div className="flex items-center mr-5 md:mr-8 lg:ml-4 lg:mr-8">
           <h1 className="text-lg tracking-tight lg:tracking-normal">
@@ -59,10 +59,10 @@ const Navbar = () => {
           </h1>
         </div>
         <div className="hidden md:flex flex-col md:flex-row w-full md:w-auto 
-            grow justify-around items-center text-base lg:text-lg"
+          grow justify-around items-center text-base lg:text-lg"
         >
           { menuLists.map(menu => {    
-            // assign the name for the reactIcon component
+          // assign the name for the reactIcon component
             const Icon = menu.ioIcon
             if(menu.name !== "BackOffice") {
               return (
@@ -86,13 +86,13 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-        <NextLink
-          href="/backoffice/admin"
-          className="absolute right-[5%] hidden xl:block text-lg hover:underline underline-offset-4"
-        >
-          BackOffice    
-        </NextLink>      
-      </nav>
+      <NextLink
+        href="/backoffice/admin"
+        className="absolute right-[5%] hidden xl:block text-lg hover:underline underline-offset-4"
+      >
+        BackOffice    
+      </NextLink>      
+    </nav>
 
   ) : <div />
 }
