@@ -19,9 +19,10 @@ function usePortFolio(dirtyFields: FieldsProps) {
     type: string, 
     projectId: string | undefined
   ) {
-    const apiRoute = type === "edit" && projectId ? 
-      `/api/auth/update/${projectId}` : "/api/auth/upload";
-
+    const apiRoute = type === "edit" && projectId 
+      ? `/api/auth/update/${projectId}` 
+      : "/api/auth/upload";
+      
     setSubmitError("");
     const formData = new FormData();
     const formField = Object.entries(data);

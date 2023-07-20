@@ -19,7 +19,7 @@ export default function HomepageLayout({
   const [isMounted, setIsMounted] = useState(false);
   const { theme } = useContext(ThemeContext);
     
-  // Display the Herotitle only when IsMounted is set to true in order to
+  // Fix the Hydration issue with server component to
   // correctly display the dark theme gradient color on first load.
   useEffect(() => {
     setIsMounted(true)
