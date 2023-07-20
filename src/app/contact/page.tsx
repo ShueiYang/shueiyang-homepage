@@ -79,7 +79,7 @@ function Contact () {
         <FormProvider {...methods}>
           <form
             className="flex flex-col mt-2 "
-            onSubmit={handleSubmit(data => submitEmail(data))}
+            onSubmit={handleSubmit(submitEmail)}
             noValidate
           >
             <InputForm 
