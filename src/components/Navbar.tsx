@@ -19,7 +19,11 @@ export interface LinkItemProps {
 }
 
 //Higher order component as Navbar component wrapper
-const LinkItem = ({ children, href, path }: LinkItemProps) => {
+const LinkItem: React.FC<LinkItemProps> = ({
+  children, 
+  href, 
+  path 
+}) => {
   const active = path === href;
   const { Link, linkProps } = getLinkAndProps(href);
   return (
@@ -41,8 +45,9 @@ const Navbar = () => {
   const { theme } = useContext(ThemeContext);
   const [isMounted, setIsMounted] = useState(false);
 
+  // Hydration trick to display correct gradient color theme on Navbar
   useEffect(() => {
-      setIsMounted(true)
+    setIsMounted(true)
   }, []);
 
   return isMounted ? (
