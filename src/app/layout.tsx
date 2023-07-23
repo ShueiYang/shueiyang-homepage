@@ -1,4 +1,4 @@
-import "@/styles/globals.css"
+import "./globals.css"
 import type { Metadata } from "next"
 import { Roboto, IBM_Plex_Sans } from "next/font/google"
 // import Head from "next/head"
