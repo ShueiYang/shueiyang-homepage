@@ -14,7 +14,7 @@ export function getLinkAndProps(route: string) {
   const linkProps =
     Link === "a"
       ? { rel: "noopener noreferrer", target: "_blank" }
-      : { prefetch: prefetchPath, scroll: false };
+      : { prefetch: prefetchPath, scroll: true } // set to true since Exit animation not working
 
   return {
     Link,

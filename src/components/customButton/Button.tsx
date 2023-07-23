@@ -16,7 +16,7 @@ const Button = ({ children, goMail, path, setMotion }: ButtonProps) => {
 
   return (
     <div className="flex justify-center my-4">
-      <Link href={path} scroll={false}>
+      <Link href={path} scroll={true}>  {/* set to true since Exit animation not working */}
         <button
           className="btn-primary flex items-center"
           onClick={() => {
