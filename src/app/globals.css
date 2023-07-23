@@ -47,6 +47,9 @@
   .logoBox:hover > img {
     transform: rotate(-35deg);
   }
+  html, body {
+    overflow-x: hidden;
+  }
   .inactive {
     pointer-events: none;
     opacity: 0.5;
