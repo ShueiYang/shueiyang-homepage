@@ -7,10 +7,10 @@ import { sendEmail } from "@/lib/sendEmail";
 import { slideIn } from "@/utils/motion";
 import { FormProvider, useForm } from "react-hook-form";
 import { RiMailSendFill } from "react-icons/ri";
-import { EmailForm } from "../../../common.types";
+import { EmailForm } from "@root/common.types";
 
-import PreviousLink from "@/components/PreviousLink";
 import SuccessForm from "@/components/SuccessForm";
+import PreviousLink from "@/components/PreviousLink";
 import InputForm from "@/components/formToSubmit/InputForm";
 import TextareaForm from "@/components/formToSubmit/TextareaForm";
 
@@ -19,7 +19,7 @@ const MapLocation = dynamic(()=> import("@/components/map/MapLocation"), {
 })
 
 
-function Contact () {
+export default function Contact() {
   
   const [error, setError] = useState<{ message: string } | null>(null);
   const initialForm = {
@@ -111,7 +111,6 @@ function Contact () {
             </button>
           </form>
         </FormProvider>
-        
         { error &&
           <p className="text-sm text-red-500 dark:text-red-400 text-center mt-3">
             {error.message}
@@ -122,6 +121,4 @@ function Contact () {
       <MapLocation />
     </div> 
   )
-}
-
-export default Contact;
+};
