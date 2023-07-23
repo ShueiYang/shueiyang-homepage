@@ -1,6 +1,6 @@
 
 import dynamic from "next/dynamic"
-import HomepageLayout from "@/components/resume/homepage"
+import HomepageLayout from "@/components/resume/Homepage"
 import { Section } from "@/components/layouts/Section"
 import Button from "@/components/customButton/Button"
 import Curriculum from "@/components/resume/Curriculum"

@@ -1,4 +1,4 @@
-import "./globals.css"
+import "@/styles/globals.css"
 import type { Metadata } from "next"
 import { Roboto, IBM_Plex_Sans } from "next/font/google"
 // import Head from "next/head"
@@ -8,7 +8,8 @@ import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer" 
 import dynamic from "next/dynamic";
 import CandleStickLoader from "@/components/model3D/CandleStick.Loader";
-import AnimatePresenceLayout from "./AnimateLayout"
+// import AnimateLayoutWrapper from "@/components/layouts/AnimateLayout"
+
 
 const ChineseCandleStick = dynamic(()=> import("@/components/model3D/ChineseCandleStick"), {
   ssr: false,
@@ -52,9 +53,9 @@ export default function RootLayout({
             <Navbar />
               <section className="container grow pt-14 px-8"> 
                 <ChineseCandleStick />
-                  {/* <AnimatePresenceLayout> */}
-                    {children}
-                  {/* </AnimatePresenceLayout> */}
+                {/* <AnimateLayoutWrapper> */}
+                  {children}
+                {/* </AnimateLayoutWrapper>  */}
               </section>
             <Footer />
           </main>

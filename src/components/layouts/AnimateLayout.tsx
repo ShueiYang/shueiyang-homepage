@@ -3,11 +3,11 @@
 import { scrollAfterLoad } from "@/utils/utility";
 import { AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation"
-import { Fragment, type PropsWithChildren } from "react";
+import { Fragment} from "react";
 
 // not working for now...
 
-const AnimatePresenceLayout = ({children}: PropsWithChildren) => {
+const AnimateLayoutWrapper = ({children}: {children: React.ReactNode}) => {
   const pathName = usePathname();
 
   return (
@@ -23,4 +23,4 @@ const AnimatePresenceLayout = ({children}: PropsWithChildren) => {
   )
 }
 
-export default AnimatePresenceLayout;
+export default AnimateLayoutWrapper;
