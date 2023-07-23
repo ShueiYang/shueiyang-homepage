@@ -19,10 +19,10 @@ const ChineseCandleStick = dynamic(()=> import("@/components/model3D/ChineseCand
 export const metadata: Metadata = {
   title: "Kim Nguyen - Homepage",
   description: `Kim"s website`,
-  authors: [{ name: "Kim Nguyen" }, { name: "Shueiyang", url: "https://shueiyang.vercel.app" }],
-  // linkedin: {
-  //   title: "Kim Nguyen"
-  // }
+  authors: [
+    { name: "Kim Nguyen" },
+    { name: "Shueiyang", url: "https://shueiyang.vercel.app" }
+  ],
 }
 
 const roboto = Roboto({

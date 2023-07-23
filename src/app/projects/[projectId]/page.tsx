@@ -1,4 +1,5 @@
 // import { ParsedUrlQuery } from "querystring";
+import { Metadata } from "next";
 import { ProjectData } from "@root/common.types";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,6 +13,16 @@ export const revalidate = 60 // revalidate every 60s...
 
 interface ParamsProps {
   params: { projectId: string }
+}
+
+// generate dynamic Metadata
+export async function generateMetadata(
+  { params }: ParamsProps 
+): Promise<Metadata> {
+  const project: ProjectData | null = await getProjectInfo(params.projectId);
+  return {
+    title: `Kim - ${project?.title}`
+  }
 }
 
 export async function generateStaticParams() {
