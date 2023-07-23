@@ -40,7 +40,7 @@ const AdminLoginPage = () => {
       }
     } catch (err) {
       console.error(err)
-      setLoginError((err as Error).message)   
+      setLoginError("Network Error")   
     } 
   }
 
@@ -58,7 +58,7 @@ const AdminLoginPage = () => {
           <FormProvider {...methods}>
             <form
               className="flex flex-col max-w-xs mt-6 mx-auto"
-              onSubmit={handleSubmit(data => handleLogin(data))}
+              onSubmit={handleSubmit(handleLogin)}
               noValidate
             >
               <InputForm
