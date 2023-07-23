@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { Metadata } from "next";
 import { ProjectData } from "@root/common.types";
 import { notFound } from "next/navigation";
 import { getProjectInfo } from "@/app/action";
@@ -8,12 +7,10 @@ const ProjectForm = dynamic(()=> import("@/components/ProjectForm"), {
   ssr: false
 })
 
-export const metadata: Metadata = {
-  title: "Dashboard - Kim Nguyen"
-}
 export interface ParamsRoute {
   params: {id: string}
 }
+
 
 const ProjectPanel = async ({params}: ParamsRoute) =>  {
   const id = params.id;

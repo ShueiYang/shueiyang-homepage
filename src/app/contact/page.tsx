@@ -18,7 +18,6 @@ const MapLocation = dynamic(()=> import("@/components/map/MapLocation"), {
   ssr: false 
 })
 
-// const pageTitle = "Contact - Kim Nguyen"
 
 function Contact () {
   
