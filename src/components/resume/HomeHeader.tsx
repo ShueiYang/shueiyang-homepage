@@ -10,7 +10,7 @@ import { ThemeContext } from "../themeContext/ThemeProvider";
 import HeroName from "./HeroName";
 
 
-export default function HomepageLayout({
+export default function HomepageWrapper({
     children
   }: {
     children: React.ReactNode

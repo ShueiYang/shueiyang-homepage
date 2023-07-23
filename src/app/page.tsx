@@ -1,6 +1,6 @@
 
 import dynamic from "next/dynamic"
-import HomepageLayout from "@/components/resume/Homepage"
+import HomepageWrapper from "@/components/resume/HomeHeader"
 import { Section } from "@/components/layouts/Section"
 import Button from "@/components/customButton/Button"
 import Curriculum from "@/components/resume/Curriculum"
@@ -16,7 +16,7 @@ const SkillsBar = dynamic(()=> import("@/components/skillsAnimeBar/SkillsBar"), 
 export default function Homepage() {  
 
   return ( 
-    <HomepageLayout>
+    <HomepageWrapper>
       <Section delay={0.1}> 
         <h2 className="section">
           A propos
@@ -67,6 +67,6 @@ export default function Homepage() {
           Cyclisme, Manga et Manhwa, Film coréen en VOSTA.
         </p>
       </Section>
-    </HomepageLayout>
+    </HomepageWrapper>
   )
 };
