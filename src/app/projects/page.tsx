@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 }
 
 // function to query database in server component
-export async function getProjects()  {
+export async function getProjects(): Promise<ProjectData[]>  {
   try {
     const results = await prisma.project.findMany({
       include:{
@@ -23,7 +23,7 @@ export async function getProjects()  {
         createAt: "desc" // Sort by most recent date
       }
     })
-    return results as unknown as ProjectData[]
+    return results
   } catch (error) {
     console.error(error)
     throw error

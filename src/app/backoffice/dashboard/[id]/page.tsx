@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { ProjectData } from "@root/common.types";
+import { DataKeys, ProjectData } from "@root/common.types";
 import { notFound } from "next/navigation";
 import { getProjectInfo } from "@/app/action";
 
@@ -28,7 +28,7 @@ const ProjectPanel = async ({params}: ParamsRoute) =>  {
     ...project,
     imageFile: imageUrl,
     stack: stackAsString
-  }
+  } as DataKeys
     
   return (
     <ProjectForm 

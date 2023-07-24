@@ -94,7 +94,7 @@ const Work = async ({params}: ParamsProps) => {
             WEBSITE
           </h3>
           <a 
-            href={project.siteUrl}
+            href={project.siteUrl ?? undefined}
             className="text-blue-600 dark:text-teal-300 hover:underline underline-offset-4"              
             rel="noopener noreferrer" 
             target="_blank"

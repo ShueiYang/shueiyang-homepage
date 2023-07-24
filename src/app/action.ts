@@ -15,7 +15,9 @@ export async function logOut() {
 
 
 // function to query project detail from DB in server component
-export async function getProjectInfo(projectId: string) {
+export async function getProjectInfo(
+  projectId: string
+): Promise<ProjectData | null> {
   try {
     const project = await prisma.project.findUnique({
       where: {id: projectId},
@@ -23,7 +25,7 @@ export async function getProjectInfo(projectId: string) {
         images: true  // Include the associated images
       },   
     })      
-    return project as unknown as ProjectData | null
+    return project
   } catch (error) {
     console.error(error)
     throw error
