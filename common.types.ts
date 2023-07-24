@@ -1,3 +1,11 @@
+import { Prisma } from "@prisma/client";
+
+// create a type to include relational images props using Prisma built-in utility... 
+export interface ProjectData extends Prisma.ProjectGetPayload<{
+    include: {
+      images: true
+    }
+}> {}
 
 export interface Portfolio {
     id: string;
@@ -41,17 +49,6 @@ export interface ImageProps {
 export type DataKeys = ProjectForm & {
     id: string,
 }
-
-export interface ProjectData {
-    id: string;
-    title: string;
-    description: string;
-    images: ImageProps[]
-    siteUrl: string;
-    stack: string[];
-    githubUrl: string,
-    content: string;
-};
 
 export interface validateForm {
     titleName: string
