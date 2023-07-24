@@ -3,18 +3,26 @@ Welcome to my homepage !
 
 <br />
 
-Stacks use for this project:
+Stacks use for this portfolio:
 
-* Next.js 
+* Next.js 13 app directory
 * TailwindCss
 * Framer Motion
 * Three.js
 * Prisma
 * MongoDB
 
+Languages and tools
+
+* TypeScript
+* Headless ui
+* React hook form
+* Cloudinary
+* PNPM package manager
+
 Feature:
-* projects are stored in DB and can be uploaded from admin panel.
-* projects can also be edited and removed from the Edit panel.
+* Projects are stored in MongoDB and can be uploaded from admin panel.
+* Projects can also be edited and removed from the Edit panel.
 * Only admin get acces to CRUD operation.
 * Authentification with JWT (Jose) and session with cookie.
 
