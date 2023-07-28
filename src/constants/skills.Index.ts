@@ -13,7 +13,7 @@ export const skillsArray: SkillProps[] = [
         path: "/icons/skills/css3.svg"
     },
     {
-        name: "Javascript",
+        name: "JavaScript",
         path: "/icons/skills/js.svg"
     },
     {
@@ -25,7 +25,7 @@ export const skillsArray: SkillProps[] = [
         path: "/icons/skills/node.svg"
     },
     {
-        name: "Typescript",
+        name: "TypeScript",
         path: "/icons/skills/typescript.svg"
     },
     {

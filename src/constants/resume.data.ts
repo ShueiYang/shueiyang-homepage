@@ -18,18 +18,22 @@ export const resumeData = [
     },
     {
         year: "2010 - 2022",
-        cv: `travaille chez POBIX.COM; Vente et expédition des matériels informatique 
-            specialisé en batteries et chargeurs pour pc portable, Mac, ainsi que
+        cv: `POBIX.COM: Vente et expédition des matériels informatiques 
+            spécialisé en batteries et chargeurs pour pc portable, Mac, ainsi que
             les EPDM (Vélo Trotinette)`,
     },
     {
-        year: "Avril - Juin 2023",
-        cv: `En formation chez Le Reacteur à Paris.`
+        year: "Juin - Nov 2022",
+        cv: `Autoformation en Développment web et application (Validation de la certification
+            Udemy "The Complete Web Developer" de Zero to Mastery en Août, suivi après 
+            la certification Udemy "Complete NodeJs Developer" de ZTM en Novembre)`
     },
     {
-        year: "2022 à présent",
-        cv: `Autoformation en Développment Web et application (Zero to Mastery, Udemy, internet)`
-    },
+        year: "Avril - Juin 2023",
+        cv: `Validation de la Certification du Reacteur (full stack JavaScript) et
+            pré-qualification au passage du titre RNCP niveau 6 (Bac +3/4) de Concepteur
+            développeur d'applications. (Le Reacteur à Paris)`
+    },  
 ];
 
 
