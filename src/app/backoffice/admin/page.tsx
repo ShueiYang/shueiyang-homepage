@@ -71,9 +71,7 @@ const AdminLoginPage = () => {
                 text="Password"
                 errorText=""       
               /> 
-              <button 
-                className="btn-primary flex items-center mx-auto mt-6"
-              >
+              <button className={`${isSubmitting || authenticate ? "inactive" : ""} btn-primary flex items-center mx-auto mt-6`}>
                 { isSubmitting ? "Checking..." 
                   : authenticate ? "Authenticate!" 
                   : "Connecter"

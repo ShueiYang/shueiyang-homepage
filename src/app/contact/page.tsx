@@ -102,7 +102,7 @@ export default function Contact() {
               errorText="Veuillez écrire un message avant l'envoi"
             />   
             <button 
-              className={`${isValid ? "" : "inactive"} btn-primary flex items-center mx-auto mb-4`}
+              className={`${!isValid || isSubmitting ? "inactive" : ""} btn-primary flex items-center mx-auto mb-4`}
               aria-label={isSubmitting ? "Envoi en cours..." : "Envoyer"}
               aria-disabled={!isValid}
             >

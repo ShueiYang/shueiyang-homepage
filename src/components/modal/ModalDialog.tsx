@@ -132,7 +132,7 @@ export default function ModalDialog({
                     { type === "edit" && deleteAction && projectId &&
                       <button
                         type="button"
-                        className={`btn-secondary flex items-center text-base ${isValid ? "" : "inactive"}`}
+                        className={`btn-secondary flex items-center text-base ${isValid && !isSubmitting ? "" : "inactive"}`}
                         onClick={
                           handleSubmit(()=> deleteAction(projectId))
                         }

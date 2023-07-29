@@ -59,7 +59,7 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
             {legend}
           </span>
           <button 
-            className="btn-primary px-2 mt-3"
+            className={`btn-primary px-2 mt-3 ${isPending ? "inactive" : ""}`}
             onClick={()=> startTransition(()=> {
               logOut()
               route.refresh(); // force page revalidation
@@ -111,9 +111,7 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
               errorText="Le contenu est requis" 
             />
             <div className="flex justify-around">
-              <button 
-                className="btn-primary flex items-center mt-6"
-              >
+              <button className={`btn-primary flex items-center mt-6 ${isSubmitting ? "inactive" : ""}`}>
                 { isSubmitting ? "Uploading..." 
                   : type === "create" ? "Upload" : "Update"
                 }
