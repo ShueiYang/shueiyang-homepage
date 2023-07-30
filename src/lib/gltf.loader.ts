@@ -1,5 +1,5 @@
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 
 
 export function loadGLTFModel (
@@ -9,7 +9,7 @@ export function loadGLTFModel (
   options = { receiveShadow: true, castShadow: true }
 ): Promise<THREE.Object3D> {
   
-const { receiveShadow, castShadow } = options
+  const { receiveShadow, castShadow } = options;
 
   return new Promise((resolve, reject) => {
     // use loadingManager to show the progress bar
@@ -26,7 +26,7 @@ const { receiveShadow, castShadow } = options
       glbPath,
       gltf => {
         const obj = gltf.scene
-        obj.name = 'candleStick'
+        obj.name = "candleStick"
         obj.receiveShadow = receiveShadow
         obj.castShadow = castShadow
         gltf.scene.scale.multiplyScalar(100);

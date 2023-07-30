@@ -1,15 +1,15 @@
 "use client";
 
-import { usePathname } from "next/navigation"
-import DropDownMenu from "./mobileMenu/DropDownMenu";
-
-import Logo from "./Logo";
-import NextLink from "next/link";
-import ThemeToggleButton from "./customButton/ThemeButton";
-import { MENU_LISTS } from "@/constants/menu.Index";
-import { ThemeContext } from "@/components/themeContext/ThemeProvider";
-import { useContext, useEffect, useState } from "react";
 import { getLinkAndProps } from "@/utils/utility";
+import { usePathname } from "next/navigation"
+import NextLink from "next/link";
+import { useContext, useEffect, useState } from "react";
+
+import { ThemeContext } from "@/components/themeContext/ThemeProvider";
+import { MENU_LISTS } from "@/constants/menu.Index";
+import Logo from "./Logo";
+import ThemeToggleButton from "@/components/customButton/ThemeButton";
+import DropDownMenu from "@/components/mobileMenu/DropDownMenu";
 
 
 export interface LinkItemProps {
@@ -18,7 +18,7 @@ export interface LinkItemProps {
   href: string;
 }
 
-//Higher order component as Navbar component wrapper
+// Higher order component as Navbar component wrapper
 const LinkItem: React.FC<LinkItemProps> = ({
   children, 
   href, 

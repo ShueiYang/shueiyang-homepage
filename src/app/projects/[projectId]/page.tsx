@@ -34,7 +34,10 @@ export async function generateStaticParams() {
 }
 
 
-const Work = async ({params}: ParamsProps) => {
+export default async function Work ({
+  params
+}: ParamsProps
+) {
   const projectId = params.projectId
   // console.log("check", params);
   
@@ -138,6 +141,4 @@ const Work = async ({params}: ParamsProps) => {
       </article>
     </PageLayout>
   )
-}
-
-export default Work;
+};
