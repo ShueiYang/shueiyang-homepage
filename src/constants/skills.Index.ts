@@ -3,7 +3,7 @@ interface SkillProps {
     path: string
 }
 
-export const skillsArray: SkillProps[] = [
+export const SKILLS_ARRAY: SkillProps[] = [
     {
         name: "Html",
         path: "/icons/skills/html5.svg"

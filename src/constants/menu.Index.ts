@@ -7,7 +7,7 @@ export interface MenuProps {
     ioIcon: IconType;       
 };
 
-export const menuLists: MenuProps[] = [
+export const MENU_LISTS: MenuProps[] = [
     {
         name: "Projects",
         url: "/projects",

@@ -39,9 +39,10 @@ export default function ModalDialog({
     setIsOpen(true)
   }
 
-  const Icon = title === "@Yang" ?
-   FaTwitter : title === "#Yang" ?
-   FaFacebook : null
+  const Icon = 
+    title === "@Yang" ? FaTwitter
+  : title === "#Yang" ? FaFacebook
+  : null;
 
   return (
     <>  

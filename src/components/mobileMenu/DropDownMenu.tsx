@@ -6,11 +6,13 @@ import { IoMenu } from "react-icons/io5";
 import DropDownMenuItem from "./DropDownMenuItem";
 
 interface MenuListsProps {
-    menuLists: MenuProps[]
+  MENU_LISTS: MenuProps[]
 };
 
-function DropDownMenu({ menuLists }: MenuListsProps) {
-    
+export default function DropDownMenu({
+  MENU_LISTS 
+}: MenuListsProps
+) {  
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -38,7 +40,7 @@ function DropDownMenu({ menuLists }: MenuListsProps) {
           ring-opacity-5 focus:outline-none divide-zinc-400 dark:divide-zinc-700 "
         >
           <div className="py-3">
-            { menuLists.map(item => {
+            { MENU_LISTS.map(item => {
               const Icon = item.ioIcon
               return (
                 <DropDownMenuItem href={item.url} key={item.name}>
@@ -52,6 +54,4 @@ function DropDownMenu({ menuLists }: MenuListsProps) {
       </Transition> 
     </Menu>          
   )
-}
-
-export default DropDownMenu;
+};

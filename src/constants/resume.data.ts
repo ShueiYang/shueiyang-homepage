@@ -1,5 +1,5 @@
 
-export const resumeData = [
+export const RESUME_DATA = [
     {
         year: "1983",
         cv: "Né à Paris, France",

@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { skillsArray } from "@/constants/skills.Index";
+import { SKILLS_ARRAY } from "@/constants/skills.Index";
 import AnimateSkillsBar from "./ScrollAnimation";
 
 
-function SkillsBar() {
+export default function SkillsBar() {
 
   const iconsRef = useRef<HTMLDivElement>(null);
   const [iconsRefWidth, setIconsRefWidth] = useState<number>(0);
@@ -22,7 +22,7 @@ function SkillsBar() {
   return (
     <AnimateSkillsBar baseVelocity={-50} childWidth={iconsRefWidth}>
       <div className="flex " ref={iconsRef}>
-        {skillsArray.map((skill) => {
+        { SKILLS_ARRAY.map((skill) => {
           return (
             <div key={skill.name} className="w-[4.5rem]">
               <Image
@@ -42,6 +42,4 @@ function SkillsBar() {
       </div>
     </AnimateSkillsBar>
   );
-}
-     
-export default SkillsBar;                
+};              
