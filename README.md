@@ -20,13 +20,13 @@ Languages and tools
 * Cloudinary
 * PNPM package manager
 
-Feature:
+Features:
 * Projects are stored in MongoDB and can be uploaded from admin panel.
 * Projects can also be edited and removed from the Edit panel.
 * Only admin get acces to CRUD operation.
 * Authentification with JWT (Jose) and session with cookie.
 
-Known issue:
+Known issues:
 * Exit animation with Framer Motion not working in the App router.
 * as props from Link component didn't work in App dir.
 * Issue with revalidation didn't work as expected in the App router.
