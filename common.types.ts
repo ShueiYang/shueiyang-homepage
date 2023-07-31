@@ -31,6 +31,7 @@ export interface AdminForm {
 }
 
 export interface ProjectForm {
+    id: string,
     title: string,
     imageFile: string,
     description: string,
@@ -44,10 +45,6 @@ export interface ImageProps {
     public_id: string;
     folder: string,
     secure_url: string;
-}
-
-export type DataKeys = ProjectForm & {
-    id: string,
 }
 
 export interface validateForm {
