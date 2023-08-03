@@ -1,15 +1,17 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useContext } from "react";
-import { ThemeContext } from "@/components/themeContext/ThemeProvider";
+import { ThemeContext } from "@/providers/ThemeProvider";
 import { LinkItemProps } from "./Navbar";
+
+type EventProps = React.MouseEvent<HTMLDivElement, MouseEvent>
 
 
 const Logo = ({ path }: Pick<LinkItemProps, "path">) => {
 
   const { theme } = useContext(ThemeContext);
 
-  function handleHomeClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  function handleHomeClick(event: EventProps) {
     if (path === "/") {
       event.preventDefault();
       window.scrollTo({ top: 0, behavior: "smooth" });

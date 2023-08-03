@@ -6,7 +6,7 @@ import HeroTitle from "@/components/resume/HeroTitle"
 import { Section } from "@/components/layouts/Section"
 import Button from "@/components/customButton/Button"
 import { useContext, useEffect, useState } from "react"
-import { ThemeContext } from "../themeContext/ThemeProvider";
+import { ThemeContext } from "@/providers/ThemeProvider";
 import HeroName from "./HeroName";
 
 

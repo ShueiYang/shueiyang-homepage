@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 import NextLink from "next/link";
 import { useContext, useEffect, useState } from "react";
 
-import { ThemeContext } from "@/components/themeContext/ThemeProvider";
+import { ThemeContext } from "@/providers/ThemeProvider";
 import { MENU_LISTS } from "@/constants/menu.Index";
 import Logo from "./Logo";
 import ThemeToggleButton from "@/components/customButton/ThemeButton";

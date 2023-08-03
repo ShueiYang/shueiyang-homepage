@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { Roboto, IBM_Plex_Sans } from "next/font/google"
 // import Head from "next/head"
 // import Script from "next/script"
-import ThemeProvider from "@/components/themeContext/ThemeProvider"
+import ThemeProvider from "@/providers/ThemeProvider"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer" 
 import dynamic from "next/dynamic";

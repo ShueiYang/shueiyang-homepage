@@ -2,13 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface PrevLinkProps {
-    children: React.ReactNode;
-    path: string;
-    style?: string 
+  children: React.ReactNode;
+  path: string;
+  style?: string 
 }
 
-const PreviousLink = ({children, path, style }: PrevLinkProps) => {
-
+const PreviousLink: React.FC<PrevLinkProps> = ({
+  children, 
+  path, 
+  style 
+}) => {
   return (
     <div className={`flex text-lg md:max-w-[44rem] ${style}`}>
         <div className="mr-1 my-auto">

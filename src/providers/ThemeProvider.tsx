@@ -15,7 +15,7 @@ export const ThemeContext = createContext<ThemeContextValue>(
 );
 
 
-function ThemeProvider({
+export default function ThemeProvider({
   children
 }: {
   children: React.ReactNode
@@ -39,6 +39,4 @@ function ThemeProvider({
       {children}
     </ThemeContext.Provider>
   )
-}
-
-export default ThemeProvider;
+};

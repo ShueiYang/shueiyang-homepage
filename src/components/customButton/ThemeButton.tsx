@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react"
 import { Switch } from "@headlessui/react"
 import { IoSunny, IoMoon } from "react-icons/io5";
 
-import { ThemeContext } from "@/components/themeContext/ThemeProvider";
+import { ThemeContext } from "@/providers/ThemeProvider";
 
 
 export default function ThemeToggleButton() {
