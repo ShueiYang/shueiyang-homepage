@@ -11,7 +11,7 @@ export async function middleware(req: NextRequest) {
   if(!jwtCookie) {
     if(url.includes("/backoffice/admin")) {
       return;
-    } else if (url.includes("/backoffice/dashboard")) {
+    } else if (url.includes("/backoffice")) {
       return NextResponse.redirect(new URL("/backoffice/admin", url)) 
     } else {
       return NextResponse.json(
