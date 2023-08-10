@@ -50,9 +50,9 @@ const ImgUploadForm = ({ label, type, defaultImg }: ImgUploadProps) => {
       />
       { ((imgFile && imgFile.length) || defaultImg) &&
         <Image 
-          src={ imgFile instanceof FileList && imgFile[0] ?
-            URL.createObjectURL(imgFile[0])
-          : defaultImg
+          src={ imgFile instanceof FileList && imgFile[0] 
+            ? URL.createObjectURL(imgFile[0])
+            : defaultImg
           }
           className="object-contain z-20 sm:p-10"
           alt="Project poster"
