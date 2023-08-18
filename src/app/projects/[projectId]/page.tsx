@@ -6,8 +6,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation"
 import PageLayout from "@/components/layouts/PageLayout";
 import PreviousLink from "@/components/PreviousLink";
-import { getProjects } from "../page";
-import { getProjectInfo } from "@/app/action";
+import { getProjectInfo, getProjects } from "@/app/action";
 
 export const revalidate = 60 // revalidate every 60s...
 

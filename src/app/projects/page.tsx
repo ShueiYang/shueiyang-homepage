@@ -3,31 +3,13 @@ import { ProjectData } from "@root/common.types";
 import PageLayout from "@/components/layouts/PageLayout";
 import PortfolioLayout from "@/components/layouts/PortfolioLayout";
 import PreviousLink from '@/components/PreviousLink';
-import { prisma } from "@/lib/prisma";
+import { getProjects } from "@/app/action";
 
 export const revalidate = 60 // revalidate every 60s...
 
 export const metadata: Metadata = {
   title: "Kim Nguyen - Projects",
   description: `Kim"s website`,
-}
-
-// function to query database in server component
-export async function getProjects(): Promise<ProjectData[]>  {
-  try {
-    const results = await prisma.project.findMany({
-      include:{
-        images: true
-      },
-      orderBy: {
-        createAt: "desc" // Sort by most recent date
-      }
-    })
-    return results
-  } catch (error) {
-    console.error(error)
-    throw error
-  }
 }
 
 

@@ -1,16 +1,24 @@
-"use server"
 import { prisma } from "@/lib/prisma"
-import { cookies } from "next/headers"
 import { ProjectData } from "@root/common.types"
 
-// testing server action
-export async function logOut() {
-  cookies().set({
-    name: "shueiJWT",
-    value: "",
-    maxAge: -1,
-    path: "/"
-  })
+
+
+// function to query database in server component
+export async function getProjects(): Promise<ProjectData[]>  {
+  try {
+    const results = await prisma.project.findMany({
+      include:{
+        images: true
+      },
+      orderBy: {
+        createAt: "desc" // Sort by most recent date
+      }
+    })
+    return results
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
 }
 
 

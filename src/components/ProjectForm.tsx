@@ -7,7 +7,7 @@ import TextareaForm from "@/components/formToSubmit/TextareaForm";
 import ImgUploadForm from "@/components/formToSubmit/ImgUploadForm";
 import PageLayout from "@/components/layouts/PageLayout";
 import { useRouter } from "next/navigation";
-import { logOut } from "@/app/action";
+import { logOut } from "@/actions/serverAction";
 import usePortFolio from "@/hooks/usePortFolio";
 import ModalDialog from "./modal/ModalDialog";
 import { useTransition } from "react";
@@ -62,7 +62,7 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
             className={`btn-primary px-2 mt-3 ${isPending ? "inactive" : ""}`}
             onClick={()=> startTransition(()=> {
               logOut()
-              route.refresh(); // force page revalidation
+              route.refresh();
             })}
           >
             {isPending ? "logging out..." : "Deconnexion"}
