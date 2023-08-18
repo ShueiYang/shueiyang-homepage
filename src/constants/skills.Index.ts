@@ -49,6 +49,10 @@ export const SKILLS_ARRAY: SkillProps[] = [
         path: "/icons/skills/nextjs.svg"
     },
     {
+        name: "Supabase",
+        path: "/icons/skills/supabase.svg"
+    },
+    {
         name: "GraphQL",
         path: "/icons/skills/graphql.svg"
     },
