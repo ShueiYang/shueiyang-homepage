@@ -24,7 +24,7 @@ interface FormProps {
 
 const ProjectForm = ({type, legend, project }: FormProps) => {
   
-  const route = useRouter();
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
   const projectId = project?.id
@@ -53,12 +53,16 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
   // use portfolio custom hooks
   const { submitError, uploadProject, deleteProject } = usePortFolio(dirtyFields);
   
+  const isMutating = isPending || isSubmitting
 
-  // const onSubmitUpload: SubmitHandler<ProjectForm> = (data) => {
-  //   startTransition(() => {
-  //     uploadProject(data, type, projectId)
-  //   })
-  // }
+  const onSubmitUpload = handleSubmit(async(data) => {
+    startTransition(async() => {
+      await uploadProject(data, type, projectId);
+      router.refresh();
+    })
+  })
+ 
+
   // console.log("LOADPENDING", isPending);
   // console.log("LOADSUBMIT", isSubmitting);
   return (
@@ -73,7 +77,7 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
             className={`btn-primary px-2 mt-3 ${isPending ? "inactive" : ""}`}
             onClick={()=> startTransition(()=> {
               logOut()
-              route.refresh();
+              router.refresh();
             })}
           >
             {isPending ? "logging out..." : "Deconnexion"}
@@ -83,7 +87,7 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
         <FormProvider {...methods}>
           <form
             className="flex flex-col mt-4"
-            onSubmit={handleSubmit((data) => uploadProject(data, type, projectId))}
+            onSubmit={onSubmitUpload}
             // noValidate
           >
             <ImgUploadForm 
@@ -122,8 +126,8 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
               errorText="Le contenu est requis" 
             />
             <div className="flex justify-around">
-              <button className={`btn-primary flex items-center mt-6 ${isSubmitting || !isDirty ? "inactive" : ""}`}>
-                { isSubmitting ? "Uploading..." 
+              <button className={`btn-primary flex items-center mt-6 ${isMutating || !isDirty ? "inactive" : ""}`}>
+                { isMutating ? "Uploading..." 
                   : type === "create" ? "Upload" : "Update"
                 }
               </button> 

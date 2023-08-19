@@ -78,7 +78,7 @@ export async function updateProjectAction(
     if(err instanceof Error) {
       return { error: err.message }
     }
-    return { error: "Error: Failed to upsert project" };
+    return { error: "Error: Failed to update project" };
   }
 
   revalidatePath("/projects");  
