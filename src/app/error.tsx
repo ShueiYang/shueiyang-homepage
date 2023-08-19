@@ -19,9 +19,9 @@ export default function Error({
  
   return (
     <PageLayout>
-      <div className="container xl:max-w-5xl mt-6 md:mt-[10%]">
-        <h1 className="text-3xl font-ibm font-semibold text-center mb-4">
-          Une erreur s&apos;est produite... :/
+      <div className="container xl:max-w-5xl my-8 md:my-[10%]">
+        <h1 className="text-2xl font-ibm font-semibold text-center mb-8 max-w-[500px] mx-auto">
+          Une erreur s&apos;est produite lors de l&apos;affichage de cette page ... :/
         </h1>
         <hr />
         
