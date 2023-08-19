@@ -47,6 +47,10 @@ export interface ImageProps {
     secure_url: string;
 }
 
-export interface validateForm {
+export interface ValidateForm {
     titleName: string
+}
+
+export interface ActionProps {
+    error: string | null
 }
