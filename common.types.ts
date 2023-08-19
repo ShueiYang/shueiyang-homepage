@@ -51,6 +51,6 @@ export interface ValidateForm {
     titleName: string
 }
 
-export interface ActionProps {
-    error: string | null
+export type ActionProps = { 
+    error?: string 
 }
