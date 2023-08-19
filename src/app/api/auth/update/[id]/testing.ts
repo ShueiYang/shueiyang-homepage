@@ -1,15 +1,15 @@
-import { Portfolio, ImageProps } from "@root/common.types";
-import { ParamsRoute } from "@/app/backoffice/dashboard/[id]/page";
-import { NextResponse } from "next/server";
-import { deleteImage, uploadImage } from "@/app/api/cloudinary.actions";
-import { prisma } from "@/lib/prisma";
-import { revalidatePath } from "next/cache";
+// import { Portfolio, ImageProps } from "@root/common.types";
+// import { ParamsRoute } from "@/app/backoffice/dashboard/[id]/page";
+// import { NextResponse } from "next/server";
+// import { deleteImage, uploadImage } from "@/app/api/cloudinary.actions";
+// import { prisma } from "@/lib/prisma";
+// import { revalidatePath } from "next/cache";
 
-interface UpdateProps {
-    oldAssetId: string,
-    cloudImage: ImageProps,
-    stackArray: string[]
-}
+// interface UpdateProps {
+//     oldAssetId: string,
+//     cloudImage: ImageProps,
+//     stackArray: string[]
+// }
 
 
 // export async function PUT(request: Request, {params}: ParamsRoute) {
@@ -86,41 +86,41 @@ interface UpdateProps {
 
 
 
-export async function DELETE(request: Request, {params}: ParamsRoute) {
-    try {
-        const id = params.id;
-        console.log("DELETE ROUTE ID", id)
-        const resultFound = await prisma.project.findUnique({
-             where: {id},
-             include: {
-                images: true, // Include the associated images
-            } 
-        }) 
-        if(!resultFound) {
-            return NextResponse.json(
-                { message: "project not found!" }, { status: 404 }      
-            )
-        }
-        // delete image from cloudinary
-        if(resultFound.images.length) {
-            const folderPath = resultFound.images[0].folder;   
-            await deleteImage(folderPath); 
-        }
-        // delete project
-        await prisma.project.delete({where: {id}})
+// export async function DELETE(request: Request, {params}: ParamsRoute) {
+//     try {
+//         const id = params.id;
 
-        // call the revalidate path but it's not working as expected...
-        revalidatePath("/projects");
+//         const resultFound = await prisma.project.findUnique({
+//              where: {id},
+//              include: {
+//                 images: true, // Include the associated images
+//             } 
+//         }) 
+//         if(!resultFound) {
+//             return NextResponse.json(
+//                 { message: "project not found!" }, { status: 404 }      
+//             )
+//         }
+//         // delete image from cloudinary
+//         if(resultFound.images.length) {
+//             const folderPath = resultFound.images[0].folder;   
+//             await deleteImage(folderPath); 
+//         }
+//         // delete project
+//         await prisma.project.delete({where: {id}})
+
+//         // call the revalidate path but it's not working as expected...
+//         revalidatePath("/projects");
     
-        return NextResponse.json(
-            { message: "project successfully deleted!" }, { status: 200 }      
-        )  
+//         return NextResponse.json(
+//             { message: "project successfully deleted!" }, { status: 200 }      
+//         )  
               
-    } catch (err) {
-        console.error(err);
-        return NextResponse.json(
-            { message: "Internal Error please try again later." },
-            { status: 500 }
-        );      
-    }    
-};
+//     } catch (err) {
+//         console.error(err);
+//         return NextResponse.json(
+//             { message: "Internal Error please try again later." },
+//             { status: 500 }
+//         );      
+//     }    
+// };

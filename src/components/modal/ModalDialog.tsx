@@ -1,10 +1,11 @@
 "use client"
 
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { Dialog, Transition } from "@headlessui/react"
+import { Fragment, useState, useTransition } from "react"
+import { useForm } from "react-hook-form"
 import { FaFacebook, FaTwitter } from "react-icons/fa"
-import { ValidateForm } from '@root/common.types'
+import { ValidateForm } from "@root/common.types"
+import { useRouter } from "next/navigation"
 
 interface ModalProps {
   type?: string
@@ -19,8 +20,11 @@ export default function ModalDialog({
   projectId, 
   deleteAction 
 }: ModalProps 
-) { 
-  const [isOpen, setIsOpen] = useState(false)
+) {
+  const router = useRouter(); 
+  const [isOpen, setIsOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
+
   const { 
     register,
     reset,
@@ -43,6 +47,8 @@ export default function ModalDialog({
     title === "@Yang" ? FaTwitter
   : title === "#Yang" ? FaFacebook
   : null;
+
+  const isMutating = isSubmitting || isPending;
 
   return (
     <>  
@@ -116,7 +122,7 @@ export default function ModalDialog({
                   : <div className="mt-2">
                       <p className="text-sm text-gray-500">
                         { `Désolé pas de compte ${title === "@Yang" ? "Twitter" : title === "#Yang" ? 
-                          "Facebook" : null}, c'etait juste pour faire style...`  
+                          "Facebook" : null}, c'était juste pour faire style...`  
                         }
                       </p>
                     </div>            
@@ -133,12 +139,17 @@ export default function ModalDialog({
                     { type === "edit" && deleteAction && projectId &&
                       <button
                         type="button"
-                        className={`btn-secondary flex items-center text-base ${isValid && !isSubmitting ? "" : "inactive"}`}
+                        className={`btn-secondary flex items-center text-base ${isValid && !isMutating ? "" : "inactive"}`}
                         onClick={
-                          handleSubmit(()=> deleteAction(projectId))
+                          handleSubmit(async() => {
+                            startTransition(async() => {
+                              await deleteAction(projectId);
+                              router.refresh();
+                            })
+                          })
                         }
                       >
-                        { isSubmitting ? "deleting..." : "Delete now" }
+                        { isMutating ? "deleting..." : "Delete now" }
                       </button>
                     }
                   </div>

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { convertRawDataToFormData } from "@/utils/formDataHelper";
 import { addProjectAction } from "@/actions/serverActionCreate";
 import { updateProjectAction } from "@/actions/serverActionUpdate";
+import { deleteProjectAction } from "@/actions/serveurActionDelete";
 
 
 
@@ -72,7 +73,6 @@ function usePortFolio(dirtyFields: FieldsProps) {
     projectId: string | undefined
   ) {   
     setSubmitError("");
-
     const formData = await convertRawDataToFormData(data, dirtyFields)
 
     if(type === "edit" && projectId) {
@@ -97,22 +97,14 @@ function usePortFolio(dirtyFields: FieldsProps) {
   }
 
 
-
-
   async function deleteProject (projectId: string) {
-    try {
-      const response = await fetch(`/api/auth/update/${projectId}`, {
-        method: "DELETE"
-      })
-      if(response.ok) {
-      // workaround to revalidate data but not work as expected
-        router.replace("/projects")
-        router.refresh()
-      } else {
-        throw new Error("Failed to delete project. Try again!")
-      }  
-    } catch (err) {
-      console.error(err)
+    // Server Action
+    const { error } = await deleteProjectAction(projectId);
+
+    if(error) {
+      setSubmitError(error)
+    } else {
+      router.replace("/projects")
     }
   }
   

@@ -53,7 +53,7 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
   // use portfolio custom hooks
   const { submitError, uploadProject, deleteProject } = usePortFolio(dirtyFields);
   
-  const isMutating = isPending || isSubmitting
+  const isMutating = isSubmitting || isPending;
 
   const onSubmitUpload = handleSubmit(async(data) => {
     startTransition(async() => {
@@ -62,9 +62,6 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
     })
   })
  
-
-  // console.log("LOADPENDING", isPending);
-  // console.log("LOADSUBMIT", isSubmitting);
   return (
     <div className="container xl:max-w-5xl my-6 flex flex-col items-center justify-center lg:flex-row">
      <fieldset className="max-w-lg w-full">

@@ -32,13 +32,14 @@ export async function updateProjectAction(
     const resultFound = await prisma.project.findUnique({
       where: { id: projectId },
       include: {
-        images: true, // Include the associated images
+        images: true // Include the associated images
       },
     });
-    if (!resultFound) {
+
+    if(!resultFound) {
       throw new Error("Project not found!")
     }
-    if (imageFile) {
+    if(imageFile) {
       updateData.oldAssetId = resultFound.images[0].id;
       const publicId = resultFound.images[0].public_id;
       const folderPath = resultFound.images[0].folder;
@@ -48,7 +49,7 @@ export async function updateProjectAction(
         publicId
       );
     }
-    if (stack) {
+    if(stack) {
       updateData.stackArray = stack.split(", ");
     }
 
