@@ -1,7 +1,7 @@
 "use client";
 
 import { ProjectForm } from "@root/common.types";
-import { FormProvider, useForm } from "react-hook-form";
+import { FieldNamesMarkedBoolean, FormProvider, useForm } from "react-hook-form";
 import InputForm from "@/components/formToSubmit/InputForm";
 import TextareaForm from "@/components/formToSubmit/TextareaForm";
 import ImgUploadForm from "@/components/formToSubmit/ImgUploadForm";
@@ -12,8 +12,11 @@ import usePortFolio from "@/hooks/usePortFolio";
 import ModalDialog from "./modal/ModalDialog";
 import { useTransition } from "react";
 
+export type FieldsProps = Partial<Readonly<FieldNamesMarkedBoolean<ProjectForm>>>
+export type MethodAction = "create" | "edit"
+
 interface FormProps {
-   type: string,
+   type: MethodAction,
    legend: string,
    project?: ProjectForm
 }
@@ -22,7 +25,7 @@ interface FormProps {
 const ProjectForm = ({type, legend, project }: FormProps) => {
   
   const route = useRouter();
-  let [isPending, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
 
   const projectId = project?.id
 
@@ -40,7 +43,8 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
   const { 
     handleSubmit, 
     formState: { 
-      errors, 
+      errors,
+      isDirty, 
       isSubmitting,
       dirtyFields
     } 
@@ -49,7 +53,14 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
   // use portfolio custom hooks
   const { submitError, uploadProject, deleteProject } = usePortFolio(dirtyFields);
   
-  
+
+  // const onSubmitUpload: SubmitHandler<ProjectForm> = (data) => {
+  //   startTransition(() => {
+  //     uploadProject(data, type, projectId)
+  //   })
+  // }
+  // console.log("LOADPENDING", isPending);
+  // console.log("LOADSUBMIT", isSubmitting);
   return (
     <div className="container xl:max-w-5xl my-6 flex flex-col items-center justify-center lg:flex-row">
      <fieldset className="max-w-lg w-full">
@@ -72,7 +83,7 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
         <FormProvider {...methods}>
           <form
             className="flex flex-col mt-4"
-            onSubmit={handleSubmit((data)=> uploadProject(data, type, projectId))}
+            onSubmit={handleSubmit((data) => uploadProject(data, type, projectId))}
             // noValidate
           >
             <ImgUploadForm 
@@ -111,7 +122,7 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
               errorText="Le contenu est requis" 
             />
             <div className="flex justify-around">
-              <button className={`btn-primary flex items-center mt-6 ${isSubmitting ? "inactive" : ""}`}>
+              <button className={`btn-primary flex items-center mt-6 ${isSubmitting || !isDirty ? "inactive" : ""}`}>
                 { isSubmitting ? "Uploading..." 
                   : type === "create" ? "Upload" : "Update"
                 }

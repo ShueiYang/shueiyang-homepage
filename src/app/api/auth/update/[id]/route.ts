@@ -89,7 +89,7 @@ export async function PUT(request: Request, {params}: ParamsRoute) {
 export async function DELETE(request: Request, {params}: ParamsRoute) {
     try {
         const id = params.id;
-
+        console.log("DELETE ROUTE ID", id)
         const resultFound = await prisma.project.findUnique({
              where: {id},
              include: {

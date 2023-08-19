@@ -4,7 +4,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaFacebook, FaTwitter } from "react-icons/fa"
-import { validateForm } from '@root/common.types'
+import { ValidateForm } from '@root/common.types'
 
 interface ModalProps {
   type?: string
@@ -29,7 +29,7 @@ export default function ModalDialog({
       isValid,
       isSubmitting
     } 
-  } = useForm<validateForm>({defaultValues: { titleName: "" }});
+  } = useForm<ValidateForm>({defaultValues: { titleName: "" }});
 
   function closeModal() {
     reset()
