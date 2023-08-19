@@ -81,13 +81,17 @@ function usePortFolio(dirtyFields: FieldsProps) {
 
       if(result?.error) {
         setSubmitError(result.error)
-      } 
+      } else {
+        router.refresh();
+      }
     } else {
       // Server Action
       const result = await addProjectAction(formData);
 
       if(result?.error) {
         setSubmitError(result.error)
+      } else {
+        router.refresh();
       }
     }
   }
