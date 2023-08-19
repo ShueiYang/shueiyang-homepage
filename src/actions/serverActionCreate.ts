@@ -4,7 +4,6 @@ import { ActionProps, Portfolio } from "@root/common.types";
 import { prisma } from "@/lib/prisma";
 import { uploadImage } from "@/app/api/cloudinary.actions";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 
 export async function addProjectAction(
@@ -48,11 +47,11 @@ export async function addProjectAction(
       },
     });
 
+    revalidatePath("/projects");
+    return { error: null }
+
   } catch (err) {
     console.error(err);
     return { error: "Error: Failed to upsert project" };
   }
-
-  revalidatePath("/projects");
-  redirect("/projects");
 };

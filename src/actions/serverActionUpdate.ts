@@ -4,7 +4,6 @@ import { ActionProps, Portfolio, ImageProps } from "@root/common.types";
 import { prisma } from "@/lib/prisma";
 import { uploadImage } from "@/app/api/cloudinary.actions";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 interface UpdateProps {
   oldAssetId: string,
@@ -72,6 +71,9 @@ export async function updateProjectAction(
         content,
       },
     });
+
+    revalidatePath("/projects");
+    return { error: null }
     
   } catch (err) {
     console.error(err);
@@ -80,7 +82,4 @@ export async function updateProjectAction(
     }
     return { error: "Error: Failed to update project" };
   }
-
-  revalidatePath("/projects");  
-  redirect("/projects");
 };
