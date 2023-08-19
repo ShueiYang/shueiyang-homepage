@@ -77,21 +77,17 @@ function usePortFolio(dirtyFields: FieldsProps) {
 
     if(type === "edit" && projectId) {
       // server Action
-      const { error } = await updateProjectAction(formData, projectId)
+      const result = await updateProjectAction(formData, projectId)
 
-      if(error) {
-        setSubmitError(error)
-      } else {
-        router.replace("/projects")
-      }
+      if(result?.error) {
+        setSubmitError(result.error)
+      } 
     } else {
       // Server Action
-      const { error } = await addProjectAction(formData);
+      const result = await addProjectAction(formData);
 
-      if(error) {
-        setSubmitError(error)
-      } else {
-        router.replace("/projects")
+      if(result?.error) {
+        setSubmitError(result.error)
       }
     }
   }
