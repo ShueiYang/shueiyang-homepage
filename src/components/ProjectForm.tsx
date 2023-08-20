@@ -56,14 +56,11 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
   // use portfolio custom hooks
   const { submitError, uploadProject, deleteProject } = usePortFolio();
   
-  const isMutating = isSubmitting || isPending;
 
-  const onSubmitUpload = handleSubmit((data) => {
-    startTransition(async() => {
-      const formData = await convertRawDataToFormData(data, dirtyFields);
-      await uploadProject(formData, type, projectId);
-    })
-  })
+  async function handleUpload(data: ProjectForm) {
+    const formData = await convertRawDataToFormData(data, dirtyFields);
+    await uploadProject(formData, type, projectId);
+  }
  
   return (
     <div className="container xl:max-w-5xl my-6 flex flex-col items-center justify-center lg:flex-row">
@@ -87,7 +84,7 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
         <FormProvider {...methods}>
           <form
             className="flex flex-col mt-4"
-            onSubmit={onSubmitUpload}
+            onSubmit={handleSubmit(handleUpload)}
             // noValidate
           >
             <ImgUploadForm 
@@ -126,8 +123,9 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
               errorText="Le contenu est requis" 
             />
             <div className="flex justify-around">
-              <button className={`btn-primary flex items-center mt-6 ${isMutating || !isDirty ? "inactive" : ""}`}>
-                { isMutating ? "Uploading..." 
+              <button className={`btn-primary flex items-center mt-6 ${isSubmitting || !isDirty ? "inactive" : ""}`}>
+                { isSubmitting 
+                  ? "Uploading..." 
                   : type === "create" ? "Upload" : "Update"
                 }
               </button> 

@@ -1,11 +1,10 @@
 "use client"
 
 import { Dialog, Transition } from "@headlessui/react"
-import { Fragment, useState, useTransition } from "react"
+import { Fragment, useState } from "react"
 import { useForm } from "react-hook-form"
 import { FaFacebook, FaTwitter } from "react-icons/fa"
 import { ValidateForm } from "@root/common.types"
-import { useRouter } from "next/navigation"
 
 interface ModalProps {
   type?: string
@@ -21,9 +20,7 @@ export default function ModalDialog({
   deleteAction 
 }: ModalProps 
 ) {
-  const router = useRouter(); 
   const [isOpen, setIsOpen] = useState(false);
-  const [isPending, startTransition] = useTransition();
 
   const { 
     register,
@@ -47,8 +44,6 @@ export default function ModalDialog({
     title === "@Yang" ? FaTwitter
   : title === "#Yang" ? FaFacebook
   : null;
-
-  const isMutating = isSubmitting || isPending;
 
   return (
     <>  
@@ -139,16 +134,10 @@ export default function ModalDialog({
                     { type === "edit" && deleteAction && projectId &&
                       <button
                         type="button"
-                        className={`btn-secondary flex items-center text-base ${isValid && !isMutating ? "" : "inactive"}`}
-                        onClick={
-                          handleSubmit(() => {
-                            startTransition(async() => {
-                              await deleteAction(projectId);
-                            })
-                          })
-                        }
+                        className={`btn-secondary flex items-center text-base ${isValid && !isSubmitting ? "" : "inactive"}`}
+                        onClick={handleSubmit(() => deleteAction(projectId))}
                       >
-                        { isMutating ? "deleting..." : "Delete now" }
+                        { isSubmitting ? "deleting..." : "Delete now" }
                       </button>
                     }
                   </div>

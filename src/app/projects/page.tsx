@@ -5,7 +5,6 @@ import { getProjects } from "@/app/action";
 import PageLayout from "@/components/layouts/PageLayout";
 import PortfolioLayout from "@/components/layouts/PortfolioLayout";
 import PreviousLink from '@/components/PreviousLink';
-import DataRevalidator from "@/components/DataRevalidator";
 
 export const revalidate = 60 // revalidate every 60s...
 
@@ -21,7 +20,6 @@ export default async function Projects() {
 
   return (
     <PageLayout>
-      <DataRevalidator />
       <article className="container mb-6">
         <PreviousLink path="/">
           Retour
