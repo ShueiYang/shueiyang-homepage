@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer" 
 import dynamic from "next/dynamic";
 import CandleStickLoader from "@/components/model3D/CandleStick.Loader";
+import RevalidateProvider from "@/providers/RevalidateProvider"
 // import AnimateLayoutWrapper from "@/components/layouts/AnimateLayout"
 
 
@@ -49,16 +50,18 @@ export default function RootLayout({
       </Head> */}
       <body className="bg-orange-50 dark:bg-black-russ text-zinc-900 dark:text-slate-200 break-words leading-6 transition-colors duration-500">
         <ThemeProvider>
-          <main className={`${roboto.className} ${ibmPlex.variable} ${roboto.variable}`}>
-            <Navbar />
-              <section className="container grow pt-14 px-8"> 
-                <ChineseCandleStick />
-                {/* <AnimateLayoutWrapper> */}
-                  {children}
-                {/* </AnimateLayoutWrapper>  */}
-              </section>
-            <Footer />
-          </main>
+          <RevalidateProvider>
+            <main className={`${roboto.className} ${ibmPlex.variable} ${roboto.variable}`}>
+              <Navbar />
+                <section className="container grow pt-14 px-8"> 
+                  <ChineseCandleStick />
+                  {/* <AnimateLayoutWrapper> */}
+                    {children}
+                  {/* </AnimateLayoutWrapper>  */}
+                </section>
+              <Footer />
+            </main>
+          </RevalidateProvider>
         </ThemeProvider>
       </body> 
     </html>

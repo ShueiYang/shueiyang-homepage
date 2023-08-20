@@ -1,8 +1,9 @@
 import { ProjectForm } from "@root/common.types";
-import { FieldsProps, MethodAction } from "@/components/ProjectForm";
-import { useState } from "react";
+import { MethodAction } from "@/components/ProjectForm";
+import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
-import { convertRawDataToFormData } from "@/utils/formDataHelper";
+import { RevalidateContext } from "@/providers/RevalidateProvider";
+
 import { addProjectAction } from "@/actions/serverActionCreate";
 import { updateProjectAction } from "@/actions/serverActionUpdate";
 import { deleteProjectAction } from "@/actions/serveurActionDelete";
@@ -10,11 +11,12 @@ import { deleteProjectAction } from "@/actions/serveurActionDelete";
 
 
 // custom hook
-function usePortFolio(dirtyFields: FieldsProps) {
+function usePortFolio() {
 
   const router = useRouter();
+  const { setRevalidate } = useContext(RevalidateContext);
   const [submitError, setSubmitError] = useState("");
-
+  
 
   // async function uploadProject(
   //   data: ProjectForm, 
@@ -68,13 +70,12 @@ function usePortFolio(dirtyFields: FieldsProps) {
   // }
 
   async function uploadProject(
-    data: ProjectForm, 
+    formData: FormData, 
     type: MethodAction, 
     projectId: string | undefined
   ) {   
     setSubmitError("");
-    const formData = await convertRawDataToFormData(data, dirtyFields)
-
+  
     if(type === "edit" && projectId) {
       // server Action
       const { error } = await updateProjectAction(formData, projectId)
@@ -82,6 +83,7 @@ function usePortFolio(dirtyFields: FieldsProps) {
       if(error) {
         setSubmitError(error)
       } else {
+        setRevalidate(true)
         router.replace("/projects")
       } 
     } else {
@@ -91,6 +93,7 @@ function usePortFolio(dirtyFields: FieldsProps) {
       if(error) {
         setSubmitError(error)
       } else {
+        setRevalidate(true)
         router.replace("/projects")
       }
     }
@@ -105,8 +108,27 @@ function usePortFolio(dirtyFields: FieldsProps) {
       setSubmitError(error)
     } else {
       router.replace("/projects")
+      setRevalidate(true)
     }
   }
+
+
+  // async function deleteProject (projectId: string) {
+  //   try {
+  //     const response = await fetch(`/api/auth/update/${projectId}`, {
+  //       method: "DELETE"
+  //     })
+  //     if(response.ok) {
+  //     // workaround to revalidate data but not work as expected
+  //       router.replace("/projects")
+  //       router.refresh()
+  //     } else {
+  //       throw new Error("Failed to delete project. Try again!")
+  //     }  
+  //   } catch (err) {
+  //     console.error(err)
+  //   }
+  // }
   
   return {
     submitError,

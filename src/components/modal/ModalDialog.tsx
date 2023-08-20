@@ -141,10 +141,9 @@ export default function ModalDialog({
                         type="button"
                         className={`btn-secondary flex items-center text-base ${isValid && !isMutating ? "" : "inactive"}`}
                         onClick={
-                          handleSubmit(async() => {
+                          handleSubmit(() => {
                             startTransition(async() => {
                               await deleteAction(projectId);
-                              router.refresh();
                             })
                           })
                         }

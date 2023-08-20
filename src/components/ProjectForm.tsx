@@ -1,24 +1,27 @@
 "use client";
 
 import { ProjectForm } from "@root/common.types";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 import { FieldNamesMarkedBoolean, FormProvider, useForm } from "react-hook-form";
+
+import usePortFolio from "@/hooks/usePortFolio";
+import { logOut } from "@/actions/serverAction";
+import { convertRawDataToFormData } from "@/utils/formDataHelper";
+
 import InputForm from "@/components/formToSubmit/InputForm";
 import TextareaForm from "@/components/formToSubmit/TextareaForm";
 import ImgUploadForm from "@/components/formToSubmit/ImgUploadForm";
 import PageLayout from "@/components/layouts/PageLayout";
-import { useRouter } from "next/navigation";
-import { logOut } from "@/actions/serverAction";
-import usePortFolio from "@/hooks/usePortFolio";
-import ModalDialog from "./modal/ModalDialog";
-import { useTransition } from "react";
+import ModalDialog from "@/components/modal/ModalDialog";
 
 export type FieldsProps = Partial<Readonly<FieldNamesMarkedBoolean<ProjectForm>>>
 export type MethodAction = "create" | "edit"
 
 interface FormProps {
-   type: MethodAction,
-   legend: string,
-   project?: ProjectForm
+  type: MethodAction,
+  legend: string,
+  project?: ProjectForm
 }
 
 
@@ -51,14 +54,14 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
   } = methods;
 
   // use portfolio custom hooks
-  const { submitError, uploadProject, deleteProject } = usePortFolio(dirtyFields);
+  const { submitError, uploadProject, deleteProject } = usePortFolio();
   
   const isMutating = isSubmitting || isPending;
 
-  const onSubmitUpload = handleSubmit(async(data) => {
+  const onSubmitUpload = handleSubmit((data) => {
     startTransition(async() => {
-      await uploadProject(data, type, projectId);
-      router.refresh();
+      const formData = await convertRawDataToFormData(data, dirtyFields);
+      await uploadProject(formData, type, projectId);
     })
   })
  
