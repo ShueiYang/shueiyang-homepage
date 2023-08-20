@@ -5,13 +5,19 @@ import Link from "next/link";
 import { motion } from 'framer-motion'
 
 interface LayoutProps {
-    children: React.ReactNode;
-    href: string;
-    title: string;
-    thumbnail: string;        
+  children: React.ReactNode;
+  href: string;
+  title: string;
+  thumbnail: string;        
 }
 
-function PortfolioLayout({children, href, title, thumbnail}: LayoutProps) {
+
+const PortfolioLayout: React.FC<LayoutProps> = ({
+  children, 
+  href, 
+  title, 
+  thumbnail
+}) => {
   // const titleName = title.replace(/\s/g, "-");
 
   return (
@@ -35,7 +41,7 @@ function PortfolioLayout({children, href, title, thumbnail}: LayoutProps) {
             blurDataURL={thumbnail}
             width={550}
             height={310}
-        />
+          />
           <motion.div 
             initial={{opacity: 0}}
             whileHover={{opacity: 1}}
@@ -48,10 +54,10 @@ function PortfolioLayout({children, href, title, thumbnail}: LayoutProps) {
           </motion.div>
         </Link> 
       </motion.div>
-        <p className="mt-4 text-xl font-ibm font-semibold">{title}</p>
-        <p className="my-2">{children}</p>
+      <p className="mt-4 text-xl font-ibm font-semibold">{title}</p>
+      <p className="my-2">{children}</p>
     </div>
   )
 }
 
-export default PortfolioLayout;       
+export default PortfolioLayout;      

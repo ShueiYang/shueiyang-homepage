@@ -23,13 +23,13 @@ export default function ThemeProvider({
   const [ theme, setTheme ] = useState(()=> {
     //check if Server Side Rendering
     if (typeof window === "undefined") {
-        return "light";
+      return "light";
     }
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-        return localStorage.getItem("theme") as ThemeColor;
+      return localStorage.getItem("theme") as ThemeColor;
     }
     if (!localStorage && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        return "dark"
+      return "dark"
     } 
     return "light";
   });
