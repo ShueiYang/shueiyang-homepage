@@ -63,9 +63,9 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
   }
  
   return (
+    <PageLayout>
     <div className="container xl:max-w-5xl my-6 flex flex-col items-center justify-center lg:flex-row">
-     <fieldset className="max-w-lg w-full">
-       <PageLayout>
+      <fieldset className="max-w-lg w-full">
         <legend className="flex items-center justify-between w-full">
           <span className="font-ibm text-xl lg:text-2xl font-semibold block mt-3 tracking-wide">
             {legend}
@@ -138,22 +138,22 @@ const ProjectForm = ({type, legend, project }: FormProps) => {
                   deleteAction={deleteProject}
                 />
               }
-             </div>  
-           </form>
-         </FormProvider>
-          { submitError &&
-            <p className="text-sm text-red-500 dark:text-red-400 text-center mt-3">
-              {submitError}
-            </p>
-          }
-          { (errors.imageFile) &&
-            <p className="text-sm text-red-500 dark:text-red-400 text-center mt-3">
-              Images are required
-            </p>
-          }
-       </PageLayout>
-     </fieldset>
+            </div>  
+          </form>
+        </FormProvider>
+        {submitError &&
+          <p className="text-sm text-red-500 dark:text-red-400 text-center mt-3">
+            {submitError}
+          </p>
+        }
+        {(errors.imageFile) &&
+          <p className="text-sm text-red-500 dark:text-red-400 text-center mt-3">
+            Images are required
+          </p>
+        }
+      </fieldset>
     </div>
+    </PageLayout>
   )
 }
 

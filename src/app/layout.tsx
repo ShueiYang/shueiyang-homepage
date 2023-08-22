@@ -8,7 +8,8 @@ import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer" 
 import dynamic from "next/dynamic";
 import CandleStickLoader from "@/components/model3D/CandleStick.Loader";
-// import AnimateLayoutWrapper from "@/components/layouts/AnimateLayout"
+// import AnimationLayout from "@/components/layouts/AnimateLayout"
+
 
 
 const ChineseCandleStick = dynamic(()=> import("@/components/model3D/ChineseCandleStick"), {
@@ -53,9 +54,9 @@ export default function RootLayout({
             <Navbar />
               <section className="container grow pt-14 px-8"> 
                 <ChineseCandleStick />
-                {/* <AnimateLayoutWrapper> */}
+                {/* <AnimationLayout> */}
                   {children}
-                {/* </AnimateLayoutWrapper>  */}
+                {/* </AnimationLayout> */}
               </section>
             <Footer />
           </main>

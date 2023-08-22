@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion"
 import { transit } from "@/utils/motion";
+import { DirectionType } from "@/providers/DirectionProvider";
 
 type PageLayoutProps = {
     children: React.ReactNode;
-    direction?: string;
+    direction?: DirectionType;
 }
 
 const PageLayout = ({ children, direction }: PageLayoutProps) => {
@@ -24,4 +25,4 @@ const PageLayout = ({ children, direction }: PageLayoutProps) => {
   )
 }
   
-export default PageLayout;     
+export default PageLayout;  

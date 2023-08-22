@@ -1,7 +1,7 @@
 import SocialButton from "@/components/customButton/SocialButton";
 import { IoLogoGithub, IoLogoLinkedin, IoLogoDiscord, IoLogoStackoverflow } from "react-icons/io5"
 import { FaSteam,  FaBattleNet } from "react-icons/fa"
-import ModalDialog from "../modal/ModalDialog";
+import ModalDialog from "@/components/modal/ModalDialog";
 
 const WebPresence = () => {
 

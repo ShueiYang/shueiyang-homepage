@@ -3,12 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { RiMailSendFill } from "react-icons/ri";
+import { DirectionType } from "@/providers/DirectionProvider";
 
 export interface ButtonProps {
   children: React.ReactNode;
   path: string;
   goMail?: boolean;
-  setMotion?: (value: string) => void;
+  setMotion?: (value: DirectionType) => void;
 }
 
 
@@ -23,7 +24,7 @@ const Button = ({ children, goMail, path, setMotion }: ButtonProps) => {
         <button
           className="btn-primary flex items-center"
           onClick={() => {
-            setMotion && setMotion("up");
+            setMotion && setMotion("top");
           }} // change direction for the homepage exit animation
         >
           {goMail && <RiMailSendFill className="mr-3 text-xl" />}

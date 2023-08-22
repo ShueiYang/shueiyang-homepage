@@ -10,11 +10,11 @@ export async function POST(request: Request) {
     // desctructure the key from formData
     const formData = await request.formData();
     const {
-        title,
-        description,
-        siteUrl,
-        githubUrl,
-        content
+      title,
+      description,
+      siteUrl,
+      githubUrl,
+      content
     } = Object.fromEntries(formData) as unknown as Portfolio;
       
     const imageFile = formData.get("imageFile") as string

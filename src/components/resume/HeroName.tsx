@@ -1,4 +1,4 @@
-import { HeroSection } from "../layouts/Section";
+import { HeroSection } from "@/components/layouts/Section";
 
 
 const HeroName = () => {

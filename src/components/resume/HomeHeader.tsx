@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image"
+import { useContext, useEffect, useState } from "react"
+import { DirectionType } from "@/providers/DirectionProvider";
+import { ThemeContext } from "@/providers/ThemeProvider";
+
 import PageLayout from "@/components/layouts/PageLayout"
 import HeroTitle from "@/components/resume/HeroTitle"
 import { Section } from "@/components/layouts/Section"
 import Button from "@/components/customButton/Button"
-import { useContext, useEffect, useState } from "react"
-import { ThemeContext } from "@/providers/ThemeProvider";
 import HeroName from "./HeroName";
 
 
@@ -15,7 +17,7 @@ export default function HomepageWrapper({
   }: {
     children: React.ReactNode
   }) {
-  const [motionDirection, setMotionDirection] = useState<string | undefined>();
+  const [motionDirection, setMotionDirection] = useState<DirectionType | undefined>();
   const [isMounted, setIsMounted] = useState(false);
   const { theme } = useContext(ThemeContext);
     

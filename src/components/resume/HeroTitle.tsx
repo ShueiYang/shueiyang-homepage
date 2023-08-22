@@ -1,4 +1,4 @@
-import { HeroSection } from "../layouts/Section";
+import { HeroSection } from "@/components/layouts/Section";
 
 
 const HeroTitle = () => {
@@ -12,7 +12,7 @@ const HeroTitle = () => {
             const timing = 0.1 + index * 0.1
               return (
                 <HeroSection key={index} delay={timing}>
-                    {letter === " " ? "\u00A0" : letter}
+                  {letter === " " ? "\u00A0" : letter}
                 </HeroSection>
               )
             }

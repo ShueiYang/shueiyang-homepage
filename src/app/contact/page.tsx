@@ -2,12 +2,13 @@
 
 import dynamic from "next/dynamic"
 import { useState } from "react";
-import { motion } from "framer-motion"
-import { sendEmail } from "@/lib/sendEmail";
-import { slideIn } from "@/utils/motion";
 import { FormProvider, useForm } from "react-hook-form";
+import { motion } from "framer-motion"
+
 import { RiMailSendFill } from "react-icons/ri";
 import { EmailForm } from "@root/common.types";
+import { sendEmail } from "@/lib/sendEmail";
+import { slideIn } from "@/utils/motion";
 
 import SuccessForm from "@/components/SuccessForm";
 import PreviousLink from "@/components/PreviousLink";

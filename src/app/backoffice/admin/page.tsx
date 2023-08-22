@@ -46,52 +46,52 @@ const AdminLoginPage = () => {
 
 
   return (
+    <PageLayout>
     <div className="container xl:max-w-5xl my-6 flex flex-col items-center justify-center lg:flex-row">
       <fieldset className="max-w-lg w-full text-center">
-        <PageLayout>
-          <legend className="mx-auto">
-            <span className="font-ibm text-3xl lg:text-3xl font-semibold block mt-3 tracking-wide">
-              Connexion au BackOffice
-            </span>
-          </legend>
+        <legend className="mx-auto">
+          <span className="font-ibm text-3xl lg:text-3xl font-semibold block mt-3 tracking-wide">
+            Connexion au BackOffice
+          </span>
+        </legend>
           
-          <FormProvider {...methods}>
-            <form
-              className="flex flex-col max-w-xs mt-6 mx-auto"
-              onSubmit={handleSubmit(handleLogin)}
-              noValidate
-            >
-              <InputForm
-                label="username"
-                text="Admin username"
-                errorText=""     
-              />
-              <InputForm 
-                label="password"
-                text="Password"
-                errorText=""       
-              /> 
-              <button className={`${isSubmitting || authenticate ? "inactive" : ""} btn-primary flex items-center mx-auto mt-6`}>
-                { isSubmitting ? "Checking..." 
-                  : authenticate ? "Authenticate!" 
-                  : "Connecter"
-                }
-              </button>
-            </form>
-          </FormProvider>
-          { loginError &&
-            <p className="text-sm text-red-500 dark:text-red-400 text-center mt-3">
-              {loginError}
-            </p>
-          }
-          { (errors.username || errors.password) &&
-            <p className="text-sm text-red-500 dark:text-red-400 text-center mt-3">
-              All field are required
-            </p>
-          }
-        </PageLayout>
+        <FormProvider {...methods}>
+          <form
+            className="flex flex-col max-w-xs mt-6 mx-auto"
+            onSubmit={handleSubmit(handleLogin)}
+            noValidate
+          >
+            <InputForm
+              label="username"
+              text="Admin username"
+              errorText=""     
+            />
+            <InputForm 
+              label="password"
+              text="Password"
+              errorText=""       
+            /> 
+            <button className={`${isSubmitting || authenticate ? "inactive" : ""} btn-primary flex items-center mx-auto mt-6`}>
+              { isSubmitting ? "Checking..." 
+                : authenticate ? "Authenticate!" 
+                : "Connecter"
+              }
+            </button>
+          </form>
+        </FormProvider>
+        { loginError &&
+          <p className="text-sm text-red-500 dark:text-red-400 text-center mt-3">
+            {loginError}
+          </p>
+        }
+        { (errors.username || errors.password) &&
+          <p className="text-sm text-red-500 dark:text-red-400 text-center mt-3">
+            All field are required
+          </p>
+        }
       </fieldset>
     </div>    
+    </PageLayout>
   )
 }
 
