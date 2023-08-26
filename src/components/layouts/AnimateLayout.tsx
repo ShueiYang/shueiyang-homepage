@@ -4,9 +4,8 @@ import { PropsWithChildren, useContext, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation"
 import { scrollAfterLoad } from "@/utils/utility";
-import { transit } from "@/utils/motion";
-
-import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context";
+import { transit } from "@/utils/motion"
+// import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context";
 
 // not working for now...
 
