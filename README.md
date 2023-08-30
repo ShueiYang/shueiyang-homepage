@@ -27,6 +27,6 @@ Features:
 * Authentification with JWT (Jose) and session with cookie.
 
 Known issues:
-* Exit animation with Framer Motion not working in the App router.
-* as props from Link component didn't work in App dir.
-* Issue with revalidation didn't work as expected in the App router.
+* Exit animation shared layout with Framer Motion not working in the App router.
+* as props from Link component didn't work as expected in App router.
+* Issue with revalidation / router.refresh didn't work as expected in the App router when deployed in Vercel.
