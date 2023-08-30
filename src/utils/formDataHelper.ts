@@ -3,7 +3,6 @@ import { FieldsProps } from "@/components/ProjectForm";
 import { processImage } from "./imageTool";
 
 
-
 export async function convertRawDataToFormData(
   data: ProjectForm,
   dirtyFields: FieldsProps
