@@ -10,8 +10,6 @@ import dynamic from "next/dynamic";
 import CandleStickLoader from "@/components/model3D/CandleStick.Loader";
 // import AnimationLayout from "@/components/layouts/AnimateLayout"
 
-
-
 const ChineseCandleStick = dynamic(()=> import("@/components/model3D/ChineseCandleStick"), {
   ssr: false,
   loading: () => <CandleStickLoader />  
@@ -24,6 +22,10 @@ export const metadata: Metadata = {
     { name: "Kim Nguyen" },
     { name: "Shueiyang", url: "https://shueiyang.vercel.app" }
   ],
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/favicon.ico"
+  },
 }
 
 const roboto = Roboto({
