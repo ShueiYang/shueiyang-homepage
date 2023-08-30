@@ -25,8 +25,15 @@ export default function Homepage() {
           en reconversion professionnelle dans le développement Web, j&apos;ai commencé en autodidacte en 2022 et afin d&apos;officialiser 
           cette reconversion j&apos;ai décidé de démissionner de mon poste pour poursuivre ce &quot;Carrer path&quot; ! 
           <br />&nbsp; J&apos;ai récemment complété ma formation chez Le Reacteur afin de renforcer mes compétences, et je 
-          suis actuellement à la recherche d&apos;un stage ou alternance pour mettre en pratique mes compétences en Backend 
-          et/ou Frontend.  
+          suis actuellement en internship chez&nbsp;
+          <a 
+            href="https://www.ekino.fr"
+            className="underline underline-offset-2"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Ekino
+          </a>. 
         </p>
       </Section>
           

@@ -74,8 +74,9 @@ export default function ChineseCandleStick() {
       // const axesHelper = new THREE.AxesHelper( 20 );
       // scene.add( axesHelper );
 
-      const spotLight1 = new THREE.SpotLight(0xffeeb1, 4)
+      const spotLight1 = new THREE.SpotLight(0xffeeb1, 12)
       spotLight1.castShadow = true;
+      spotLight1.decay = 0.0;
       spotLight1.shadow.bias = -0.0001
       spotLight1.shadow.camera.near = 0.5;
       spotLight1.shadow.camera.far = 500;
@@ -84,11 +85,12 @@ export default function ChineseCandleStick() {
       spotLight1.shadow.mapSize.height = 1024 * 4;
       scene.add(spotLight1)
 
-      const spotLight2 = new THREE.SpotLight(0xffffff, 3, 0, Math.PI / 4);
+      const spotLight2 = new THREE.SpotLight(0xffffff, 9.3, 0, Math.PI / 4);
+      spotLight2.decay = 0.0;
       spotLight2.position.set(-15, 5, 5);
       scene.add(spotLight2);
 
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.3)
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.93)
       scene.add(ambientLight)
 
       // RENDERER
