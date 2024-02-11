@@ -3,17 +3,12 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Kim - Admin Dashboard",
   description: `Backoffice`,
-}
-
+};
 
 export default function BackofficeLayout({
-  children
+  children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  return (
-    <>
-      {children}
-    </>
-  )
+  return <>{children}</>;
 }

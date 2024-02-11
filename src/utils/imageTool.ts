@@ -1,4 +1,3 @@
-
 // function to convert image file into base64String
 export function convertToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -14,12 +13,11 @@ export function convertToBase64(file: File): Promise<string> {
   });
 }
 
-
 // function to resized Base64String
 export async function resizeImage(
   base64String: string,
   maxWidth = 450,
-  maxHeight = 450
+  maxHeight = 450,
 ): Promise<string> {
   const resizeBase64 = await new Promise((resolve, reject) => {
     const img = new Image();
@@ -55,11 +53,10 @@ export async function resizeImage(
   return resizeBase64 as string;
 }
 
-
 // Image processing
 export async function processImage(
   file: File,
-  imgSizeLimit = 350
+  imgSizeLimit = 350,
 ): Promise<string> {
   try {
     const result = await convertToBase64(file);
@@ -78,7 +75,6 @@ export async function processImage(
     throw error;
   }
 }
-
 
 // calulating the Image size in KB
 function calcImageSize(base64Str: string) {

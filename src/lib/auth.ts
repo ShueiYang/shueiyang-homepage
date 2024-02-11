@@ -1,10 +1,9 @@
 import { JWTPayload, SignJWT, jwtVerify } from "jose";
 
-
 // function to sign the JWT
 export async function signJWT(
   payload: { username: string },
-  secret: string
+  secret: string,
 ): Promise<string> {
   try {
     const jwtSecret = new TextEncoder().encode(secret);
@@ -18,12 +17,10 @@ export async function signJWT(
       .setSubject(payload.username)
       .setExpirationTime(exp)
       .sign(jwtSecret);
-
   } catch (err) {
     throw err;
   }
 }
-
 
 // function to verify and validate the JWT
 export async function verifyAuth(token: string, secret: string) {

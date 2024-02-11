@@ -7,11 +7,10 @@ cloudinary.config({
   api_secret: process.env.CLOUD_API_SECRET,
 });
 
-
 export async function uploadImage(
   image: string,
   folderPath: string,
-  publicId?: string
+  publicId?: string,
 ) {
   try {
     if (publicId) {
@@ -30,8 +29,7 @@ export async function uploadImage(
   } catch (err) {
     throw err;
   }
-};
-
+}
 
 export async function deleteImage(folderPath: string) {
   try {
@@ -42,4 +40,4 @@ export async function deleteImage(folderPath: string) {
   } catch (err) {
     throw err;
   }
-};
+}

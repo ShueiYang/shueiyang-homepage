@@ -2,32 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
   .btn-primary {
-    @apply text-lg dark:font-medium bg-teal-500 dark:bg-teal-400 text-[white] dark:text-stone-900 hover:bg-teal-600  dark:hover:bg-teal-200 py-2 px-4 rounded-lg focus:outline-none;
+    @apply rounded-lg bg-teal-500 px-4 py-2 text-lg text-[white] hover:bg-teal-600  focus:outline-none dark:bg-teal-400 dark:font-medium dark:text-stone-900 dark:hover:bg-teal-200;
   }
   .btn-secondary {
-    @apply text-lg dark:font-medium bg-red-500 dark:bg-red-400 text-[white] dark:text-stone-900 hover:bg-red-600  dark:hover:bg-red-200 py-2 px-4 rounded-lg focus:outline-none;
+    @apply rounded-lg bg-red-500 px-4 py-2 text-lg text-[white] hover:bg-red-600  focus:outline-none dark:bg-red-400 dark:font-medium dark:text-stone-900 dark:hover:bg-red-200;
   }
   .section {
-    @apply font-ibm font-semibold text-xl my-3 inline-block border-b-4 border-orange-200 dark:border-sea-d;
+    @apply my-3 inline-block border-b-4 border-orange-200 font-ibm text-xl font-semibold dark:border-sea-d;
   }
-  .subSection{
-    @apply md:max-w-[80%] lg:max-w-[40rem] mx-auto my-1 block
+  .subSection {
+    @apply mx-auto my-1 block md:max-w-[80%] lg:max-w-[40rem];
   }
   .subTitle {
-    @apply md:mx-4 px-1 whitespace-nowrap font-semibold bg-orange-200 text-zinc-700 inline-block dark:bg-zinc-700 dark:text-orange-200
+    @apply inline-block whitespace-nowrap bg-orange-200 px-1 font-semibold text-zinc-700 dark:bg-zinc-700 dark:text-orange-200 md:mx-4;
   }
   .inputField {
-    @apply w-full p-2 sm:p-2.5 rounded-md border-2 border-neutral-200 dark:border-transparent outline-none dark:bg-[#193754] dark:focus:bg-[#20466b] focus:border-zinc-400 dark:focus:border-slate-400
+    @apply w-full rounded-md border-2 border-neutral-200 p-2 outline-none focus:border-zinc-400 dark:border-transparent dark:bg-[#193754] dark:focus:border-slate-400 dark:focus:bg-[#20466b] sm:p-2.5;
   }
   .placeholder {
-    @apply left-0 py-2.5 pl-5 duration-500 pointer-events-none text-gray-400
+    @apply pointer-events-none left-0 py-2.5 pl-5 text-gray-400 duration-500;
   }
   .customField input:valid ~ span,
   .customField input:focus ~ span {
-    @apply bg-orange-50 dark:bg-black-russ text-zinc-900 dark:text-slate-200 text-xs translate-x-0 -translate-y-5 py-0 px-2
+    @apply -translate-y-5 translate-x-0 bg-orange-50 px-2 py-0 text-xs text-zinc-900 dark:bg-black-russ dark:text-slate-200;
   }
 }
 
@@ -40,14 +39,15 @@
     height: 1.875rem;
     line-height: 1.25rem;
     padding: 0.625rem;
-  }  
+  }
   .logoBox > img {
     transition: 200ms ease;
   }
   .logoBox:hover > img {
     transform: rotate(-35deg);
   }
-  html, body {
+  html,
+  body {
     overflow-x: hidden;
   }
   .inactive {
@@ -59,7 +59,8 @@
     height: 20px;
     background-color: #2dd4bf;
     border-radius: 50%;
-    animation: bouncer 0.3s cubic-bezier(.19,.57,.3,.98) infinite alternate;
+    animation: bouncer 0.3s cubic-bezier(0.19, 0.57, 0.3, 0.98) infinite
+      alternate;
   }
   .bouncer div:nth-child(2) {
     animation-delay: 0.1s;
@@ -70,8 +71,12 @@
     opacity: 0.6;
   }
   @keyframes bouncer {
-    from { transform: translateY(0);}
-    to { transform: translateY(-30px);}
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-30px);
+    }
   }
   .circle-background,
   .circle-progress {

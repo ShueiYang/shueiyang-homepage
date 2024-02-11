@@ -1,7 +1,6 @@
-"use server"
+"use server";
 
-import { cookies } from "next/headers"
-
+import { cookies } from "next/headers";
 
 // testing server action
 export async function logOut() {
@@ -9,6 +8,6 @@ export async function logOut() {
     name: "shueiJWT",
     value: "",
     maxAge: -1,
-    path: "/"
-  })
+    path: "/",
+  });
 }

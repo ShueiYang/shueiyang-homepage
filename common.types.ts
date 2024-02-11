@@ -1,56 +1,57 @@
 import { Prisma } from "@prisma/client";
 
-// create a type to include relational images props using Prisma built-in utility... 
-export interface ProjectData extends Prisma.ProjectGetPayload<{
+// create a type to include relational images props using Prisma built-in utility...
+export interface ProjectData
+  extends Prisma.ProjectGetPayload<{
     include: {
-      images: true
-    }
-}> {}
+      images: true;
+    };
+  }> {}
 
 export interface Portfolio {
-    id: string;
-    title: string;
-    description: string;
-    imageFile: ImageProps;
-    siteUrl?: string;
-    stack: string[];
-    githubUrl?: string,
-    content?: string;
-};
+  id: string;
+  title: string;
+  description: string;
+  imageFile: ImageProps;
+  siteUrl?: string;
+  stack: string[];
+  githubUrl?: string;
+  content?: string;
+}
 
 export interface EmailForm {
-    name: string,
-    email: string,
-    subject: string,
-    message: string,
-};
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
 
 export interface AdminForm {
-    username: string,
-    password: string,
+  username: string;
+  password: string;
 }
 
 export interface ProjectForm {
-    id: string,
-    title: string,
-    imageFile: string,
-    description: string,
-    siteUrl: string,
-    githubUrl: string,
-    stack: string,
-    content: string,
-};
+  id: string;
+  title: string;
+  imageFile: string;
+  description: string;
+  siteUrl: string;
+  githubUrl: string;
+  stack: string;
+  content: string;
+}
 
 export interface ImageProps {
-    public_id: string;
-    folder: string,
-    secure_url: string;
+  public_id: string;
+  folder: string;
+  secure_url: string;
 }
 
 export interface ValidateForm {
-    titleName: string
+  titleName: string;
 }
 
-export type ActionProps = { 
-    error: string | null
-}
+export type ActionProps = {
+  error: string | null;
+};

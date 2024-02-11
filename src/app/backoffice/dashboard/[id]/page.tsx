@@ -3,21 +3,20 @@ import { ProjectData, ProjectForm } from "@root/common.types";
 import { notFound } from "next/navigation";
 import { getProjectInfo } from "@/app/action";
 
-const ProjectForm = dynamic(()=> import("@/components/ProjectForm"), {
-  ssr: false
-})
+const ProjectForm = dynamic(() => import("@/components/ProjectForm"), {
+  ssr: false,
+});
 
 export interface ParamsRoute {
-  params: {id: string}
+  params: { id: string };
 }
 
-
-const ProjectPanel = async ({params}: ParamsRoute) =>  {
+const ProjectPanel = async ({ params }: ParamsRoute) => {
   const id = params.id;
-  
+
   const project: ProjectData | null = await getProjectInfo(id);
 
-  if(!project) {
+  if (!project) {
     notFound();
   }
   // modify the data to match the ProjectForm
@@ -27,16 +26,12 @@ const ProjectPanel = async ({params}: ParamsRoute) =>  {
   const projectData = {
     ...project,
     imageFile: imageUrl,
-    stack: stackAsString
-  } as ProjectForm
-    
+    stack: stackAsString,
+  } as ProjectForm;
+
   return (
-    <ProjectForm 
-      type="edit"
-      legend="Project editing"
-      project={projectData}
-    />
-  )
-}
+    <ProjectForm type="edit" legend="Project editing" project={projectData} />
+  );
+};
 
 export default ProjectPanel;

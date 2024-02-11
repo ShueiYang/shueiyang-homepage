@@ -2,12 +2,10 @@ import { ProjectForm } from "@root/common.types";
 import { FieldsProps } from "@/components/ProjectForm";
 import { processImage } from "./imageTool";
 
-
 export async function convertRawDataToFormData(
   data: ProjectForm,
-  dirtyFields: FieldsProps
+  dirtyFields: FieldsProps,
 ): Promise<FormData> {
-
   const formData = new FormData();
   const formField = Object.entries(data);
 
@@ -20,13 +18,13 @@ export async function convertRawDataToFormData(
           formData.append(key, result);
         }
       } else {
-      // only append data if is modified in the input value
-        if(dirtyFields[key as keyof ProjectForm]) {
+        // only append data if is modified in the input value
+        if (dirtyFields[key as keyof ProjectForm]) {
           formData.append(key, value);
         }
       }
       return null;
-    })
-  )
+    }),
+  );
   return formData;
-} 
+}

@@ -2,9 +2,9 @@
 
 import { PropsWithChildren, useContext, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { usePathname } from "next/navigation"
+import { usePathname } from "next/navigation";
 import { scrollAfterLoad } from "@/utils/utility";
-import { transit } from "@/utils/motion"
+import { transit } from "@/utils/motion";
 // import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context";
 
 // not working for now...
@@ -20,14 +20,13 @@ import { transit } from "@/utils/motion"
 //   );
 // }
 
-
 // export default function AnimationLayout(props : PropsWithChildren<{}>) {
 //   const pathName = usePathname();
 
 //   return (
 //     <AnimatePresence
 //       initial={true}
-//       mode="wait" 
+//       mode="wait"
 //       onExitComplete={()=>{scrollAfterLoad()}}
 //     >
 //       <motion.section
@@ -43,6 +42,6 @@ import { transit } from "@/utils/motion"
 //           {props.children}
 //         {/* </FrozenRouter> */}
 //       </motion.section>
-//     </AnimatePresence>  
+//     </AnimatePresence>
 //   )
 // };

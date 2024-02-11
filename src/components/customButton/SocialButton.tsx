@@ -6,16 +6,15 @@ interface SocialButtonProps extends ButtonProps {
 }
 
 const SocialButton = ({ children, iconName, path }: SocialButtonProps) => {
-
   const Icon = iconName;
-  
+
   return (
     <div>
       <button
-          className="text-teal-700 dark:text-teal-400 py-2 px-5 hover:bg-[#fce6cc] dark:hover:bg-sea-d 
-          font-semibold rounded-lg hover:underline underline-offset-4 decoration-blue-600 
-          dark:decoration-orange-200 sm:ml-[10%]"
-        >
+        className="rounded-lg px-5 py-2 font-semibold text-teal-700 decoration-blue-600 
+          underline-offset-4 hover:bg-[#fce6cc] hover:underline dark:text-teal-400 dark:decoration-orange-200 
+          dark:hover:bg-sea-d sm:ml-[10%]"
+      >
         <a
           className="flex items-center"
           href={path}

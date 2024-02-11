@@ -1,13 +1,11 @@
-
 // Simple Circular Progress Bar for React using SVG
 
-const CircularProgressBar = (
-  { sqSize = 100, 
-    strokeWidth = 5, 
-    percentage = 25,
-    preload = false,
-  }) => {
-  
+const CircularProgressBar = ({
+  sqSize = 100,
+  strokeWidth = 5,
+  percentage = 25,
+  preload = false,
+}) => {
   // SVG centers the stroke width on the radius, subtract out so circle fits in square
   const radius = (sqSize - strokeWidth) / 2;
   // Enclose cicle in a circumscribing square
@@ -38,20 +36,21 @@ const CircularProgressBar = (
           strokeDashoffset: dashOffset,
         }}
       />
-      { preload ?
+      {preload ? (
         <text x="50%" y="50%" dy=".3em" textAnchor="middle">
           Loading...
         </text>
-      : <text 
-          className="circle-text" 
-          x="50%" 
-          y="50%" 
-          dy=".3em" 
+      ) : (
+        <text
+          className="circle-text"
+          x="50%"
+          y="50%"
+          dy=".3em"
           textAnchor="middle"
         >
           {`${percentage}%`}
         </text>
-      }
+      )}
     </svg>
   );
 };

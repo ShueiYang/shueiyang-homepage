@@ -16,14 +16,9 @@ export async function PUT(request: Request, { params }: ParamsRoute) {
     const id = params.id;
     // desctructure the key from formData
     const formData = await request.formData();
-    const { 
-      title, 
-      description, 
-      siteUrl, 
-      githubUrl, 
-      content 
-    } = Object.fromEntries(formData) as unknown as Portfolio;
-      
+    const { title, description, siteUrl, githubUrl, content } =
+      Object.fromEntries(formData) as unknown as Portfolio;
+
     const imageFile = formData.get("imageFile") as string | null;
     const stack = formData.get("stack") as string | null;
     const updateData = {} as UpdateProps;
@@ -38,7 +33,7 @@ export async function PUT(request: Request, { params }: ParamsRoute) {
     if (!resultFound) {
       return NextResponse.json(
         { message: "project not found!" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -49,7 +44,7 @@ export async function PUT(request: Request, { params }: ParamsRoute) {
       updateData.cloudImage = await uploadImage(
         imageFile,
         folderPath,
-        publicId
+        publicId,
       );
     }
     if (stack) {
@@ -80,18 +75,16 @@ export async function PUT(request: Request, { params }: ParamsRoute) {
 
     return NextResponse.json(
       { message: "Project successfully updated!" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (err) {
     console.error(err);
     return NextResponse.json(
       { message: "Internal Error please try again later." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-
-
 
 export async function DELETE(request: Request, { params }: ParamsRoute) {
   try {
@@ -106,7 +99,7 @@ export async function DELETE(request: Request, { params }: ParamsRoute) {
     if (!resultFound) {
       return NextResponse.json(
         { message: "project not found!" },
-        { status: 404 }
+        { status: 404 },
       );
     }
     // delete image from cloudinary
@@ -121,13 +114,13 @@ export async function DELETE(request: Request, { params }: ParamsRoute) {
 
     return NextResponse.json(
       { message: "project successfully deleted!" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (err) {
     console.error(err);
     return NextResponse.json(
       { message: "Internal Error please try again later." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

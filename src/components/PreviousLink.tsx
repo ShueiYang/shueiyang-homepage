@@ -4,18 +4,14 @@ import Link from "next/link";
 interface PrevLinkProps {
   children: React.ReactNode;
   path: string;
-  style?: string 
+  style?: string;
 }
 
-const PreviousLink: React.FC<PrevLinkProps> = ({
-  children, 
-  path, 
-  style 
-}) => {
+const PreviousLink: React.FC<PrevLinkProps> = ({ children, path, style }) => {
   return (
     <div className={`flex text-lg md:max-w-[44rem] ${style}`}>
-      <div className="mr-1 my-auto">
-        <Image 
+      <div className="my-auto mr-1">
+        <Image
           className="dark:invert"
           src="/icons/chevronLeft.svg"
           width={17}
@@ -23,14 +19,14 @@ const PreviousLink: React.FC<PrevLinkProps> = ({
           alt="chevron-leftIcon"
         />
       </div>
-      <Link 
+      <Link
         href={path}
-        scroll={false} 
-        className="z-20 text-blue-600 dark:text-teal-300 hover:underline underline-offset-4"
+        scroll={false}
+        className="z-20 text-blue-600 underline-offset-4 hover:underline dark:text-teal-300"
       >
         {children}
       </Link>
     </div>
-  )
-}
+  );
+};
 export default PreviousLink;
