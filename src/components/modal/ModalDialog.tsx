@@ -18,7 +18,7 @@ export default function ModalDialog({
   title,
   projectId,
   deleteAction,
-}: ModalProps) {
+}: Readonly<ModalProps>) {
   const [isOpen, setIsOpen] = useState(false);
 
   const {
@@ -36,8 +36,16 @@ export default function ModalDialog({
     setIsOpen(true);
   }
 
-  const Icon =
-    title === "@Yang" ? FaTwitter : title === "#Yang" ? FaFacebook : null;
+  let Icon = null;
+  let socialNetworkName: string | null = null;
+
+  if (title === "@Yang") {
+    Icon = FaTwitter;
+    socialNetworkName = "Twitter";
+  } else if (title === "#Yang") {
+    Icon = FaFacebook;
+    socialNetworkName = "Facebook";
+  }
 
   return (
     <>
@@ -116,13 +124,7 @@ export default function ModalDialog({
                   ) : (
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        {`Désolé pas de compte ${
-                          title === "@Yang"
-                            ? "Twitter"
-                            : title === "#Yang"
-                              ? "Facebook"
-                              : null
-                        }, c'était juste pour faire style...`}
+                        {`Désolé pas de compte ${socialNetworkName}, c'était juste pour faire style...`}
                       </p>
                     </div>
                   )}

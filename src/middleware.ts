@@ -4,7 +4,7 @@ import { verifyAuth } from "./lib/auth";
 // Middleware function to protect backoffice route and auth API route.
 export async function middleware(req: NextRequest) {
   const jwtCookie = req.cookies.get("shueiJWT");
-  const jwtSecret = process.env.JWT_SECRET || "";
+  const jwtSecret = process.env.JWT_SECRET ?? "";
   const url = req.url;
 
   if (!jwtCookie) {

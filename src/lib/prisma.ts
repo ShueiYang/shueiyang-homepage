@@ -1,7 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 
-//Solution to instantiate a single instance PrismaClient and
-// save it on the globalThis object.
+/*
+  Solution to instantiate a single instance of PrismaClient
+  and save it on the globalThis object.
+*/
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;

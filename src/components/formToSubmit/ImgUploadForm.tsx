@@ -49,7 +49,7 @@ const ImgUploadForm = ({ label, type, defaultImg }: ImgUploadProps) => {
         type="file"
         accept="image/*"
       />
-      {((imgFile && imgFile.length) || defaultImg) && (
+      {(imgFile?.length !== 0 || defaultImg) && (
         <Image
           src={
             imgFile instanceof FileList && imgFile[0]

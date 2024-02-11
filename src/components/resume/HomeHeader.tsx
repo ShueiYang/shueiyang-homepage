@@ -67,7 +67,7 @@ export default function HomepageWrapper({
         <Section delay={0.8}>
           <h2 className="section">Contact</h2>
           <p className="text-center tracking-wide">
-            Pour entrer en contact et pour tout renseignement complémentaire,
+            Pour entrer en contact et pour tout renseignement complémentaire,{" "}
             <span className="block">cela se passe ici</span>
           </p>
           <Image

@@ -58,21 +58,17 @@ export async function processImage(
   file: File,
   imgSizeLimit = 350,
 ): Promise<string> {
-  try {
-    const result = await convertToBase64(file);
-    const oldSize = calcImageSize(result);
+  const result = await convertToBase64(file);
+  const oldSize = calcImageSize(result);
 
-    if (oldSize > imgSizeLimit) {
-      const resized = await resizeImage(result);
-      const newSize = calcImageSize(resized);
-      console.log("new_size=> ", newSize, "KB");
-      console.log("old_size=> ", oldSize, "KB");
-      return resized;
-    } else {
-      return result;
-    }
-  } catch (error) {
-    throw error;
+  if (oldSize > imgSizeLimit) {
+    const resized = await resizeImage(result);
+    const newSize = calcImageSize(resized);
+    console.log("new_size=> ", newSize, "KB");
+    console.log("old_size=> ", oldSize, "KB");
+    return resized;
+  } else {
+    return result;
   }
 }
 

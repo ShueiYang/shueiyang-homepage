@@ -11,17 +11,15 @@ export async function convertRawDataToFormData(
 
   await Promise.all(
     formField.map(async ([key, value]) => {
-      //check if the value is a FileList instance and if there is a file in FileList.
+      // check if the value is a FileList instance and if there is a file in FileList.
       if (key === "imageFile") {
         if (value instanceof FileList && value.length) {
-          const result = await processImage(value[0]);
+          const result = await processImage(value[0] as File);
           formData.append(key, result);
         }
-      } else {
         // only append data if is modified in the input value
-        if (dirtyFields[key as keyof ProjectForm]) {
-          formData.append(key, value);
-        }
+      } else if (dirtyFields[key as keyof ProjectForm]) {
+        formData.append(key, value);
       }
       return null;
     }),

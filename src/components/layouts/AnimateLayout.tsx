@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable  @typescript-eslint/no-unused-vars */
+
 import { PropsWithChildren, useContext, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
