@@ -8,5 +8,6 @@ const eslintCommand = (filenames) =>
 const formatCommand = "prettier --write";
 
 module.exports = {
+  "**/*.(ts|tsx)": () => "pnpm tsc --noEmit",
   "*.{js,jsx,ts,tsx}": [formatCommand, eslintCommand],
 };

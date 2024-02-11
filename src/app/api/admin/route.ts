@@ -8,7 +8,7 @@ import { getJwtSecret } from "@/app/action";
 
 export async function POST(req: Request) {
   try {
-    const body = (await req.json()) as unknown as AdminForm;
+    const body: AdminForm = await req.json();
     const { username, password } = body;
 
     const adminUser = await prisma.adminUser.findUnique({

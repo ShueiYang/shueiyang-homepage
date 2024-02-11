@@ -36,14 +36,14 @@ const ProjectForm = ({ type, legend, project }: FormProps) => {
 
   const projectId = project?.id;
 
-  const initialForm = {
-    title: project?.title || "",
-    imageFile: project?.imageFile || "",
-    description: project?.description || "",
-    siteUrl: project?.siteUrl || "",
-    githubUrl: project?.githubUrl || "",
-    stack: project?.stack || "",
-    content: project?.content || "",
+  const initialForm: ProjectForm = {
+    title: project?.title ?? "",
+    imageFile: project?.imageFile ?? null,
+    description: project?.description ?? "",
+    siteUrl: project?.siteUrl ?? "",
+    githubUrl: project?.githubUrl ?? "",
+    stack: project?.stack ?? "",
+    content: project?.content ?? "",
   };
 
   const methods = useForm<ProjectForm>({
@@ -62,6 +62,8 @@ const ProjectForm = ({ type, legend, project }: FormProps) => {
     const formData = await convertRawDataToFormData(data, dirtyFields);
     await uploadProject(formData, type, projectId);
   }
+
+  const buttonLabel = type === "create" ? "Upload" : "Update";
 
   return (
     <PageLayout>
@@ -129,11 +131,7 @@ const ProjectForm = ({ type, legend, project }: FormProps) => {
                 <button
                   className={`btn-primary mt-6 flex items-center ${isSubmitting || !isDirty ? "inactive" : ""}`}
                 >
-                  {isSubmitting
-                    ? "Uploading..."
-                    : type === "create"
-                      ? "Upload"
-                      : "Update"}
+                  {isSubmitting ? "Uploading..." : buttonLabel}
                 </button>
 
                 {type === "edit" && project && (

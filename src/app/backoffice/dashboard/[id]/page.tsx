@@ -20,7 +20,7 @@ const ProjectPanel = async ({ params }: ParamsRoute) => {
     notFound();
   }
   // modify the data to match the ProjectForm
-  const imageUrl = project.images[0].secure_url;
+  const imageUrl = project.images[0]!.secure_url;
   const stackAsString = project.stack.join(", ");
 
   const projectData = {

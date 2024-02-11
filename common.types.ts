@@ -8,17 +8,6 @@ export interface ProjectData
     };
   }> {}
 
-export interface Portfolio {
-  id: string;
-  title: string;
-  description: string;
-  imageFile: ImageProps;
-  siteUrl?: string;
-  stack: string[];
-  githubUrl?: string;
-  content?: string;
-}
-
 export interface EmailForm {
   name: string;
   email: string;
@@ -32,9 +21,9 @@ export interface AdminForm {
 }
 
 export interface ProjectForm {
-  id: string;
+  id?: string;
   title: string;
-  imageFile: string;
+  imageFile: string | null;
   description: string;
   siteUrl: string;
   githubUrl: string;

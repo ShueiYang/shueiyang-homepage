@@ -2,17 +2,28 @@ import { uploadImage } from "@/app/api/cloudinary.actions";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
-import { Portfolio } from "@root/common.types";
+import { ProjectForm } from "@root/common.types";
 
 export async function POST(request: Request) {
   try {
     // desctructure the key from formData
     const formData = await request.formData();
-    const { title, description, siteUrl, githubUrl, content } =
-      Object.fromEntries(formData) as unknown as Portfolio;
 
-    const imageFile = formData.get("imageFile") as string;
-    const stack = formData.get("stack") as string;
+    const {
+      title,
+      description,
+      siteUrl,
+      githubUrl,
+      content,
+      imageFile,
+      stack,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } = Object.fromEntries<any>(formData) as ProjectForm;
+
+    if (imageFile === null) {
+      return NextResponse.json({ message: "Image required" }, { status: 400 });
+    }
+
     // transform into array
     const stackArray = stack.split(", ");
     // upload to cloudinary

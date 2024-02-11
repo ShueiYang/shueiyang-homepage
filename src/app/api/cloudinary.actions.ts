@@ -1,3 +1,4 @@
+import { ImageProps } from "@root/common.types";
 import { v2 as cloudinary } from "cloudinary";
 
 // Configuration
@@ -11,7 +12,7 @@ export async function uploadImage(
   image: string,
   folderPath: string,
   publicId?: string,
-) {
+): Promise<ImageProps> {
   if (publicId) {
     await cloudinary.uploader.destroy(publicId);
   }
