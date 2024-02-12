@@ -78,7 +78,7 @@ export const SKILLS_ARRAY: SkillProps[] = [
   },
   {
     name: "RTL",
-    path: "/icons/skills/rtl.png",
+    path: "/icons/skills/rtl.svg",
   },
   {
     name: "Prisma",
