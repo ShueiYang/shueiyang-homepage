@@ -2,36 +2,34 @@
 
 /* eslint-disable  @typescript-eslint/no-unused-vars */
 
-import { PropsWithChildren, useContext, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { usePathname } from "next/navigation";
-import { scrollAfterLoad } from "@/utils/utility";
-import { transit } from "@/utils/motion";
-// import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context";
+// import { PropsWithChildren, useContext, useRef } from "react";
+// import { AnimatePresence, motion } from "framer-motion";
+// import { usePathname } from "next/navigation";
+// import { scrollAfterLoad } from "@/utils/utility";
+// import { transit } from "@/utils/motion";
+// import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-// not working for now...
-
-// function FrozenRouter(props: PropsWithChildren<{}>) {
+// function FrozenRouter({ children }: PropsWithChildren) {
 //   const context = useContext(LayoutRouterContext);
 //   const frozen = useRef(context).current;
 
 //   return (
 //     <LayoutRouterContext.Provider value={frozen}>
-//       {props.children}
+//       {children}
 //     </LayoutRouterContext.Provider>
 //   );
 // }
 
-// export default function AnimationLayout(props : PropsWithChildren<{}>) {
+// export default function AnimationLayout({ children }: PropsWithChildren) {
 //   const pathName = usePathname();
 
 //   return (
 //     <AnimatePresence
-//       initial={true}
+//       // initial={true}
 //       mode="wait"
 //       onExitComplete={()=>{scrollAfterLoad()}}
 //     >
-//       <motion.section
+//       <motion.div
 //         key={pathName}
 //         initial="hidden"
 //         animate="enter"
@@ -40,10 +38,10 @@ import { transit } from "@/utils/motion";
 //         transition={{ duration: 0.4, type: "easeInOut"}}
 //         className="relative"
 //       >
-//         {/* <FrozenRouter> */}
-//           {props.children}
-//         {/* </FrozenRouter> */}
-//       </motion.section>
+//         <FrozenRouter>
+//           {children}
+//         </FrozenRouter>
+//       </motion.div>
 //     </AnimatePresence>
 //   )
 // };

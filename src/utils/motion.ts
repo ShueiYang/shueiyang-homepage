@@ -1,8 +1,9 @@
 import { DirectionType } from "@/providers/DirectionProvider";
+import { Variants } from "framer-motion";
 
 // Framer motion animation
 
-export function transit(direction?: DirectionType) {
+export function transit(direction?: DirectionType): Variants {
   return {
     hidden: {
       opacity: 0,
@@ -22,7 +23,7 @@ export function transit(direction?: DirectionType) {
   };
 }
 
-export function letterAnimate(direction: DirectionType) {
+export function letterAnimate(direction: DirectionType): Variants {
   return {
     hidden: {
       opacity: 0,
@@ -37,7 +38,11 @@ export function letterAnimate(direction: DirectionType) {
   };
 }
 
-export function slideIn(direction: DirectionType, type: string, delay: number) {
+export function slideIn(
+  direction: DirectionType,
+  type: string,
+  delay: number,
+): Variants {
   return {
     hidden: {
       opacity: 0,
