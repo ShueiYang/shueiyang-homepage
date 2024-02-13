@@ -1,13 +1,13 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
-import { FormProps } from "./InputForm";
+import { FormContextValue, FormProps } from "./InputForm";
 
-const TextareaForm = ({ label, text, errorText }: FormProps) => {
+const TextareaForm: React.FC<FormProps> = ({ label, text }) => {
   const {
     register,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<FormContextValue>();
 
   return (
     <>
@@ -17,12 +17,12 @@ const TextareaForm = ({ label, text, errorText }: FormProps) => {
           className="inputField mt-2 resize-none"
           id={label}
           rows={9}
-          {...register(label, { required: true })}
+          {...register(label)}
           placeholder="Redigez votre message ici ..."
         />
       </label>
       <span className="mb-4 text-sm text-red-500 dark:text-red-400">
-        {errors[label] && errorText}
+        {errors[label]?.message}
       </span>
     </>
   );

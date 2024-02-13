@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import { deleteImage, uploadImage } from "@/app/api/cloudinary.actions";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { ProjectFormSchema } from "@/validator/schemaValidation";
 
 export type ImageDataType = {
   id: string;
@@ -22,8 +23,14 @@ interface UpdateProps {
 export async function PUT(request: Request, { params }: ParamsRoute) {
   try {
     const id = params.id;
-    // desctructure the key from formData
     const formData = await request.formData();
+    const projectFormValue = Object.fromEntries(formData) as ProjectForm;
+    const validatedFields = ProjectFormSchema.safeParse(projectFormValue);
+
+    if (!validatedFields.success) {
+      return NextResponse.json({ message: "Invalid form" }, { status: 400 });
+    }
+
     const {
       title,
       description,
@@ -32,8 +39,7 @@ export async function PUT(request: Request, { params }: ParamsRoute) {
       content,
       imageFile,
       stack,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } = Object.fromEntries<any>(formData) as ProjectForm;
+    } = validatedFields.data;
 
     const updateData = {} as UpdateProps;
 
@@ -51,7 +57,7 @@ export async function PUT(request: Request, { params }: ParamsRoute) {
       );
     }
 
-    if (imageFile) {
+    if (imageFile && typeof imageFile === "string") {
       const imageData = resultFound.images.at(0) ?? ({} as ImageDataType);
 
       updateData.oldAssetId = imageData.id;

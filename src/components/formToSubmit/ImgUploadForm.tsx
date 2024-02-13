@@ -1,9 +1,9 @@
 "use client";
 
-import { useFormContext } from "react-hook-form";
-import { MethodAction } from "../ProjectForm";
-import { FormProps } from "./InputForm";
 import Image from "next/image";
+import { useFormContext } from "react-hook-form";
+import { MethodAction } from "@/components/ProjectForm";
+import { FormProps } from "./InputForm";
 import { useEffect, useState } from "react";
 
 interface ImgUploadProps extends Pick<FormProps, "label"> {
@@ -50,7 +50,7 @@ const ImgUploadForm = ({ label, type, defaultImg }: ImgUploadProps) => {
         type="file"
         accept="image/*"
       />
-      {(imgFile?.length !== 0 || defaultImg) && (
+      {(imgFile?.length > 0 || defaultImg) && (
         <Image
           src={
             imgFile instanceof FileList && imgFile[0]

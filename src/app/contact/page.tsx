@@ -2,6 +2,8 @@
 
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { EmailFormSchema } from "@/validator/schemaValidation";
 import { FormProvider, useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 
@@ -21,7 +23,7 @@ const MapLocation = dynamic(() => import("@/components/map/MapLocation"), {
 
 export default function Contact() {
   const [error, setError] = useState<{ message: string } | null>(null);
-  const initialForm = {
+  const initialForm: EmailForm = {
     name: "",
     email: "",
     subject: "",
@@ -30,8 +32,10 @@ export default function Contact() {
 
   const methods = useForm<EmailForm>({
     mode: "onChange",
+    resolver: zodResolver(EmailFormSchema),
     defaultValues: initialForm,
   });
+
   const {
     handleSubmit,
     reset,
@@ -79,26 +83,10 @@ export default function Contact() {
             onSubmit={handleSubmit(submitEmail)}
             noValidate
           >
-            <InputForm
-              label="name"
-              text="Votre Nom"
-              errorText="Un nom est requis"
-            />
-            <InputForm
-              label="email"
-              text="Votre Email"
-              errorText="Une adresse email est requise"
-            />
-            <InputForm
-              label="subject"
-              text="Sujet"
-              errorText="Un sujet est requis"
-            />
-            <TextareaForm
-              label="message"
-              text="Votre message"
-              errorText="Veuillez écrire un message avant l'envoi"
-            />
+            <InputForm label="name" text="Votre Nom" />
+            <InputForm label="email" text="Votre Email" />
+            <InputForm label="subject" text="Sujet" />
+            <TextareaForm label="message" text="Votre message" />
             <button
               className={`${!isValid || isSubmitting ? "inactive" : ""} btn-primary mx-auto mb-4 flex items-center`}
               aria-label={isSubmitting ? "Envoi en cours..." : "Envoyer"}

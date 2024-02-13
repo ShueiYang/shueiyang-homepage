@@ -3,19 +3,19 @@
 import { EmailForm, AdminForm, ProjectForm } from "@root/common.types";
 import { useFormContext } from "react-hook-form";
 
-type FormKeys = keyof EmailForm | keyof AdminForm | keyof ProjectForm;
+export type FormContextValue = EmailForm & AdminForm & ProjectForm;
 
 export interface FormProps {
   label: FormKeys;
   text: string;
-  errorText: string;
 }
+type FormKeys = keyof FormContextValue;
 
-const InputForm = ({ label, text, errorText }: FormProps) => {
+const InputForm: React.FC<FormProps> = ({ label, text }) => {
   const {
     register,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<FormContextValue>();
 
   function getInputType(label: FormKeys) {
     if (label === "password") {
@@ -31,7 +31,7 @@ const InputForm = ({ label, text, errorText }: FormProps) => {
         <input
           className="inputField"
           id={label}
-          {...register(label, { required: true })}
+          {...register(label)}
           type={getInputType(label)}
           aria-label={text}
           required
@@ -39,7 +39,7 @@ const InputForm = ({ label, text, errorText }: FormProps) => {
         <span className="placeholder absolute">{text}</span>
       </label>
       <span className="mb-2 text-sm text-red-500 dark:text-red-400">
-        {errors[label] && errorText}
+        {errors[label]?.message}
       </span>
     </>
   );

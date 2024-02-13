@@ -1,5 +1,7 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AdminFormSchema } from "@/validator/schemaValidation";
 import { AdminForm } from "@root/common.types";
 import InputForm from "@/components/formToSubmit/InputForm";
 import { FormProvider, useForm } from "react-hook-form";
@@ -12,11 +14,16 @@ const AdminLoginPage = () => {
   const [loginError, setLoginError] = useState("");
   const [authenticate, setAuthenticate] = useState(false);
 
-  const methods = useForm<AdminForm>();
+  const methods = useForm<AdminForm>({
+    resolver: zodResolver(AdminFormSchema),
+  });
+
   const {
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = methods;
+
+  const buttonLabel = authenticate ? "Authenticate!" : "Connecter";
 
   async function handleLogin(userCredential: AdminForm) {
     setLoginError("");
@@ -55,27 +62,18 @@ const AdminLoginPage = () => {
               onSubmit={handleSubmit(handleLogin)}
               noValidate
             >
-              <InputForm label="username" text="Admin username" errorText="" />
-              <InputForm label="password" text="Password" errorText="" />
+              <InputForm label="username" text="Admin username" />
+              <InputForm label="password" text="Password" />
               <button
                 className={`${isSubmitting || authenticate ? "inactive" : ""} btn-primary mx-auto mt-6 flex items-center`}
               >
-                {isSubmitting
-                  ? "Checking..."
-                  : authenticate
-                    ? "Authenticate!"
-                    : "Connecter"}
+                {isSubmitting ? "Checking..." : buttonLabel}
               </button>
             </form>
           </FormProvider>
           {loginError && (
             <p className="mt-3 text-center text-sm text-red-500 dark:text-red-400">
               {loginError}
-            </p>
-          )}
-          {(errors.username || errors.password) && (
-            <p className="mt-3 text-center text-sm text-red-500 dark:text-red-400">
-              All field are required
             </p>
           )}
         </fieldset>

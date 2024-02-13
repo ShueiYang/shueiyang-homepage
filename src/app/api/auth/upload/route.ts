@@ -1,13 +1,20 @@
-import { uploadImage } from "@/app/api/cloudinary.actions";
 import { prisma } from "@/lib/prisma";
-import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
+import { uploadImage } from "@/app/api/cloudinary.actions";
+import { revalidatePath } from "next/cache";
 import { ProjectForm } from "@root/common.types";
+import { ProjectFormSchema } from "@/validator/schemaValidation";
 
 export async function POST(request: Request) {
   try {
-    // desctructure the key from formData
     const formData = await request.formData();
+    // convert back to ProjectForm and validate with Zod
+    const projectFormValue = Object.fromEntries(formData) as ProjectForm;
+    const validatedFields = ProjectFormSchema.safeParse(projectFormValue);
+
+    if (!validatedFields.success) {
+      return NextResponse.json({ message: "Invalid form" }, { status: 400 });
+    }
 
     const {
       title,
@@ -17,11 +24,13 @@ export async function POST(request: Request) {
       content,
       imageFile,
       stack,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } = Object.fromEntries<any>(formData) as ProjectForm;
+    } = validatedFields.data;
 
-    if (imageFile === null) {
-      return NextResponse.json({ message: "Image required" }, { status: 400 });
+    if (typeof imageFile !== "string" || imageFile === "") {
+      return NextResponse.json(
+        { message: "Image required or invalid" },
+        { status: 400 },
+      );
     }
 
     // transform into array

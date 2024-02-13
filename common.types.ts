@@ -1,4 +1,10 @@
 import { Prisma } from "@prisma/client";
+import { z } from "zod";
+import {
+  AdminFormSchema,
+  EmailFormSchema,
+  ProjectFormSchema,
+} from "@/validator/schemaValidation";
 
 // create a type to include relational images props using Prisma built-in utility...
 export interface ProjectData
@@ -8,28 +14,11 @@ export interface ProjectData
     };
   }> {}
 
-export interface EmailForm {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
+export type AdminForm = z.infer<typeof AdminFormSchema>;
 
-export interface AdminForm {
-  username: string;
-  password: string;
-}
+export type EmailForm = z.infer<typeof EmailFormSchema>;
 
-export interface ProjectForm {
-  id?: string;
-  title: string;
-  imageFile: string | null;
-  description: string;
-  siteUrl: string;
-  githubUrl: string;
-  stack: string;
-  content: string;
-}
+export type ProjectForm = z.infer<typeof ProjectFormSchema>;
 
 export interface ImageProps {
   public_id: string;

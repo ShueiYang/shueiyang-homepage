@@ -1,6 +1,8 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { ProjectForm } from "@root/common.types";
+import { ProjectFormSchema } from "@/validator/schemaValidation";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import {
@@ -48,8 +50,10 @@ const ProjectForm = ({ type, legend, project }: FormProps) => {
 
   const methods = useForm<ProjectForm>({
     mode: "onChange",
+    resolver: zodResolver(ProjectFormSchema),
     defaultValues: initialForm,
   });
+
   const {
     handleSubmit,
     formState: { errors, isDirty, isSubmitting, dirtyFields },
@@ -95,38 +99,14 @@ const ProjectForm = ({ type, legend, project }: FormProps) => {
               <ImgUploadForm
                 label="imageFile"
                 type={type}
-                defaultImg={initialForm.imageFile}
+                defaultImg={initialForm.imageFile as string | null}
               />
-              <InputForm
-                label="title"
-                text="Title du projet"
-                errorText="Un titre est requis"
-              />
-              <InputForm
-                label="description"
-                text="Votre description"
-                errorText="Une description est requise"
-              />
-              <InputForm
-                label="siteUrl"
-                text="Sitelive Url"
-                errorText="siteUrl est manquant"
-              />
-              <InputForm
-                label="githubUrl"
-                text="Source code Url"
-                errorText="source code url est mamquant"
-              />
-              <InputForm
-                label="stack"
-                text="Techno stack"
-                errorText="stack est requis"
-              />
-              <TextareaForm
-                label="content"
-                text="Votre contenu"
-                errorText="Le contenu est requis"
-              />
+              <InputForm label="title" text="Title du projet" />
+              <InputForm label="description" text="Votre description" />
+              <InputForm label="siteUrl" text="Sitelive Url" />
+              <InputForm label="githubUrl" text="Source code Url" />
+              <InputForm label="stack" text="Techno stack" />
+              <TextareaForm label="content" text="Votre contenu" />
               <div className="flex justify-around">
                 <button
                   className={`btn-primary mt-6 flex items-center ${isSubmitting || !isDirty ? "inactive" : ""}`}

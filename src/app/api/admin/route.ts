@@ -1,4 +1,4 @@
-import { AdminForm } from "@root/common.types";
+import { AdminFormSchema } from "@/validator/schemaValidation";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { signJWT } from "@/lib/auth";
@@ -8,8 +8,13 @@ import { getJwtSecret } from "@/app/action";
 
 export async function POST(req: Request) {
   try {
-    const body: AdminForm = await req.json();
-    const { username, password } = body;
+    // Validate with Zod
+    const validatedFields = AdminFormSchema.safeParse(await req.json());
+
+    if (!validatedFields.success) {
+      return NextResponse.json({ message: "Access Denied" }, { status: 401 });
+    }
+    const { username, password } = validatedFields.data;
 
     const adminUser = await prisma.adminUser.findUnique({
       where: { username },
@@ -17,6 +22,7 @@ export async function POST(req: Request) {
     if (adminUser === null) {
       return NextResponse.json({ message: "Access Denied" }, { status: 401 });
     }
+
     // compare the password with hash...
     const match = await bcrypt.compare(password, adminUser.userhash);
     if (!match) {
