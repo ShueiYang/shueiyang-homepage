@@ -47,6 +47,9 @@ const imageFileValidation = z
     { message: "File type is not supported" },
   );
 
+// MongoDB string validation
+export const mongoIdSchema = z.string().regex(/^[0-9a-f]{24}$/);
+
 export const AdminFormSchema = z.object({
   username: z.string().min(1, { message: "Username is required" }),
   password: z.string(),
@@ -60,7 +63,13 @@ export const EmailFormSchema = z.object({
 });
 
 export const ProjectFormSchema = z.object({
-  id: z.string().optional(),
+  id: z
+    .string()
+    .refine((val) => (val !== "" 
+      ? /^[0-9a-f]{24}$/.test(val) 
+      : true
+    ))
+    .optional(),
   title: z
     .string().min(1, { message: "Un titre est requis" }),
   imageFile: 
@@ -80,7 +89,7 @@ export const ProjectFormSchema = z.object({
 });
 
 export const EditFormSchema = z.object({
-  id: z.string().min(1),
+  id: mongoIdSchema,
   title: z.string().optional(),
   imageFile: z.string().optional(),
   description: z
