@@ -10,8 +10,6 @@ import {
   FormProvider,
   useForm,
 } from "react-hook-form";
-
-// import usePortFolio from "@/hooks/usePortFolio";
 import { convertRawDataToFormData } from "@/utils/formDataHelper";
 
 // Server actions
@@ -30,13 +28,17 @@ export type FieldsProps = Partial<
 >;
 export type MethodAction = "create" | "edit";
 
-interface FormProps {
+interface ProjectFormProps {
   type: MethodAction;
   legend: string;
   project?: ProjectForm;
 }
 
-const ProjectForm = ({ type, legend, project }: FormProps) => {
+export default function ProjectForm({
+  type,
+  legend,
+  project,
+}: Readonly<ProjectFormProps>) {
   const projectId = project?.id;
 
   const router = useRouter();
@@ -77,7 +79,7 @@ const ProjectForm = ({ type, legend, project }: FormProps) => {
       router.replace("/projects");
     } else if (deleteState.status === "Success") {
       router.replace("/");
-      // router.refresh();
+      router.refresh();
     }
   }, [createState, deleteState, updateState, router]);
 
@@ -139,6 +141,7 @@ const ProjectForm = ({ type, legend, project }: FormProps) => {
               <InputForm label="githubUrl" text="Source code Url" />
               <InputForm label="stack" text="Techno stack" />
               <TextareaForm label="content" text="Votre contenu" />
+
               <div className="flex justify-around">
                 <SubmitButton
                   label={buttonLabel}
@@ -167,6 +170,4 @@ const ProjectForm = ({ type, legend, project }: FormProps) => {
       </div>
     </PageLayout>
   );
-};
-
-export default ProjectForm;
+}
