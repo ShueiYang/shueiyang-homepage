@@ -1,19 +1,26 @@
-import { prisma } from "@/lib/prisma";
-import { NextResponse } from "next/server";
-import { uploadImage } from "@/app/api/cloudinary.actions";
-import { revalidatePath } from "next/cache";
-import { ProjectForm } from "@root/common.types";
-import { ProjectFormSchema } from "@/validator/schemaValidation";
+"use server";
 
-export async function POST(request: Request) {
+import { prisma } from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
+import { ProjectFormSchema } from "@/validator/schemaValidation";
+import { ProjectForm, ServerActionState } from "@root/common.types";
+import { uploadImage } from "@/app/api/cloudinary.actions";
+
+export async function uploadProject(
+  prevState: ServerActionState,
+  formData: FormData,
+): Promise<ServerActionState> {
   try {
-    const formData = await request.formData();
     // convert back to ProjectForm and validate with Zod
     const projectFormValue = Object.fromEntries(formData) as ProjectForm;
     const validatedFields = ProjectFormSchema.safeParse(projectFormValue);
 
+    // Return early if the form data is invalid
     if (!validatedFields.success) {
-      return NextResponse.json({ message: "Invalid form" }, { status: 400 });
+      return {
+        status: "Failure",
+        error: "SubmitForm value is invalid",
+      };
     }
 
     const {
@@ -27,12 +34,11 @@ export async function POST(request: Request) {
     } = validatedFields.data;
 
     if (typeof imageFile !== "string" || imageFile === "") {
-      return NextResponse.json(
-        { message: "Image required or invalid" },
-        { status: 400 },
-      );
+      return {
+        status: "Failure",
+        error: "Image is required or invalid",
+      };
     }
-
     // transform into array
     const stackArray = stack.split(", ");
     // upload to cloudinary
@@ -48,10 +54,10 @@ export async function POST(request: Request) {
         images: {
           create: [cloudImage],
         },
-        siteUrl: siteUrl || "",
+        siteUrl,
         stack: stackArray,
-        githubUrl: githubUrl || "",
-        content: content || "",
+        githubUrl,
+        content,
         owner: {
           connect: {
             id: "649c7484735a162a66509481", // connect in relation to adminUser
@@ -62,15 +68,15 @@ export async function POST(request: Request) {
 
     revalidatePath("/projects");
 
-    return NextResponse.json(
-      { message: "project successfully insert!" },
-      { status: 201 },
-    );
+    return {
+      ...prevState,
+      status: "Success",
+    };
   } catch (err) {
     console.error(err);
-    return NextResponse.json(
-      { message: "Internal Error please try again later." },
-      { status: 500 },
-    );
+    return {
+      status: "Failure",
+      error: "Internal Error please try again later.",
+    };
   }
 }

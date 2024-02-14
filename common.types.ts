@@ -20,11 +20,24 @@ export type EmailForm = z.infer<typeof EmailFormSchema>;
 
 export type ProjectForm = z.infer<typeof ProjectFormSchema>;
 
-export interface ImageProps {
+export type ImageDataType = {
+  id: string;
   public_id: string;
   folder: string;
   secure_url: string;
-}
+  projectId: string;
+};
+
+export type ImageProps = {
+  public_id: string;
+  folder: string;
+  secure_url: string;
+};
+
+export type ServerActionState = {
+  status: "Success" | "Failure" | "InitialState";
+  error: string | null;
+};
 
 export interface ValidateForm {
   titleName: string;

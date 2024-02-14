@@ -8,21 +8,23 @@ export type FormContextValue = EmailForm & AdminForm & ProjectForm;
 export interface FormProps {
   label: FormKeys;
   text: string;
+  value?: string;
 }
 type FormKeys = keyof FormContextValue;
 
-const InputForm: React.FC<FormProps> = ({ label, text }) => {
+const InputForm: React.FC<FormProps> = ({ label, text, value }) => {
   const {
     register,
     formState: { errors },
   } = useFormContext<FormContextValue>();
 
   function getInputType(label: FormKeys) {
-    if (label === "password") {
+    if (label === "id") {
+      return "hidden";
+    } else if (label === "password") {
       return "password";
-    } else {
-      return undefined;
     }
+    return undefined;
   }
 
   return (
@@ -34,7 +36,8 @@ const InputForm: React.FC<FormProps> = ({ label, text }) => {
           {...register(label)}
           type={getInputType(label)}
           aria-label={text}
-          required
+          value={value}
+          required={label !== "id"}
         />
         <span className="placeholder absolute">{text}</span>
       </label>

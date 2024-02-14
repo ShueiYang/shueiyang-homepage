@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { ProjectData } from "@root/common.types";
+import { ImageDataType, ProjectData } from "@root/common.types";
 import { getProjects } from "@/app/action";
 
 import PageLayout from "@/components/layouts/PageLayout";
 import PortfolioLayout from "@/components/layouts/PortfolioLayout";
 import PreviousLink from "@/components/PreviousLink";
-import { ImageDataType } from "@/app/api/auth/update/[id]/route";
 
 export const revalidate = 60; // revalidate every 60s...
 

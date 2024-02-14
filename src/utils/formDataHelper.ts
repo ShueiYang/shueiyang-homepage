@@ -22,8 +22,11 @@ export async function convertRawDataToFormData(
           const result = await processImage(value[0] as File);
           formData.append(key, result);
         }
-        // only append data if is modified in the input value
-      } else if (value && dirtyFields[key as keyof ProjectForm]) {
+        // only append data if is modified in the input value or the key is ID.
+      } else if (
+        value &&
+        (key === "id" || dirtyFields[key as keyof ProjectForm])
+      ) {
         formData.append(key, value as string);
       }
       return null;

@@ -7,17 +7,19 @@ import { FaFacebook, FaTwitter } from "react-icons/fa";
 import { ValidateForm } from "@root/common.types";
 
 interface ModalProps {
-  type?: string;
   title: string;
+  type?: string;
   projectId?: string;
-  deleteAction?: (projectId: string) => Promise<void>;
+  isPending?: boolean;
+  handleDeleteAction?: (projectId: string) => void;
 }
 
 export default function ModalDialog({
-  type,
   title,
+  type,
   projectId,
-  deleteAction,
+  isPending,
+  handleDeleteAction,
 }: Readonly<ModalProps>) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,7 +27,7 @@ export default function ModalDialog({
     register,
     reset,
     handleSubmit,
-    formState: { isValid, isSubmitting },
+    formState: { isValid },
   } = useForm<ValidateForm>({ defaultValues: { titleName: "" } });
 
   function closeModal() {
@@ -137,13 +139,17 @@ export default function ModalDialog({
                     >
                       {type === "edit" ? "Cancel" : "Ok je vois..."}
                     </button>
-                    {type === "edit" && deleteAction && projectId && (
+                    {type === "edit" && handleDeleteAction && projectId && (
                       <button
                         type="button"
-                        className={`btn-secondary flex items-center text-base ${isValid && !isSubmitting ? "" : "inactive"}`}
-                        onClick={handleSubmit(() => deleteAction(projectId))}
+                        className={`btn-secondary flex items-center text-base ${
+                          isValid && !isPending ? "" : "inactive"
+                        }`}
+                        onClick={handleSubmit(() =>
+                          handleDeleteAction(projectId),
+                        )}
                       >
-                        {isSubmitting ? "deleting..." : "Delete now"}
+                        {isPending ? "deleting..." : "Delete now"}
                       </button>
                     )}
                   </div>
