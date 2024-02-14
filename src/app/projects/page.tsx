@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ImageDataType, ProjectData } from "@root/common.types";
-import { getProjects } from "@/app/action";
+import { getProjects } from "@/actions";
 
 import PageLayout from "@/components/layouts/PageLayout";
 import PortfolioLayout from "@/components/layouts/PortfolioLayout";

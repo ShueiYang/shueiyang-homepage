@@ -1,4 +1,3 @@
-// import { ParsedUrlQuery } from "querystring";
 import { Metadata } from "next";
 import { ProjectData } from "@root/common.types";
 import Image from "next/image";
@@ -6,7 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageLayout from "@/components/layouts/PageLayout";
 import PreviousLink from "@/components/PreviousLink";
-import { getProjectInfo, getProjects } from "@/app/action";
+import { getProjectInfo, getProjects } from "@/actions";
 
 export const revalidate = 60; // revalidate every 60s...
 
@@ -34,7 +33,7 @@ export async function generateStaticParams() {
 
 export default async function Work({ params }: ParamsProps) {
   const projectId = params.projectId;
-  // console.log("check", params);
+  console.log("check", params);
 
   const project: ProjectData | null = await getProjectInfo(projectId);
 

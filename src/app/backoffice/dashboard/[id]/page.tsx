@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { ProjectData, ProjectForm } from "@root/common.types";
 import { notFound } from "next/navigation";
-import { getProjectInfo } from "@/app/action";
+import { getProjectInfo } from "@/actions/action";
 
 const ProjectForm = dynamic(() => import("@/components/ProjectForm"), {
   ssr: false,
