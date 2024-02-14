@@ -1,25 +1,29 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ProjectForm } from "@root/common.types";
+import { ProjectForm, ServerActionState } from "@root/common.types";
 import { ProjectFormSchema } from "@/validator/schemaValidation";
 import { useRouter } from "next/navigation";
-import { useTransition } from "react";
+import { useEffect, useTransition } from "react";
 import {
   FieldNamesMarkedBoolean,
   FormProvider,
   useForm,
 } from "react-hook-form";
 
-import usePortFolio from "@/hooks/usePortFolio";
-import { logOut } from "@/actions/serverAction";
+// import usePortFolio from "@/hooks/usePortFolio";
 import { convertRawDataToFormData } from "@/utils/formDataHelper";
+
+// Server actions
+import { logOut, uploadProject, deleteProject, updateProject } from "@/actions";
 
 import InputForm from "@/components/formToSubmit/InputForm";
 import TextareaForm from "@/components/formToSubmit/TextareaForm";
 import ImgUploadForm from "@/components/formToSubmit/ImgUploadForm";
 import PageLayout from "@/components/layouts/PageLayout";
 import ModalDialog from "@/components/modal/ModalDialog";
+import SubmitButton from "./customButton/SubmitButton";
+import { useFormState } from "react-dom";
 
 export type FieldsProps = Partial<
   Readonly<FieldNamesMarkedBoolean<ProjectForm>>
@@ -33,14 +37,23 @@ interface FormProps {
 }
 
 const ProjectForm = ({ type, legend, project }: FormProps) => {
+  const projectId = project?.id;
+
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
-  const projectId = project?.id;
+  const initialState: ServerActionState = {
+    status: "InitialState",
+    error: null,
+  };
+  // New useFormState hook
+  const [createState, createAction] = useFormState(uploadProject, initialState);
+  const [updateState, updateAction] = useFormState(updateProject, initialState);
+  const [deleteState, deleteAction] = useFormState(deleteProject, initialState);
 
   const initialForm: ProjectForm = {
     title: project?.title ?? "",
-    imageFile: project?.imageFile ?? null,
+    imageFile: project?.imageFile ?? "",
     description: project?.description ?? "",
     siteUrl: project?.siteUrl ?? "",
     githubUrl: project?.githubUrl ?? "",
@@ -56,15 +69,34 @@ const ProjectForm = ({ type, legend, project }: FormProps) => {
 
   const {
     handleSubmit,
-    formState: { errors, isDirty, isSubmitting, dirtyFields },
+    formState: { isDirty, isSubmitting, dirtyFields },
   } = methods;
 
-  // use portfolio custom hooks
-  const { submitError, uploadProject, deleteProject } = usePortFolio();
+  useEffect(() => {
+    if (createState.status === "Success" || updateState.status === "Success") {
+      router.replace("/projects");
+    } else if (deleteState.status === "Success") {
+      router.replace("/");
+      // router.refresh();
+    }
+  }, [createState, deleteState, updateState, router]);
 
   async function handleUpload(data: ProjectForm) {
-    const formData = await convertRawDataToFormData(data, dirtyFields);
-    await uploadProject(formData, type, projectId);
+    startTransition(async () => {
+      const formData = await convertRawDataToFormData(data, dirtyFields);
+
+      if (type === "edit") {
+        updateAction(formData);
+      } else {
+        createAction(formData);
+      }
+    });
+  }
+
+  function handleDelete(projectId: string) {
+    startTransition(() => {
+      deleteAction(projectId);
+    });
   }
 
   const buttonLabel = type === "create" ? "Upload" : "Update";
@@ -96,10 +128,10 @@ const ProjectForm = ({ type, legend, project }: FormProps) => {
               onSubmit={handleSubmit(handleUpload)}
               // noValidate
             >
+              <InputForm label="id" text="" value={projectId} />
               <ImgUploadForm
                 label="imageFile"
-                type={type}
-                defaultImg={initialForm.imageFile as string | null}
+                defaultImg={initialForm.imageFile as string}
               />
               <InputForm label="title" text="Title du projet" />
               <InputForm label="description" text="Votre description" />
@@ -108,31 +140,27 @@ const ProjectForm = ({ type, legend, project }: FormProps) => {
               <InputForm label="stack" text="Techno stack" />
               <TextareaForm label="content" text="Votre contenu" />
               <div className="flex justify-around">
-                <button
-                  className={`btn-primary mt-6 flex items-center ${isSubmitting || !isDirty ? "inactive" : ""}`}
-                >
-                  {isSubmitting ? "Uploading..." : buttonLabel}
-                </button>
+                <SubmitButton
+                  label={buttonLabel}
+                  isPending={isSubmitting || isPending}
+                  isDirty={isDirty}
+                />
 
                 {type === "edit" && project && (
                   <ModalDialog
                     type={type}
                     title={project.title}
                     projectId={project.id}
-                    deleteAction={deleteProject}
+                    isPending={isPending}
+                    handleDeleteAction={handleDelete}
                   />
                 )}
               </div>
             </form>
           </FormProvider>
-          {submitError && (
+          {(createState.error || updateState.error || deleteState.error) && (
             <p className="mt-3 text-center text-sm text-red-500 dark:text-red-400">
-              {submitError}
-            </p>
-          )}
-          {errors.imageFile && (
-            <p className="mt-3 text-center text-sm text-red-500 dark:text-red-400">
-              Images are required
+              {createState.error || updateState.error || deleteState.error}
             </p>
           )}
         </fieldset>
