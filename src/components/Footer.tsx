@@ -1,4 +1,4 @@
-const Footer = () => {
+export default function Footer() {
   return (
     <footer className="mx-auto pt-2 text-center text-sm opacity-60 sm:pt-4 xl:my-6 xl:max-w-5xl">
       <p>&copy;{new Date().getFullYear()} Kim Nguyen - All Rights Reserved.</p>
@@ -24,6 +24,4 @@ const Footer = () => {
       </p>
     </footer>
   );
-};
-
-export default Footer;
+}
