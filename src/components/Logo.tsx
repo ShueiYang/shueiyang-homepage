@@ -4,9 +4,10 @@ import { useContext } from "react";
 import { ThemeContext } from "@/providers/ThemeProvider";
 import { LinkItemProps } from "./Navbar";
 
-type EventProps = React.MouseEvent<HTMLDivElement, MouseEvent>;
+type LogoProps = Pick<LinkItemProps, "path">;
+type EventProps = React.MouseEvent<HTMLButtonElement, MouseEvent>;
 
-const Logo = ({ path }: Pick<LinkItemProps, "path">) => {
+const Logo: React.FC<LogoProps> = ({ path }) => {
   const { theme } = useContext(ThemeContext);
 
   function handleHomeClick(event: EventProps) {
@@ -19,7 +20,7 @@ const Logo = ({ path }: Pick<LinkItemProps, "path">) => {
   // set to true since Exit animation not working
   return (
     <Link href="/" scroll={true}>
-      <div className="logoBox" onClick={handleHomeClick}>
+      <button type="button" className="logoBox" onClick={handleHomeClick}>
         <Image
           src={`/images/mistpanda-${theme}.png`}
           alt="MistPanda logo"
@@ -29,7 +30,7 @@ const Logo = ({ path }: Pick<LinkItemProps, "path">) => {
         <p className="ml-1 font-ibm text-lg font-medium md:text-xl">
           Kim Nguyen
         </p>
-      </div>
+      </button>
     </Link>
   );
 };
