@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { signJWT } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
-import { getJwtSecret } from "@/app/action";
+import { getJwtSecret } from "@/actions";
 
 export async function POST(req: Request) {
   try {

@@ -41,5 +41,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/backoffice/:path*", "/api/auth/:path*"],
+  matcher: ["/backoffice/:path*"],
 };

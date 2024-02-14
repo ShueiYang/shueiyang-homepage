@@ -28,6 +28,7 @@ const PortfolioLayout: React.FC<LayoutProps> = ({
       >
         <Link
           href={href}
+          // Didn't work as expected in the App router...
           // as={`/projects/${titleName}`}
           scroll={false}
         >

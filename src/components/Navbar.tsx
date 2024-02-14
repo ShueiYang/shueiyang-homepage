@@ -1,9 +1,9 @@
 "use client";
 
-import { getLinkAndProps } from "@/utils/utility";
-import { usePathname } from "next/navigation";
 import NextLink from "next/link";
+import { usePathname } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
+import { getLinkAndProps } from "@/utils/utility";
 
 import { ThemeContext } from "@/providers/ThemeProvider";
 import { MENU_LISTS } from "@/constants/menu.Index";

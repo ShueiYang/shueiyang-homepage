@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { revalidatePath } from "next/cache";
 import { ProjectData, ServerActionState } from "@root/common.types";
 import { deleteImage } from "@/app/api/cloudinary.actions";
 
@@ -31,8 +30,6 @@ export async function deleteProject(
     }
     // delete project
     await prisma.project.delete({ where: { id: projectId } });
-
-    revalidatePath("/projects");
 
     return {
       ...prevState,
