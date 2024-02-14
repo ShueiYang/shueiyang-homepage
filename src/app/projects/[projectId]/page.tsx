@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import PageLayout from "@/components/layouts/PageLayout";
 import PreviousLink from "@/components/PreviousLink";
 import { getProjectInfo, getProjects } from "@/actions";
+import { mongoIdSchema } from "@/validator/schemaValidation";
 
 export const revalidate = 60; // revalidate every 60s...
 
@@ -17,9 +18,14 @@ interface ParamsProps {
 export async function generateMetadata({
   params,
 }: ParamsProps): Promise<Metadata> {
+  const validatedId = mongoIdSchema.safeParse(params.projectId);
+
+  if (!validatedId.success) {
+    return { title: "Page not found" };
+  }
   const project: ProjectData | null = await getProjectInfo(params.projectId);
   return {
-    title: `Kim - ${project?.title}`,
+    title: `Kim - ${project?.title ?? "Not Found"}`,
   };
 }
 
@@ -33,9 +39,14 @@ export async function generateStaticParams() {
 
 export default async function Work({ params }: ParamsProps) {
   const projectId = params.projectId;
-  console.log("check", params);
+  // console.log("check", params);
+  const validatedId = mongoIdSchema.safeParse(projectId);
 
-  const project: ProjectData | null = await getProjectInfo(projectId);
+  let project: ProjectData | null = null;
+
+  if (validatedId.success) {
+    project = await getProjectInfo(projectId);
+  }
 
   if (!project) {
     notFound();

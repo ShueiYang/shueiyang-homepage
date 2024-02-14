@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import { ProjectData, ProjectForm } from "@root/common.types";
 import { notFound } from "next/navigation";
 import { getProjectInfo } from "@/actions/action";
+import { mongoIdSchema } from "@/validator/schemaValidation";
 
 const ProjectForm = dynamic(() => import("@/components/ProjectForm"), {
   ssr: false,
@@ -13,8 +14,13 @@ export interface ParamsRoute {
 
 const ProjectPanel = async ({ params }: ParamsRoute) => {
   const id = params.id;
+  const validatedId = mongoIdSchema.safeParse(id);
 
-  const project: ProjectData | null = await getProjectInfo(id);
+  let project: ProjectData | null = null;
+
+  if (validatedId.success) {
+    project = await getProjectInfo(id);
+  }
 
   if (!project) {
     notFound();
