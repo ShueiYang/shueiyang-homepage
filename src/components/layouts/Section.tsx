@@ -3,8 +3,6 @@
 import { motion } from "framer-motion";
 import { transit, letterAnimate } from "@/utils/motion";
 
-// import useIntro from "@/hook/introTimer";
-
 export interface SectionProps {
   children: React.ReactNode;
   delay?: number;

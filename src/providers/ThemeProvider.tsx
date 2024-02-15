@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 
 type ThemeColor = "light" | "dark";
 
@@ -9,7 +9,7 @@ interface ThemeContextValue {
   setTheme: React.Dispatch<React.SetStateAction<ThemeColor>>;
 }
 
-//create context for theme color to be used in other components
+// create context for theme color to be used in other components
 export const ThemeContext = createContext<ThemeContextValue>(
   {} as ThemeContextValue,
 );
@@ -24,7 +24,7 @@ export default function ThemeProvider({
     if (typeof window === "undefined") {
       return "light";
     }
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+    if (localStorage?.getItem("theme")) {
       return localStorage.getItem("theme") as ThemeColor;
     }
     if (
@@ -36,8 +36,12 @@ export default function ThemeProvider({
     return "light";
   });
 
+  const contextThemeValue = useMemo(() => {
+    return { theme, setTheme };
+  }, [theme, setTheme]);
+
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={contextThemeValue}>
       {children}
     </ThemeContext.Provider>
   );
