@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ProjectForm, ServerActionState } from "@root/common.types";
 import { ProjectFormSchema } from "@/validator/schemaValidation";
 import { useRouter } from "next/navigation";
-import { useEffect, useTransition } from "react";
+import { useEffect, useOptimistic, useTransition } from "react";
 import {
   FieldNamesMarkedBoolean,
   FormProvider,
@@ -53,6 +53,20 @@ export default function ProjectForm({
   const [updateState, updateAction] = useFormState(updateProject, initialState);
   const [deleteState, deleteAction] = useFormState(deleteProject, initialState);
 
+  /*
+    useOptimistic hook to update and return to the main page before the delete action
+    is completed, this solution avoid to get a 404 page when the project panel 
+    is deleted with the cache revalidated behind the server action.
+  */
+  const [optimisticDeleteState, deleteOptimisticAction] = useOptimistic(
+    deleteState,
+    (state) => ({
+      ...state,
+      status: "Success" as ServerActionState["status"],
+      error: null,
+    }),
+  );
+
   const initialForm: ProjectForm = {
     title: project?.title ?? "",
     imageFile: project?.imageFile ?? "",
@@ -77,11 +91,10 @@ export default function ProjectForm({
   useEffect(() => {
     if (createState.status === "Success" || updateState.status === "Success") {
       router.replace("/projects");
-    } else if (deleteState.status === "Success") {
+    } else if (optimisticDeleteState.status === "Success") {
       router.replace("/");
-      router.refresh();
     }
-  }, [createState, deleteState, updateState, router]);
+  }, [createState, updateState, optimisticDeleteState, router]);
 
   async function handleUpload(data: ProjectForm) {
     startTransition(async () => {
@@ -97,6 +110,7 @@ export default function ProjectForm({
 
   function handleDelete(projectId: string) {
     startTransition(() => {
+      deleteOptimisticAction(deleteState);
       deleteAction(projectId);
     });
   }
