@@ -23,11 +23,16 @@ export function transit(direction?: DirectionType): Variants {
   };
 }
 
-export function letterAnimate(direction: DirectionType): Variants {
+export function letterAnimate(
+  direction: DirectionType,
+  delay: number,
+): Variants {
+  const startPosition = 170 - delay * 12;
+
   return {
     hidden: {
       opacity: 0,
-      x: direction === "top" ? 0 : 168,
+      x: direction === "top" ? 0 : startPosition,
       y: direction === "top" ? -81 : 0,
     },
     visible: {

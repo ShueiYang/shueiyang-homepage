@@ -7,7 +7,7 @@ import {
   ImageDataType,
   ImageProps,
   ProjectData,
-  ProjectForm,
+  ProjectFormData,
   ServerActionState,
 } from "@root/common.types";
 import { uploadImage } from "@/app/api/cloudinary.actions";
@@ -23,7 +23,7 @@ export async function updateProject(
   formData: FormData,
 ): Promise<ServerActionState> {
   try {
-    const projectFormValue = Object.fromEntries(formData) as ProjectForm;
+    const projectFormValue = Object.fromEntries(formData) as ProjectFormData;
     const validatedFields = EditFormSchema.safeParse(projectFormValue);
 
     if (!validatedFields.success) {

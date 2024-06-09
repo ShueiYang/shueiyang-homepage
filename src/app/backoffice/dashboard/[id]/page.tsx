@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { ProjectData, ProjectForm } from "@root/common.types";
+import { ProjectData, ProjectFormData } from "@root/common.types";
 import { notFound } from "next/navigation";
 import { getProjectInfo } from "@/actions/action";
 import { mongoIdSchema } from "@/validator/schemaValidation";
@@ -33,7 +33,7 @@ const ProjectPanel = async ({ params }: ParamsRoute) => {
     ...project,
     imageFile: imageUrl,
     stack: stackAsString,
-  } as ProjectForm;
+  } as ProjectFormData;
 
   return (
     <ProjectForm type="edit" legend="Project editing" project={projectData} />

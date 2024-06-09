@@ -1,9 +1,9 @@
 "use client";
 
-import { EmailForm, AdminForm, ProjectForm } from "@root/common.types";
+import { EmailForm, AdminForm, ProjectFormData } from "@root/common.types";
 import { useFormContext } from "react-hook-form";
 
-export type FormContextValue = EmailForm & AdminForm & ProjectForm;
+export type FormContextValue = EmailForm & AdminForm & ProjectFormData;
 
 export interface FormProps {
   label: FormKeys;

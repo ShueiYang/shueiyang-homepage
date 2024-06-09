@@ -33,4 +33,8 @@ export const RESUME_DATA = [
             pré-qualification au passage du titre RNCP niveau 6 (Bac +3/4) de Concepteur
             développeur d'applications. (Le Reacteur à Paris)`,
   },
+  {
+    year: "Sept - Fev 2024",
+    cv: `Stage de 6 mois au poste de Developpeur Front junior chez Ekino.`,
+  },
 ];

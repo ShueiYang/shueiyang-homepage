@@ -1,4 +1,4 @@
-import { ProjectForm } from "@root/common.types";
+import { ProjectFormData } from "@root/common.types";
 import { FieldsProps } from "@/components/ProjectForm";
 import { processImage } from "./imageTool";
 
@@ -8,7 +8,7 @@ function isFileList(value: unknown): value is FileList {
 }
 
 export async function convertRawDataToFormData(
-  data: ProjectForm,
+  data: ProjectFormData,
   dirtyFields: FieldsProps,
 ): Promise<FormData> {
   const formData = new FormData();
@@ -25,7 +25,7 @@ export async function convertRawDataToFormData(
         // only append data if is modified in the input value or the key is ID.
       } else if (
         value &&
-        (key === "id" || dirtyFields[key as keyof ProjectForm])
+        (key === "id" || dirtyFields[key as keyof ProjectFormData])
       ) {
         formData.append(key, value as string);
       }

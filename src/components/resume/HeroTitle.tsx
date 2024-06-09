@@ -9,7 +9,7 @@ const HeroTitle = () => {
       {titleArray.map((letter, index) => {
         const timing = 0.1 + index * 0.1;
         return (
-          <HeroSection key={index} delay={timing}>
+          <HeroSection key={index} direction="left" delay={timing}>
             {letter === " " ? "\u00A0" : letter}
           </HeroSection>
         );

@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ProjectForm, ServerActionState } from "@root/common.types";
+import { ProjectFormData, ServerActionState } from "@root/common.types";
 import { ProjectFormSchema } from "@/validator/schemaValidation";
 import { useRouter } from "next/navigation";
 import { useEffect, useOptimistic, useTransition } from "react";
@@ -24,14 +24,14 @@ import SubmitButton from "./customButton/SubmitButton";
 import { useFormState } from "react-dom";
 
 export type FieldsProps = Partial<
-  Readonly<FieldNamesMarkedBoolean<ProjectForm>>
+  Readonly<FieldNamesMarkedBoolean<ProjectFormData>>
 >;
 export type MethodAction = "create" | "edit";
 
 interface ProjectFormProps {
   type: MethodAction;
   legend: string;
-  project?: ProjectForm;
+  project?: ProjectFormData;
 }
 
 export default function ProjectForm({
@@ -67,7 +67,7 @@ export default function ProjectForm({
     }),
   );
 
-  const initialForm: ProjectForm = {
+  const initialForm: ProjectFormData = {
     title: project?.title ?? "",
     imageFile: project?.imageFile ?? "",
     description: project?.description ?? "",
@@ -77,7 +77,7 @@ export default function ProjectForm({
     content: project?.content ?? "",
   };
 
-  const methods = useForm<ProjectForm>({
+  const methods = useForm<ProjectFormData>({
     mode: "onChange",
     resolver: zodResolver(ProjectFormSchema),
     defaultValues: initialForm,
@@ -96,7 +96,7 @@ export default function ProjectForm({
     }
   }, [createState, updateState, optimisticDeleteState, router]);
 
-  async function handleUpload(data: ProjectForm) {
+  async function handleUpload(data: ProjectFormData) {
     startTransition(async () => {
       const formData = await convertRawDataToFormData(data, dirtyFields);
 

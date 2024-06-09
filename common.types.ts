@@ -18,7 +18,7 @@ export type AdminForm = z.infer<typeof AdminFormSchema>;
 
 export type EmailForm = z.infer<typeof EmailFormSchema>;
 
-export type ProjectForm = z.infer<typeof ProjectFormSchema>;
+export type ProjectFormData = z.infer<typeof ProjectFormSchema>;
 
 export type ImageDataType = {
   id: string;

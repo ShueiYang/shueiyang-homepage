@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { ProjectFormSchema } from "@/validator/schemaValidation";
-import { ProjectForm, ServerActionState } from "@root/common.types";
+import { ProjectFormData, ServerActionState } from "@root/common.types";
 import { uploadImage } from "@/app/api/cloudinary.actions";
 
 export async function uploadProject(
@@ -12,7 +12,7 @@ export async function uploadProject(
 ): Promise<ServerActionState> {
   try {
     // convert back to ProjectForm and validate with Zod
-    const projectFormValue = Object.fromEntries(formData) as ProjectForm;
+    const projectFormValue = Object.fromEntries(formData) as ProjectFormData;
     const validatedFields = ProjectFormSchema.safeParse(projectFormValue);
 
     // Return early if the form data is invalid

@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import HomepageWrapper from "@/components/resume/HomeHeader";
 import { Section } from "@/components/layouts/Section";
 import Button from "@/components/customButton/Button";
@@ -19,24 +20,29 @@ export default function Homepage() {
       <Section delay={0.1}>
         <h2 className="section">A propos</h2>
         <p className="text-justify indent-4">
-          Ancien vendeur et assistant commercial en maroquinerie et en
-          informatique actuellement en reconversion professionnelle dans le
-          développement Web, j&apos;ai commencé en autodidacte en 2022 et afin
-          d&apos;officialiser cette reconversion j&apos;ai décidé de
-          démissionner de mon poste pour poursuivre ce &quot;Carrer path&quot; !
+          {`Ancien vendeur et assistant commercial en maroquinerie et en informatique,
+            j'ai effectué une reconversion professionnelle dans le développement Web.
+            J'ai débuté mon apprentissage en autodidacte en 2022. Pour officialiser 
+            cette reconversion, j'ai pris la décision de démissionner de mon poste afin 
+            de me consacrer pleinement à ce nouvel objectif professionnel et poursuivre 
+            ce "Carrer path" !`}
           <br />
-          &nbsp; J&apos;ai récemment complété ma formation chez Le Reacteur afin
-          de renforcer mes compétences, et je suis actuellement en internship
-          chez&nbsp;
+          &nbsp; J&apos;ai donc par la suite complété ma formation chez Le
+          Reacteur afin de renforcer mes compétences, et je suis désormais au
+          poste de développer Front chez&nbsp;
           <a
             href="https://www.ekino.fr"
-            className="underline underline-offset-2"
+            className="inline-block"
             rel="noopener noreferrer"
             target="_blank"
           >
-            Ekino
+            <Image
+              src={`/images/ekino.svg`}
+              alt="Ekino"
+              width={49}
+              height={49}
+            />
           </a>
-          .
         </p>
       </Section>
 

@@ -2,11 +2,12 @@
 
 import { motion } from "framer-motion";
 import { transit, letterAnimate } from "@/utils/motion";
+import { DirectionType } from "@/providers/DirectionProvider";
 
 export interface SectionProps {
   children: React.ReactNode;
+  direction?: DirectionType;
   delay?: number;
-  type?: string;
 }
 
 export const Section = ({ children, delay = 0 }: SectionProps) => {
@@ -22,14 +23,18 @@ export const Section = ({ children, delay = 0 }: SectionProps) => {
   );
 };
 
-export const HeroSection = ({ children, type, delay = 0 }: SectionProps) => {
+export const HeroSection = ({
+  children,
+  direction = "left",
+  delay = 0,
+}: SectionProps) => {
   return (
     <motion.div
       className="inline-flex"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      variants={type === "top" ? letterAnimate("top") : letterAnimate("left")}
+      variants={letterAnimate(direction, delay)}
       transition={{
         duration: 0.5,
         delay,
