@@ -21,8 +21,8 @@ export default function Homepage() {
         <h2 className="section">A propos</h2>
         <p className="text-justify indent-4">
           {`Ancien vendeur et assistant commercial en maroquinerie et en informatique,
-            j'ai effectué une reconversion professionnelle dans le développement Web.
-            J'ai débuté mon apprentissage en autodidacte en 2022. Pour officialiser 
+            j'ai effectué une reconversion professionnelle dans le développement Web en
+            débutant mon apprentissage en autodidacte en 2022. Pour officialiser 
             cette reconversion, j'ai pris la décision de démissionner de mon poste afin 
             de me consacrer pleinement à ce nouvel objectif professionnel et poursuivre 
             ce "Carrer path" !`}
