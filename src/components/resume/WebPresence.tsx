@@ -8,7 +8,7 @@ import {
 import { FaSteam, FaBattleNet } from "react-icons/fa";
 import ModalDialog from "@/components/modal/ModalDialog";
 
-const WebPresence = () => {
+export default function WebPresence() {
   return (
     <>
       <h2 className="section sm:mb-5">Sur le Web</h2>
@@ -55,6 +55,4 @@ const WebPresence = () => {
       </div>
     </>
   );
-};
-
-export default WebPresence;
+}

@@ -1,4 +1,4 @@
-const Langues = () => {
+export default function Langues() {
   return (
     <>
       <h2 className="section">Langues</h2>
@@ -14,6 +14,4 @@ const Langues = () => {
       </div>
     </>
   );
-};
-
-export default Langues;
+}

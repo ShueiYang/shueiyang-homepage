@@ -4,10 +4,10 @@ import { createContext, useMemo, useState } from "react";
 
 type ThemeColor = "light" | "dark";
 
-interface ThemeContextValue {
+type ThemeContextValue = {
   theme: ThemeColor;
   setTheme: React.Dispatch<React.SetStateAction<ThemeColor>>;
-}
+};
 
 // create context for theme color to be used in other components
 export const ThemeContext = createContext<ThemeContextValue>(
@@ -19,7 +19,7 @@ export default function ThemeProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [theme, setTheme] = useState(() => {
+  const [theme, setTheme] = useState<ThemeColor>(() => {
     //check if Server Side Rendering
     if (typeof window === "undefined") {
       return "light";
