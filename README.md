@@ -20,7 +20,7 @@ Languages and tools
 - Zod schema validation
 - Headless ui
 - Cloudinary
-- PNPM package manager
+- Bun package manager
 
 Features:
 
