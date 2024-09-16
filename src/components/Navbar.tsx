@@ -2,7 +2,7 @@
 
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { getLinkAndProps } from "@/utils/utility";
 
 import { ThemeContext } from "@/providers/ThemeProvider";
@@ -36,14 +36,8 @@ const LinkItem: React.FC<LinkItemProps> = ({ children, href, path }) => {
 export default function Navbar() {
   const path = usePathname();
   const { theme } = useContext(ThemeContext);
-  const [isMounted, setIsMounted] = useState(false);
 
-  // Hydration trick to display correct gradient color theme on Navbar
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  return isMounted ? (
+  return (
     <nav
       className={`fixed z-50 flex w-screen items-center backdrop-blur
         ${
@@ -94,7 +88,5 @@ export default function Navbar() {
         BackOffice
       </NextLink>
     </nav>
-  ) : (
-    <div />
   );
 }

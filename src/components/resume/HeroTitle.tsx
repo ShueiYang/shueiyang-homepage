@@ -1,4 +1,4 @@
-import { HeroSection } from "@/components/layouts/Section";
+import { HeroSection } from "../layouts/HeroSection";
 
 export default function HeroTitle() {
   const title = "Hello, je suis";

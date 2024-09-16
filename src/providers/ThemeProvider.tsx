@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useMemo, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 type ThemeColor = "light" | "dark";
 
@@ -19,6 +19,7 @@ export default function ThemeProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [isMounted, setIsMounted] = useState(false);
   const [theme, setTheme] = useState<ThemeColor>(() => {
     //check if Server Side Rendering
     if (typeof window === "undefined") {
@@ -36,12 +37,19 @@ export default function ThemeProvider({
     return "light";
   });
 
-  const contextThemeValue = useMemo(() => {
-    return { theme, setTheme };
-  }, [theme, setTheme]);
+  /**
+   * Fix the Hydration issue with server component.
+   */
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
-    <ThemeContext.Provider value={contextThemeValue}>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );

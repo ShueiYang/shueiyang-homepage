@@ -1,4 +1,4 @@
-import { HeroSection } from "@/components/layouts/Section";
+import { HeroSection } from "../layouts/HeroSection";
 
 const HeroName = () => {
   const name = "KIM";
@@ -9,7 +9,7 @@ const HeroName = () => {
       {nameArray.map((letter, index) => {
         const timing = 0.1 + index * 0.1;
         return (
-          <HeroSection key={index} direction="top" delay={1.5 + timing}>
+          <HeroSection key={letter} direction="top" delay={1.5 + timing}>
             {letter}
           </HeroSection>
         );
