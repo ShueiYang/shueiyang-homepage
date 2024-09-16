@@ -1,0 +1,96 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Test components in resume > Curriculum 1`] = `
+<div>
+  <dl
+    class="grid grid-cols-4 gap-5"
+  >
+    <dt
+      class="col-span-1"
+    >
+      1983
+    </dt>
+    <dd
+      class="col-span-3"
+    >
+      Né à Paris, France
+    </dd>
+    <dt
+      class="col-span-1"
+    >
+      2002
+    </dt>
+    <dd
+      class="col-span-3"
+    >
+      Bac Scientifique validé au Lycée Colbert
+    </dd>
+    <dt
+      class="col-span-1"
+    >
+      2004 - 2008
+    </dt>
+    <dd
+      class="col-span-3"
+    >
+      Vente et Assistant commercial à ISIS Maroquinerie (Osny 95)
+    </dd>
+    <dt
+      class="col-span-1"
+    >
+      2009
+    </dt>
+    <dd
+      class="col-span-3"
+    >
+      BTS en maintenance informatique et réseaux (ITIC Paris)
+    </dd>
+    <dt
+      class="col-span-1"
+    >
+      2010 - 2022
+    </dt>
+    <dd
+      class="col-span-3"
+    >
+      POBIX.COM: Vente et expédition des matériels informatiques 
+            spécialisé en batteries et chargeurs pour pc portable, Mac, ainsi que
+            les EPDM (Vélo Trotinette)
+    </dd>
+    <dt
+      class="col-span-1"
+    >
+      Juin - Nov 2022
+    </dt>
+    <dd
+      class="col-span-3"
+    >
+      Autoformation en Développment web et application (Validation de la certification
+            Udemy "The Complete Web Developer" de Zero to Mastery en Août, suivi après 
+            la certification Udemy "Complete NodeJs Developer" de ZTM en Novembre)
+    </dd>
+    <dt
+      class="col-span-1"
+    >
+      Avril - Juin 2023
+    </dt>
+    <dd
+      class="col-span-3"
+    >
+      Validation de la Certification du Reacteur (full stack JavaScript) et
+            pré-qualification au passage du titre RNCP niveau 6 (Bac +3/4) de Concepteur
+            développeur d'applications. (Le Reacteur à Paris)
+    </dd>
+    <dt
+      class="col-span-1"
+    >
+      Sept - Fev 2024
+    </dt>
+    <dd
+      class="col-span-3"
+    >
+      Stage de 6 mois au poste de Developpeur Front junior chez Ekino.
+    </dd>
+  </dl>
+</div>
+`;
