@@ -16,11 +16,11 @@ interface AnimateProps {
   childWidth: number;
 }
 
-function AnimateSkillsBar({
+export default function AnimateSkillsBar({
   children,
   childWidth,
   baseVelocity = 100,
-}: AnimateProps) {
+}: Readonly<AnimateProps>) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -32,7 +32,7 @@ function AnimateSkillsBar({
     clamp: false,
   });
 
-  //wrap the x motion value between -childWidth and 0
+  /* Wrap the x motion value between -childWidth and 0 */
   const x = useTransform(baseX, (v) => wrap(-childWidth, 0, v));
 
   const directionFactor = useRef<number>(1);
@@ -68,5 +68,3 @@ function AnimateSkillsBar({
     </div>
   );
 }
-
-export default AnimateSkillsBar;

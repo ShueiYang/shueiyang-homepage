@@ -10,6 +10,13 @@ import { easeOutCirc } from "@/utils/utility";
 import SceneContainer from "./SceneContainer";
 import CandleStickLoader from "./CandleStick.Loader";
 
+/**
+ * Renders an interactive 3D model of a candlestick chart using WebGL.
+ *
+ * This component sets up a Three.js scene, camera, and renderer to display
+ * a 3D model loaded from a `.glb` file. It also tracks loading progress and
+ * adjusts the rendering size based on window resizing.
+ */
 export default function ChineseCandleStick() {
   const refContainer = useRef<HTMLDivElement>(null);
   const refRenderer = useRef<WebGLRenderer | null>(null);
@@ -107,7 +114,9 @@ export default function ChineseCandleStick() {
       container.appendChild(renderer.domElement);
       refRenderer.current = renderer;
 
-      // for Post-processing but finally I won"t use for this project not worth the ressource cost
+      /*
+       * For Post-processing but finally I won"t use for this project not worth the ressource cost.
+       */
       // const composer = new EffectComposer(renderer);
       // composer.addPass(new RenderPass(scene, camera));
       // composer.addPass(new SSAARenderPass(scene, camera, 0x202020));
