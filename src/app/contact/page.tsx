@@ -12,7 +12,6 @@ import { EmailForm } from "@root/common.types";
 import { sendEmail } from "@/lib/sendEmail";
 import { slideIn } from "@/utils/motion";
 
-import SuccessForm from "@/components/SuccessForm";
 import PreviousLink from "@/components/PreviousLink";
 import InputForm from "@/components/formToSubmit/InputForm";
 import TextareaForm from "@/components/formToSubmit/TextareaForm";
@@ -20,8 +19,12 @@ import TextareaForm from "@/components/formToSubmit/TextareaForm";
 const MapLocation = dynamic(() => import("@/components/map/MapLocation"), {
   ssr: false,
 });
+const SuccessForm = dynamic(() => import("@/components/SuccessForm"), {
+  ssr: false,
+});
 
 export default function Contact() {
+  const [isEmailSent, setIsEmailSent] = useState(false);
   const [error, setError] = useState<{ message: string } | null>(null);
   const initialForm: EmailForm = {
     name: "",
@@ -39,14 +42,16 @@ export default function Contact() {
   const {
     handleSubmit,
     reset,
-    formState: { isValid, isSubmitting, isSubmitSuccessful },
+    formState: { isValid, isSubmitting },
   } = methods;
 
   async function submitEmail(form: EmailForm) {
     try {
       setError(null);
+      setIsEmailSent(false);
       const response = await sendEmail(form); // send Email using emailjs library
       if (response.status === 200) {
+        setIsEmailSent(true);
         reset();
       }
     } catch (err) {
@@ -58,16 +63,17 @@ export default function Contact() {
     }
   }
 
-  if (isSubmitSuccessful && !error) {
+  if (isEmailSent && !error) {
     return <SuccessForm />;
   }
+
   return (
     <div className="container my-6 flex flex-col items-center justify-between lg:flex-row xl:max-w-5xl">
       <motion.fieldset
+        id="contact"
         initial="hidden"
         animate="enter"
-        exit="exit"
-        variants={slideIn("left", "tween", 0.2)}
+        variants={slideIn("left")}
         className="w-full max-w-lg p-2 lg:flex-[0.45] lg:p-8"
       >
         <legend>

@@ -3,27 +3,20 @@
 import Link from "next/link";
 import Image from "next/image";
 import { RiMailSendFill } from "react-icons/ri";
-import { DirectionType } from "@/providers/DirectionProvider";
 
-export interface ButtonProps {
+export type ButtonProps = {
   children: React.ReactNode;
   path: string;
   goMail?: boolean;
-  setMotion?: (value: DirectionType) => void;
-}
+};
 
-const Button = ({ children, goMail, path, setMotion }: ButtonProps) => {
+const Button: React.FC<ButtonProps> = ({ children, goMail, path }) => {
   return (
     <div className="my-4 flex justify-center">
-      <Link
-        href={path}
-        scroll={true} // set to true since Exit animation not working
-      >
+      <Link href={path} scroll={false}>
         <button
           className="btn-primary flex items-center"
-          onClick={() => {
-            setMotion && setMotion("top");
-          }} // change direction for the homepage exit animation
+          onClick={() => {}} // TODO: Trigger specific animation on exit.
         >
           {goMail && <RiMailSendFill className="mr-3 text-xl" />}
           {children}

@@ -22,15 +22,15 @@ const markerIcon = divIcon({
   className: "map-pin",
 });
 
-const MapLocation = () => {
+export default function MapLocation() {
   const position = [48.88222815673669, 2.489167667846882] as LatLngExpression;
 
   return (
     <motion.div
+      id="map"
       initial="hidden"
       animate="enter"
-      exit="exit"
-      variants={slideIn("right", "tween", 0.2)}
+      variants={slideIn("right")}
       className="relative w-full max-w-lg p-2 lg:max-w-xl lg:flex-[0.55] lg:p-4"
     >
       <div className="absolute right-[10%] top-[10%] z-10 w-[50%] max-w-[190px] bg-[#FFFFFF] p-1.5 text-xs tracking-tight text-zinc-900 sm:w-[40%] sm:p-3 sm:text-sm">
@@ -58,6 +58,4 @@ const MapLocation = () => {
       </MapContainer>
     </motion.div>
   );
-};
-
-export default MapLocation;
+}

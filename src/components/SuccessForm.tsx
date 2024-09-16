@@ -1,10 +1,12 @@
 import Image from "next/image";
-import { ModalSection } from "./layouts/Section";
 import Button from "@/components/customButton/Button";
 
-const SuccessForm = () => {
+export default function SuccessForm() {
   return (
-    <ModalSection>
+    <div
+      id="successMail"
+      className="container relative mt-6 md:mt-[10%] xl:max-w-5xl"
+    >
       <div className="my-8 block text-center">
         <Image
           className="mr-2 inline-block fill-blue-500 align-top"
@@ -20,8 +22,6 @@ const SuccessForm = () => {
       <Button path="/">
         <span className="text-base">Retour à la page d&apos;accueil</span>
       </Button>
-    </ModalSection>
+    </div>
   );
-};
-
-export default SuccessForm;
+}

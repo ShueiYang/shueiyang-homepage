@@ -17,9 +17,8 @@ const Logo: React.FC<LogoProps> = ({ path }) => {
     }
   }
 
-  // set to true since Exit animation not working
   return (
-    <Link href="/" scroll={true}>
+    <Link href="/" scroll={false}>
       <button type="button" className="logoBox" onClick={handleHomeClick}>
         <Image
           src={`/images/mistpanda-${theme}.png`}

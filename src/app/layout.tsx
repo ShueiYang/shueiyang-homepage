@@ -1,14 +1,13 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Roboto, IBM_Plex_Sans } from "next/font/google";
-// import Head from "next/head"
-// import Script from "next/script"
 import ThemeProvider from "@/providers/ThemeProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import dynamic from "next/dynamic";
 import CandleStickLoader from "@/components/model3D/CandleStick.Loader";
-// import AnimationLayout from "@/components/layouts/AnimateLayout"
+import TransitionProvider from "@/providers/TransitionProvider";
+import AnimateNextTransitionRouter from "@/components/layouts/AnimateTransitionRouter";
 
 const ChineseCandleStick = dynamic(
   () => import("@/components/model3D/ChineseCandleStick"),
@@ -49,21 +48,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      {/* <Head>
-        <Script src="/script/theme.js" strategy="beforeInteractive"/>   
-      </Head> */}
       <body className="break-words bg-orange-50 leading-6 text-zinc-900 transition-colors duration-500 dark:bg-black-russ dark:text-slate-200">
         <ThemeProvider>
           <main
             className={`${roboto.className} ${ibmPlex.variable} ${roboto.variable}`}
           >
             <Navbar />
-            <section className="container grow px-8 pt-14">
+            <div className="container grow px-8 pt-14">
               <ChineseCandleStick />
-              {/* <AnimationLayout> */}
-              {children}
-              {/* </AnimationLayout> */}
-            </section>
+              <TransitionProvider>
+                <AnimateNextTransitionRouter>
+                  {children}
+                </AnimateNextTransitionRouter>
+              </TransitionProvider>
+            </div>
             <Footer />
           </main>
         </ThemeProvider>

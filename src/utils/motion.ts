@@ -1,27 +1,8 @@
-import { DirectionType } from "@/providers/DirectionProvider";
-import { Variants } from "framer-motion";
+import { ValueAnimationTransition, Variants } from "framer-motion";
 
-// Framer motion animation
+// Framer motion variant animation.
 
-export function transit(direction?: DirectionType): Variants {
-  return {
-    hidden: {
-      opacity: 0,
-      x: 0,
-      y: 25,
-    },
-    enter: {
-      opacity: 1,
-      x: 0,
-      y: 0,
-    },
-    exit: {
-      opacity: 0,
-      x: 0,
-      y: direction === "top" ? "-20%" : 25,
-    },
-  };
-}
+export type DirectionType = "top" | "bottom" | "left" | "right";
 
 export function letterAnimate(
   direction: DirectionType,
@@ -43,37 +24,47 @@ export function letterAnimate(
   };
 }
 
-export function slideIn(
-  direction: DirectionType,
-  type: string,
-  delay: number,
-): Variants {
+export const exitTransitionOptions: ValueAnimationTransition = {
+  type: "tween",
+  duration: 0.5,
+  ease: "easeIn",
+  delay: 0.2,
+};
+
+/**
+ * Generates animation variants for a slide-in effect based on the specified direction.
+ *
+ * @param direction - The direction from which the element should slide in.
+ * @returns Animation variants with initial hidden state for sliding in.
+ */
+export function slideIn(direction: DirectionType): Variants {
+  const getPosition = (axis: "x" | "y"): string | 0 => {
+    if (axis === "x") {
+      if (direction === "left") return "-100%";
+      if (direction === "right") return "100%";
+      return 0;
+    } else {
+      if (direction === "top") return "-100%";
+      if (direction === "bottom") return "100%";
+      return 0;
+    }
+  };
+
   return {
     hidden: {
       opacity: 0,
-      x: direction === "left" ? "-100%" : direction === "right" ? "100%" : 0,
-      y: direction === "top" ? "-100%" : direction === "bottom" ? "100%" : 0,
+      x: getPosition("x"),
+      y: getPosition("y"),
     },
     enter: {
       opacity: 1,
       x: 0,
       y: 0,
       transition: {
-        type: type,
-        delay: delay,
+        type: "tween",
         duration: 0.5,
         ease: "easeOut",
-      },
-    },
-    exit: {
-      opacity: 0,
-      x: direction === "left" ? "-100%" : direction === "right" ? "100%" : 0,
-      y: direction === "top" ? "-100%" : direction === "bottom" ? "100%" : 0,
-      transition: {
-        type: type,
-        delay: delay,
-        duration: 0.5,
-        ease: "easeIn",
+        delay: 0.2,
       },
     },
   };

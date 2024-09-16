@@ -1,11 +1,12 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import HomepageWrapper from "@/components/resume/HomeHeader";
+import HomeHeader from "@/components/resume/HomeHeader";
 import { Section } from "@/components/layouts/Section";
 import Button from "@/components/customButton/Button";
 import Curriculum from "@/components/resume/Curriculum";
 import Langues from "@/components/resume/Langues";
 import WebPresence from "@/components/resume/WebPresence";
+import ContactSection from "@/components/resume/ContactSection";
 
 const SkillsBar = dynamic(
   () => import("@/components/skillsAnimeBar/SkillsBar"),
@@ -16,7 +17,9 @@ const SkillsBar = dynamic(
 
 export default function Homepage() {
   return (
-    <HomepageWrapper>
+    <article className="container xl:max-w-5xl">
+      <HomeHeader />
+
       <Section delay={0.1}>
         <h2 className="section">A propos</h2>
         <p className="text-justify indent-4">
@@ -76,6 +79,8 @@ export default function Homepage() {
           VOSTA.
         </p>
       </Section>
-    </HomepageWrapper>
+
+      <ContactSection />
+    </article>
   );
 }
