@@ -21,6 +21,8 @@ Languages and tools
 - Headless ui
 - Cloudinary
 - Bun package manager
+- Vitest
+- RTL
 
 Features:
 
@@ -31,9 +33,10 @@ Features:
 - Use ServerAction to create, updated, and delete projects.
 - Playground with Zod validation and TypeScript
 - Testing new hooks like useTransition, useFormState and useOptimistic.
+- Testing playground with Vitest, Happy-dom and React-testing-library (RTL)
 
 Known issues:
 
-- Exit animation shared layout with Framer Motion not working in the App router.
+- Exit animation shared layout with Framer Motion not working in the App router. (fix with next-transition-router for now)
 - as props from Link component didn't work as expected in App router.
 - ~~Issue with revalidation / router.refresh didn't work as expected in the App router when deployed in Vercel.~~
