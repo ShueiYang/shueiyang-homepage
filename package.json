@@ -26,7 +26,7 @@
     "cloudinary": "^1.41.3",
     "eslint-config-next": "14.1.0",
     "framer-motion": "^11.5.4",
-    "jose": "^4.15.9",
+    "jose": "^5.9.2",
     "leaflet": "^1.9.4",
     "next": "^14.2.11",
     "next-transition-router": "^0.2.1",
