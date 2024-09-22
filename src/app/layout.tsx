@@ -19,10 +19,10 @@ const ChineseCandleStick = dynamic(
 
 export const metadata: Metadata = {
   title: "Kim Nguyen - Homepage",
-  description: `Kim"s website`,
+  description: `Kim's website`,
   authors: [
     { name: "Kim Nguyen" },
-    { name: "Shueiyang", url: "https://shueiyang.vercel.app" },
+    { name: "Shueiyang", url: "https://www.shueiyang.me" },
   ],
   icons: {
     icon: "/favicon.ico",
