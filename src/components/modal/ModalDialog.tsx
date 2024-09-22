@@ -8,7 +8,7 @@ import {
 } from "@headlessui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaFacebook, FaTwitter } from "react-icons/fa";
+import { RiFacebookCircleFill, RiTwitterXFill } from "react-icons/ri";
 import { ValidateForm } from "@root/common.types";
 
 interface ModalProps {
@@ -47,10 +47,10 @@ export default function ModalDialog({
   let socialNetworkName: string | null = null;
 
   if (title === "@Yang") {
-    Icon = FaTwitter;
-    socialNetworkName = "Twitter";
+    Icon = RiTwitterXFill;
+    socialNetworkName = "X";
   } else if (title === "#Yang") {
-    Icon = FaFacebook;
+    Icon = RiFacebookCircleFill;
     socialNetworkName = "Facebook";
   }
 
@@ -119,7 +119,7 @@ export default function ModalDialog({
               ) : (
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">
-                    {`Désolé pas de compte ${socialNetworkName}, c'était juste pour faire style...`}
+                    {`Oops compte ${socialNetworkName}? Juste un mirage numérique pour la décoration.`}
                   </p>
                 </div>
               )}
