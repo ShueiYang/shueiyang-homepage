@@ -3,11 +3,11 @@
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import { useContext } from "react";
-import { getLinkAndProps } from "@/utils/utility";
 
 import { ThemeContext } from "@/providers/ThemeProvider";
 import { MENU_LISTS } from "@/constants/menu.Index";
 import Logo from "./Logo";
+import { useLink } from "@/hooks/useLink";
 import ThemeToggleButton from "@/components/customButton/ThemeButton";
 import DropDownMenu from "@/components/mobileMenu/DropDownMenu";
 
@@ -20,7 +20,7 @@ export interface LinkItemProps {
 // Higher order component as Navbar component wrapper
 const LinkItem: React.FC<LinkItemProps> = ({ children, href, path }) => {
   const active = path === href;
-  const { Link, linkProps } = getLinkAndProps(href);
+  const { Link, linkProps } = useLink(href);
   return (
     <Link
       href={href}

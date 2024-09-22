@@ -1,27 +1,3 @@
-import NextLink from "next/link";
-
-// function to pick Link component or a Html tag depending the route name
-export function getLinkAndProps(route: string) {
-  const Link =
-    route === "/projects" ||
-    route === "/contact" ||
-    route === "/backoffice/admin"
-      ? NextLink
-      : "a";
-
-  const prefetchPath = route !== "/contact";
-
-  const linkProps =
-    Link === "a"
-      ? { rel: "noopener noreferrer", target: "_blank" }
-      : { prefetch: prefetchPath, scroll: false };
-
-  return {
-    Link,
-    linkProps,
-  };
-}
-
 export function scrollAfterLoad() {
   if (typeof window !== "undefined") {
     window.scrollTo(0, 0);
