@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^3.12.1",
-    "@headlessui/react": "^1.7.19",
+    "@headlessui/react": "^2.1.8",
     "@hookform/resolvers": "^3.9.0",
     "@motionone/utils": "^10.18.0",
     "@prisma/client": "^5.19.1",

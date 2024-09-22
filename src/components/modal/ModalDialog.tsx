@@ -1,7 +1,12 @@
 "use client";
 
-import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import {
+  Dialog,
+  DialogBackdrop,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaFacebook, FaTwitter } from "react-icons/fa";
 import { ValidateForm } from "@root/common.types";
@@ -69,96 +74,80 @@ export default function ModalDialog({
         </div>
       </button>
 
-      <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
-          </Transition.Child>
+      <Dialog
+        open={isOpen}
+        as="div"
+        className="relative z-10 focus:outline-none"
+        onClose={closeModal}
+      >
+        <DialogBackdrop className="fixed inset-0 bg-black/30" />
 
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4">
+            <DialogPanel
+              transition
+              className="data-[closed]:transform-[scale(95%)] w-full max-w-md rounded-xl bg-white p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:opacity-0"
+            >
+              <DialogTitle
+                as="h3"
+                className="text-lg font-medium leading-6 text-gray-900"
               >
-                <Dialog.Panel className="z-50 w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
-                  >
-                    {type === "edit" ? "Delete Confirmation" : "Pas de lien..."}
-                  </Dialog.Title>
+                {type === "edit" ? "Delete Confirmation" : "Pas de lien..."}
+              </DialogTitle>
 
-                  {type === "edit" ? (
-                    <>
-                      <div className="mt-2">
-                        <p className="text-sm text-gray-500">
-                          Are you sure you want to delete{" "}
-                          <b className="text-gray-900">{`${title}`}</b> ? <br />
-                          Confirme by writing the name project below.
-                        </p>
-                      </div>
-                      <input
-                        className="mt-3 w-full rounded-md border-2 border-neutral-200 py-1 pl-3 pr-10 text-sm leading-5 text-gray-900 outline-none focus:border-slate-300"
-                        type="text"
-                        {...register("titleName", {
-                          validate: (value) => {
-                            // use react hook form validation to check the title
-                            return value === title;
-                          },
-                        })}
-                        autoComplete="off"
-                      />
-                    </>
-                  ) : (
-                    <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        {`Désolé pas de compte ${socialNetworkName}, c'était juste pour faire style...`}
-                      </p>
-                    </div>
-                  )}
-
-                  <div className="mt-4 flex justify-around">
-                    <button
-                      type="button"
-                      className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      {type === "edit" ? "Cancel" : "Ok je vois..."}
-                    </button>
-                    {type === "edit" && handleDeleteAction && projectId && (
-                      <button
-                        type="button"
-                        className={`btn-secondary flex items-center text-base ${
-                          isValid && !isPending ? "" : "inactive"
-                        }`}
-                        onClick={handleSubmit(() =>
-                          handleDeleteAction(projectId),
-                        )}
-                      >
-                        {isPending ? "deleting..." : "Delete now"}
-                      </button>
-                    )}
+              {type === "edit" ? (
+                <>
+                  <div className="mt-2">
+                    <p className="text-sm text-gray-500">
+                      Are you sure you want to delete{" "}
+                      <b className="text-gray-900">{`${title}`}</b> ? <br />
+                      Confirme by writing the name project below.
+                    </p>
                   </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
+                  <input
+                    className="mt-3 w-full rounded-md border-2 border-neutral-200 py-1 pl-3 pr-10 text-sm leading-5 text-gray-900 outline-none focus:border-slate-300"
+                    type="text"
+                    {...register("titleName", {
+                      validate: (value) => {
+                        // use react hook form validation to check the title
+                        return value === title;
+                      },
+                    })}
+                    autoComplete="off"
+                  />
+                </>
+              ) : (
+                <div className="mt-2">
+                  <p className="text-sm text-gray-500">
+                    {`Désolé pas de compte ${socialNetworkName}, c'était juste pour faire style...`}
+                  </p>
+                </div>
+              )}
+
+              <div className="mt-4 flex justify-around">
+                <button
+                  type="button"
+                  className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={closeModal}
+                >
+                  {type === "edit" ? "Cancel" : "Ok je vois..."}
+                </button>
+                {type === "edit" && handleDeleteAction && projectId && (
+                  <button
+                    type="button"
+                    className={`btn-secondary flex items-center text-base ${
+                      isValid && !isPending ? "" : "inactive"
+                    }`}
+                    onClick={handleSubmit(() => handleDeleteAction(projectId))}
+                  >
+                    {isPending ? "deleting..." : "Delete now"}
+                  </button>
+                )}
+              </div>
+            </DialogPanel>
           </div>
-        </Dialog>
-      </Transition>
+        </div>
+      </Dialog>
     </>
   );
 }
