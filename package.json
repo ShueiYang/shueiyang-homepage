@@ -1,6 +1,6 @@
 {
   "name": "shueiyang-homepage",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Kim's website",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "lint": "next lint",
     "test": "vitest",
     "format": "prettier --write .",
+    "postinstall": "npm install argon2 --build-from-source",
     "prepare": "husky"
   },
   "dependencies": {
