@@ -1,9 +1,9 @@
+import argon2 from "argon2";
 import { AdminFormSchema } from "@/validator/schemaValidation";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { signJWT } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import bcrypt from "bcrypt";
 import { getJwtSecret } from "@/actions";
 
 export async function POST(req: Request) {
@@ -24,7 +24,8 @@ export async function POST(req: Request) {
     }
 
     // compare the password with hash...
-    const match = await bcrypt.compare(password, adminUser.userhash);
+    const match = await argon2.verify(adminUser.userhash, password);
+
     if (!match) {
       return NextResponse.json({ message: "Access Denied" }, { status: 401 });
     }
