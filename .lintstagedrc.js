@@ -10,7 +10,7 @@ const formatCommand = "prettier --write";
 
 module.exports = {
   // this will check Typescript files.
-  "**/*.(ts|tsx)": () => "bun tsc --noEmit",
+  "**/*.(ts|tsx)": () => "pnpm tsc --noEmit",
   // this will lint and format on the selected extensions.
   "*.{js,jsx,ts,tsx}": [formatCommand, eslintCommand],
 };
