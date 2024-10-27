@@ -20,7 +20,7 @@ Languages and tools
 - Zod schema validation
 - Headless ui
 - Cloudinary
-- Bun package manager
+- Pnpm package manager
 - Vitest
 - RTL
 
